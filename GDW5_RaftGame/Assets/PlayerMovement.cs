@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +25,15 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     }
     float _maxSpeedSquared;
 
+    public bool isOnBoat { 
+        get => _isOnBoat; 
+        set { }
+    }
+    [FoldoutGroup("Ground Movement")][SerializeField] bool _isOnBoat;
+    /// <summary>
+    /// used to modify move direction to accurately move the player with respect to the boat's rotation from buoyancy
+    /// </summary>
+    [FoldoutGroup("Ground Movement")][SerializeField] Transform boatTransform;
 
     [FoldoutGroup("Debug Info")][SerializeField][ReadOnly] Vector3 moveDir;
 #if UNITY_EDITOR     // DO NOT REFERENCE THESE, they aresimply for debugging, and will not exist in actual builds.
@@ -74,7 +84,11 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
         if (moveDir.sqrMagnitude < 0.01f) return;
 
-        _rb.AddForce(moveDir * _acceleration, ForceMode.Acceleration);
+        // transform the world direction to be relative to the "boats" rotation. makes the player movement more accurately track the motion of the boat as it rocks.
+        Vector3 finalMoveDir = _isOnBoat ? boatTransform.TransformDirection(moveDir.normalized) : moveDir;
+  
+
+        _rb.AddForce(finalMoveDir * _acceleration, ForceMode.Acceleration);
 
         _rb.linearVelocity = Vector3.ClampMagnitude(_rb.linearVelocity, _MaxSpeed);
 

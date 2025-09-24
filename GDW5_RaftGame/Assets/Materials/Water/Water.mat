@@ -142,9 +142,9 @@ Material:
     - _ZWrite: 1
     - _alpha: 1
     - _amplitude: 2.93
-    - _amplitude_1: 1.33
-    - _amplitude_2: 3
-    - _amplitude_3: 0.58
+    - _amplitude_1: 2.03
+    - _amplitude_2: 0
+    - _amplitude_3: 0
     - _amplitude_4: 0
     - _depth: 9
     - _depth_1: 6.01
@@ -167,10 +167,10 @@ Material:
     - _temp: 0
     - _time_scale: 1
     - _timescale: 1
-    - _timescale_1: 1
+    - _timescale_1: 1.12
     - _timescale_2: 1
     - _timescale_3: 0
-    - _timescale_4: 1
+    - _timescale_4: 1.1
     - _visual_depth: 50
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

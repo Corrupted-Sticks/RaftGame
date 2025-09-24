@@ -17,12 +17,22 @@ public class WaveManager : MonoBehaviour
     public Transform WaterPlane;
     public float visualYOffset = 0;
 
+    [SerializeField] Material defaultWaterMaterial;
+
     [System.Serializable]
     public struct WaveData
     {
         public Vector3 direction;
         public float amplitude;
         public float timeScale;
+
+
+        public WaveData(float timeScale, float amp, Vector3 dir)
+        {
+            this.timeScale = timeScale;
+            amplitude = amp;
+            direction = dir;
+        }
     }
 
     [SerializeField]
@@ -97,6 +107,26 @@ public class WaveManager : MonoBehaviour
         return WaterPlane.position.y + totalDisplacement.y;
     }
 
+
+
+    public void GetAndUpdateParamsFromWaterMaterial(Material material)
+    {
+
+        phase = material.GetFloat("_phase"); // phase of waves
+        depth = material.GetFloat("_depth"); // depth of the actual water.
+        gravity = material.GetFloat("_gravity");
+        neighbourDistance = material.GetFloat("_neighbour_distance"); // used for normal recalculating.
+
+        for(int i = 1; i < 5; ++i) // 1 to <5 because i made the wave params in shader 1 indexed and im too lazy to change it ngl.
+        {
+            waves[i-1] = new WaveData(
+                material.GetFloat("_timescale_"  + i.ToString()),
+                material.GetFloat("_amplitude_"  + i.ToString()),
+                material.GetVector("_direction_" + i.ToString())
+                );
+        }
+
+    }
     private void Awake()
     {
         if (instance != null) GameObject.Destroy(instance.gameObject);
@@ -106,7 +136,7 @@ public class WaveManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        GetAndUpdateParamsFromWaterMaterial(defaultWaterMaterial);
     }
 
     // Update is called once per frame
