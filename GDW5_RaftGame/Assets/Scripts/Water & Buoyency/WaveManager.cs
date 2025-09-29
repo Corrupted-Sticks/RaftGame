@@ -5,6 +5,41 @@ using System;
 using UnityEditor.Experimental.GraphView;
 using Unity.Collections.LowLevel.Unsafe;
 
+
+[System.Serializable]
+public struct WaterShaderSettings
+{
+    // frag shader
+    float visualWaveDepth;
+
+
+    // vertex shader
+    float phase;
+    float waveDepth;
+    float gravity;
+    WaveData[] waves;
+
+}
+
+
+
+
+[System.Serializable]
+public struct WaveData
+{
+    public Vector3 direction;
+    public float amplitude;
+    public float timeScale;
+
+
+    public WaveData(float timeScale, float amp, Vector3 dir)
+    {
+        this.timeScale = timeScale;
+        amplitude = amp;
+        direction = dir;
+    }
+}
+
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager instance;
@@ -12,28 +47,12 @@ public class WaveManager : MonoBehaviour
     public float phase = 0;
     public float depth = 10;
     public float gravity = 9;
-    public float neighbourDistance = 0.001f;
+    const float neighbourDistance = 0.25f;
 
     public Transform WaterPlane;
-    public float visualYOffset = 0;
-
     [SerializeField] Material defaultWaterMaterial;
 
-    [System.Serializable]
-    public struct WaveData
-    {
-        public Vector3 direction;
-        public float amplitude;
-        public float timeScale;
 
-
-        public WaveData(float timeScale, float amp, Vector3 dir)
-        {
-            this.timeScale = timeScale;
-            amplitude = amp;
-            direction = dir;
-        }
-    }
 
     [SerializeField]
     public WaveData[] waves = new WaveData[4];
@@ -115,16 +134,21 @@ public class WaveManager : MonoBehaviour
         phase = material.GetFloat("_phase"); // phase of waves
         depth = material.GetFloat("_depth"); // depth of the actual water.
         gravity = material.GetFloat("_gravity");
-        neighbourDistance = material.GetFloat("_neighbour_distance"); // used for normal recalculating.
 
-        for(int i = 1; i < 5; ++i) // 1 to <5 because i made the wave params in shader 1 indexed and im too lazy to change it ngl.
+        for (int i = 1; i < 5; ++i) // 1 to <5 because i made the wave params in shader 1 indexed and im too lazy to change it ngl.
         {
-            waves[i-1] = new WaveData(
-                material.GetFloat("_timescale_"  + i.ToString()),
-                material.GetFloat("_amplitude_"  + i.ToString()),
+            waves[i - 1] = new WaveData(
+                material.GetFloat("_timescale_" + i.ToString()),
+                material.GetFloat("_amplitude_" + i.ToString()),
                 material.GetVector("_direction_" + i.ToString())
                 );
         }
+
+    }
+
+
+    public void SetWaterShaderParams(Material material, WaterShaderSettings settings)
+    {
 
     }
     private void Awake()

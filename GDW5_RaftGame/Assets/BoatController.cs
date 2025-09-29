@@ -1,0 +1,94 @@
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
+{
+    PlayerInput _Input;                  // Source code representation of asset.
+    PlayerInput.PlayerActions _PActions;     // Source code representation of action map.
+
+
+    Rigidbody _rb;
+
+    public Vector3 moveDir = Vector3.zero;
+    public float acceleration;
+    public float maxSpeed;
+    public float rotationSpeed;
+    public float boatRotationSpeed;
+
+    /// <summary>
+    /// the actual sail that controlls the direction of the boat.
+    /// </summary>
+    public Transform SteeringSail;
+
+
+
+    void OnEnable() => _Input.Enable();
+    void OnDisable() => _Input.Disable();
+    void OnDestroy() => _Input.Disable();
+    void Awake()
+    {
+        _Input = new PlayerInput();        // Create asset object.
+        _PActions = _Input.Player;         // Extract action map object.
+        _PActions.AddCallbacks(this);      // Register callback interface IPlayerActions.
+    }
+
+    void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
+
+    void FixedUpdate()
+    {
+        // rotation (left/right movement)
+        if (Mathf.Abs(moveDir.x) > 0.01f)
+            SteeringSail.transform.Rotate(Vector3.up, moveDir.x*rotationSpeed);
+
+
+        // movement  (forward/backwards)
+        Vector3 sailForward = SteeringSail.forward;
+        // project to xz plane to ignore sails tilt "up/down". without this any deviation from perfectly upright will cause the boat to over rotate and sink.
+        var trueForwards = Vector3.ProjectOnPlane(sailForward, Vector3.up).normalized;
+        Vector3 forwardForce = trueForwards * moveDir.z * acceleration;
+        _rb.AddForce(forwardForce, ForceMode.Acceleration);
+
+        RotateBoatToFaceSailDirection();
+    }
+
+    void RotateBoatToFaceSailDirection()
+    {
+        // Get the sail's local y rotation relative to the boat
+        float sailYRotation = SteeringSail.eulerAngles.y;
+        float boatLocalY = transform.eulerAngles.y;
+
+        // Use DeltaAngle to get signed shortest difference (-180 to 180)
+        float angleDiff = Mathf.DeltaAngle(boatLocalY, sailYRotation);
+        print(angleDiff);
+
+        // If the sail is rotated too far left/right, rotate the boat to compensate
+        if (Mathf.Abs(angleDiff) > 2.5f) // 5 degree threshold
+        {
+            // Rotation direction is just sign of angleDiff now
+            float maxStep = boatRotationSpeed * Time.fixedDeltaTime;
+            float rotationAmount = Mathf.Clamp(angleDiff, -maxStep, maxStep);
+
+            // Rotate the boat and counter-rotate the sail to keep it "stationary" in world space
+            transform.Rotate(0, rotationAmount, 0);
+            SteeringSail.Rotate(0, -rotationAmount, 0);
+        }
+    }
+
+    public void OnMove(InputAction.CallbackContext ctx)
+    {
+        Vector2 raw = ctx.ReadValue<Vector2>();
+        moveDir = new Vector3(raw.x, 0.0f, raw.y);
+    }
+
+    public void OnInteract(InputAction.CallbackContext ctx)
+    {
+
+    }
+
+
+
+}

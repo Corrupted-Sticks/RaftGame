@@ -4,10 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class WaterMeshMaker : MonoBehaviour
 {
-    public int innerResolution = 128;   // High density near center
-    public int outerResolution = 32;    // Low density at far edges
-    public float radius = 50f;          // Radius of dense region
-    public float maxDistance = 200f;    // Extent of plane
+    [SerializeField]int innerResolution = 128;   // High density near center
+    [SerializeField]int outerResolution = 32;    // Low density at far edges
+    [SerializeField]float radius = 50f;          // Radius of dense region
+    [SerializeField] float maxDistance = 200f;    // Extent of plane
+
+
+    public Transform TargetTransform { get; private set; }
+
 
     void Start()
     {
