@@ -48,7 +48,7 @@ public class WaveManager : MonoBehaviour
     public float depth = 10;
     public float gravity = 9;
     const float neighbourDistance = 0.25f;
-
+    [Space]
     public Transform WaterPlane;
     [SerializeField] Material defaultWaterMaterial;
 

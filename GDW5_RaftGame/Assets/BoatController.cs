@@ -10,8 +10,9 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
 
     Rigidbody _rb;
 
-    public Vector3 moveDir = Vector3.zero;
+    Vector3 moveDir = Vector3.zero;
     public float acceleration;
+    const float minWindMultiplier = 0.5f;
     public float maxSpeed;
     public float rotationSpeed;
     public float boatRotationSpeed;
@@ -49,10 +50,26 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
         Vector3 sailForward = SteeringSail.forward;
         // project to xz plane to ignore sails tilt "up/down". without this any deviation from perfectly upright will cause the boat to over rotate and sink.
         var trueForwards = Vector3.ProjectOnPlane(sailForward, Vector3.up).normalized;
-        Vector3 forwardForce = trueForwards * moveDir.z * acceleration;
-        _rb.AddForce(forwardForce, ForceMode.Acceleration);
 
-        RotateBoatToFaceSailDirection();
+        Vector2 tempWindDir = WindManager.instance.WindDirection.normalized;
+        Vector3 windDir = new(tempWindDir.x, 0, tempWindDir.y);
+        // at minimum, move half speed in opposite direction to the wind. closer to wind direction you point the sail, the faster it goes.
+        float windFactor = minWindMultiplier + Mathf.Max(0, Vector3.Dot(trueForwards, windDir));
+
+        print("dot product: " + windFactor);
+
+        Vector3 forwardForce = trueForwards * moveDir.z * acceleration * windFactor;
+        _rb.AddForce(forwardForce, ForceMode.Force);
+        _rb.linearVelocity = Vector3.ClampMagnitude(_rb.linearVelocity, maxSpeed);
+        if (_rb.linearVelocity.sqrMagnitude > 2) 
+            RotateBoatToFaceSailDirection();
+
+
+
+        
+        
+
+
     }
 
     void RotateBoatToFaceSailDirection()
@@ -63,7 +80,6 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
 
         // Use DeltaAngle to get signed shortest difference (-180 to 180)
         float angleDiff = Mathf.DeltaAngle(boatLocalY, sailYRotation);
-        print(angleDiff);
 
         // If the sail is rotated too far left/right, rotate the boat to compensate
         if (Mathf.Abs(angleDiff) > 2.5f) // 5 degree threshold
