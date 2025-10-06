@@ -9,7 +9,9 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     PlayerInput.PlayerActions _PActions;     // Source code representation of action map.
 
     Rigidbody _rb;
-
+    Collider _collider;
+    public Rigidbody RB { get => _rb; }
+    public Collider Collider { get => _collider; }
 
     [FoldoutGroup("Ground Movement")][SerializeField] float _acceleration = 0;
     [FoldoutGroup("Ground Movement")][SerializeField] float _maxSpeed = 10;
@@ -63,6 +65,12 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     }
 
 
+    public void ToggleInput(bool value)
+    {
+        if(value) _Input.Enable();
+        else _Input.Disable();
+    }
+
 
 
 
@@ -71,7 +79,7 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-
+        _collider = GetComponent<Collider>();
         _maxSpeedSquared = _MaxSpeed * _maxSpeed;
     }
 

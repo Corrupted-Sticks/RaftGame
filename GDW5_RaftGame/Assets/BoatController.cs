@@ -1,9 +1,13 @@
+using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
 {
+
+    public static BoatController instance;
     PlayerInput _Input;                  // Source code representation of asset.
     PlayerInput.PlayerActions _PActions;     // Source code representation of action map.
 
@@ -12,7 +16,7 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
 
     Vector3 moveDir = Vector3.zero;
     public float acceleration;
-    const float minWindMultiplier = 0.5f;
+    const float minWindMultiplier = 0.75f;
     public float maxSpeed;
     public float rotationSpeed;
     public float boatRotationSpeed;
@@ -21,10 +25,13 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
     /// the actual sail that controlls the direction of the boat.
     /// </summary>
     public Transform SteeringSail;
+    
 
+#if UNITY_EDITOR
+    [ShowInInspector] float currentSpeed;
 
+#endif
 
-    void OnEnable() => _Input.Enable();
     void OnDisable() => _Input.Disable();
     void OnDestroy() => _Input.Disable();
     void Awake()
@@ -32,12 +39,24 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
         _Input = new PlayerInput();        // Create asset object.
         _PActions = _Input.Player;         // Extract action map object.
         _PActions.AddCallbacks(this);      // Register callback interface IPlayerActions.
+
+        if (instance != null) Destroy(instance.gameObject);
+        instance = this;
     }
 
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
     }
+
+
+    public void ToggleInput(bool value)
+    {
+        if (value) _Input.Enable();
+        else _Input.Disable();
+
+    }
+
 
     void FixedUpdate()
     {
@@ -54,20 +73,22 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
         Vector2 tempWindDir = WindManager.instance.WindDirection.normalized;
         Vector3 windDir = new(tempWindDir.x, 0, tempWindDir.y);
         // at minimum, move half speed in opposite direction to the wind. closer to wind direction you point the sail, the faster it goes.
-        float windFactor = minWindMultiplier + Mathf.Max(0, Vector3.Dot(trueForwards, windDir));
-
-        print("dot product: " + windFactor);
+        float windFactor = minWindMultiplier + Mathf.Max(.35f, Vector3.Dot(trueForwards, windDir));
 
         Vector3 forwardForce = trueForwards * moveDir.z * acceleration * windFactor;
         _rb.AddForce(forwardForce, ForceMode.Force);
         _rb.linearVelocity = Vector3.ClampMagnitude(_rb.linearVelocity, maxSpeed);
+
+     
         if (_rb.linearVelocity.sqrMagnitude > 2) 
             RotateBoatToFaceSailDirection();
 
 
+#if UNITY_EDITOR
+        currentSpeed = _rb.linearVelocity.magnitude;
+#endif
 
-        
-        
+
 
 
     }
@@ -85,6 +106,7 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
         if (Mathf.Abs(angleDiff) > 2.5f) // 5 degree threshold
         {
             // Rotation direction is just sign of angleDiff now
+            float speedFactor = Mathf.Max(0.75f, 1.15f*(_rb.linearVelocity.magnitude/maxSpeed)); // increase rotation speed based on current velocity
             float maxStep = boatRotationSpeed * Time.fixedDeltaTime;
             float rotationAmount = Mathf.Clamp(angleDiff, -maxStep, maxStep);
 
@@ -105,6 +127,20 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
 
     }
 
+    void OnDrawGizmosSelected()
+    {
+        if (_rb == null) _rb = GetComponent<Rigidbody>();
 
+        // Get the world position of the center of mass
+        Vector3 comWorld = _rb.worldCenterOfMass;
+
+        // Draw a small yellow sphere at the center of mass
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(comWorld, 0.1f);
+
+        // Optional: draw a line from transform to COM
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, comWorld);
+    }
 
 }

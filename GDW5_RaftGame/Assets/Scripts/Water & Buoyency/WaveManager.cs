@@ -4,7 +4,7 @@ using UnityEngine.Jobs;
 using System;
 using UnityEditor.Experimental.GraphView;
 using Unity.Collections.LowLevel.Unsafe;
-
+using Sirenix.OdinInspector;
 
 [System.Serializable]
 public struct WaterShaderSettings
@@ -51,11 +51,30 @@ public class WaveManager : MonoBehaviour
     [Space]
     public Transform WaterPlane;
     [SerializeField] Material defaultWaterMaterial;
+    public Material DefaultWaterMaterial { get => defaultWaterMaterial; }
 
 
 
     [SerializeField]
     public WaveData[] waves = new WaveData[4];
+
+
+    [SerializeField] Transform _followTarget;
+    /// <summary>
+    /// The WaterMeshMaker script makes a plane with varying vertex density, the most verticies around the center.
+    /// we can use this follow target to update the vertex shader, and move the center most
+    /// </summary>
+    public Transform _FollowTarget { get => _followTarget; }
+
+
+    void UpdateVertexShaderFollowTarget(Material material = null)
+    {
+        if (_followTarget == null) return;
+        if (material == null) material = defaultWaterMaterial;
+        material.SetVector("_followPosition", _followTarget.position);
+
+    }
+
 
     double GetTheta(WaveData wave, Vector3 position, float time)
     {
@@ -128,8 +147,10 @@ public class WaveManager : MonoBehaviour
 
 
 
-    public void GetAndUpdateParamsFromWaterMaterial(Material material)
+    [Button("Update Wave From ShaderParams")]
+    public void GetAndUpdateParamsFromWaterMaterial(Material material = null)
     {
+        if(material == null) material = defaultWaterMaterial; // by default can be called without a material, and will use the default water material.
 
         phase = material.GetFloat("_phase"); // phase of waves
         depth = material.GetFloat("_depth"); // depth of the actual water.
@@ -166,6 +187,6 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        UpdateVertexShaderFollowTarget();
     }
 }
