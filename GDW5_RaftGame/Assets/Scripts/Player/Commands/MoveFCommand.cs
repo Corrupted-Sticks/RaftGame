@@ -6,9 +6,7 @@ public class MoveFCommand : PCommand
     {
         Rigidbody rb = player.GetRB();
 
-        Debug.Log("Going forwards!");
-
-        player.moveDir = new Vector3(10, 0, 0);
+        player.moveDir = new Vector3(0, 0, player.maxSpeed);
 
         player.playerVelocity = rb.linearVelocity;
 
