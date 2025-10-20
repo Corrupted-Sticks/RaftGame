@@ -4,6 +4,6 @@ public class MoveFCommand : PCommand
 {
     public override void Execute()
     {
-
+        Debug.Log("Going forwards!");
     }
 }

@@ -4,47 +4,37 @@ using UnityEngine;
 
 public class PlayerCMovement : MonoBehaviour
 {
-    private PCommand moveUp, moveDown, moveLeft, moveRight, interact;
-
-    Dictionary<KeyCode, PCommand> defaultBind = new();
-    Dictionary<KeyCode, PCommand> newBind = new();
-
-    KeyCode key;
-
     Rigidbody rb;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] float acceleration = 0;
+    [SerializeField] float maxSpeed = 0;
+
     void Start()
     {
-        moveUp = new MoveFCommand();
-        moveDown = new MoveBCommand();
-        moveLeft = new MoveLCommand();
-        moveRight = new MoveRCommand();
-        interact = new InteractCommand();
-
         rb = GetComponent<Rigidbody>();
-
-        PrepBinds();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    void PrepBinds()
-    {
-        defaultBind.Add(KeyCode.W, moveUp);
-        defaultBind.Add(KeyCode.S, moveDown);
-        defaultBind.Add(KeyCode.A, moveLeft);
-        defaultBind.Add(KeyCode.D, moveRight);
-        defaultBind.Add(KeyCode.E, interact);
-
-        newBind.Add(KeyCode.W, moveUp);
-        newBind.Add(KeyCode.S, moveDown);
-        newBind.Add(KeyCode.A, moveLeft);
-        newBind.Add(KeyCode.D, moveRight);
-        newBind.Add(KeyCode.E, interact);
+        if (Input.GetKeyDown(PlayerCommands.PCInstance.keyBinds[0])) // Move Forwards
+        {
+            PlayerCommands.PCInstance.keyCommands[0].Execute();
+        }
+        if (Input.GetKeyDown(PlayerCommands.PCInstance.keyBinds[1])) // Move Backwards
+        {
+            PlayerCommands.PCInstance.keyCommands[1].Execute();
+        }
+        if (Input.GetKeyDown(PlayerCommands.PCInstance.keyBinds[2])) // Move Left
+        {
+            PlayerCommands.PCInstance.keyCommands[2].Execute();
+        }
+        if (Input.GetKeyDown(PlayerCommands.PCInstance.keyBinds[3])) // Move Right
+        {
+            PlayerCommands.PCInstance.keyCommands[3].Execute();
+        }
+        if (Input.GetKeyDown(PlayerCommands.PCInstance.keyBinds[4])) // Interact
+        {
+            PlayerCommands.PCInstance.keyCommands[4].Execute();
+        }
     }
 }
