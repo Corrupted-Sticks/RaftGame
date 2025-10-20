@@ -21,11 +21,14 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
     public float rotationSpeed;
     public float boatRotationSpeed;
 
+    public bool isDockDown = false;
     /// <summary>
     /// the actual sail that controlls the direction of the boat.
     /// </summary>
     public Transform SteeringSail;
-    
+    public Transform RespawnPosition;
+    public GameObject dock;
+
 
 #if UNITY_EDITOR
     [ShowInInspector] float currentSpeed;
@@ -70,8 +73,7 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
         // project to xz plane to ignore sails tilt "up/down". without this any deviation from perfectly upright will cause the boat to over rotate and sink.
         var trueForwards = Vector3.ProjectOnPlane(sailForward, Vector3.up).normalized;
 
-        Vector2 tempWindDir = WindManager.instance.WindDirection.normalized;
-        Vector3 windDir = new(tempWindDir.x, 0, tempWindDir.y);
+        Vector3 windDir = WindManager.instance.WindDirection;
         // at minimum, move half speed in opposite direction to the wind. closer to wind direction you point the sail, the faster it goes.
         float windFactor = minWindMultiplier + Mathf.Max(.35f, Vector3.Dot(trueForwards, windDir));
 
@@ -127,6 +129,12 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
 
     }
 
+    public void ToggleDock() => dock.SetActive(isDockDown = !isDockDown);
+    public void ToggleDock(bool value)
+    {
+        dock.SetActive(value);
+        isDockDown = value;
+    }
     void OnDrawGizmosSelected()
     {
         if (_rb == null) _rb = GetComponent<Rigidbody>();

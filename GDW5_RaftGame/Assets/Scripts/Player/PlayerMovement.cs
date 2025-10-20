@@ -27,8 +27,9 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     }
     float _maxSpeedSquared;
 
-    public bool isOnBoat { 
-        get => _isOnBoat; 
+    public bool isOnBoat
+    {
+        get => _isOnBoat;
         set { }
     }
     [FoldoutGroup("Ground Movement")][SerializeField] bool _isOnBoat;
@@ -67,7 +68,7 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
     public void ToggleInput(bool value)
     {
-        if(value) _Input.Enable();
+        if (value) _Input.Enable();
         else _Input.Disable();
     }
 
@@ -94,7 +95,7 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
         // transform the world direction to be relative to the "boats" rotation. makes the player movement more accurately track the motion of the boat as it rocks.
         Vector3 finalMoveDir = _isOnBoat ? boatTransform.TransformDirection(moveDir.normalized) : moveDir;
-  
+
 
         _rb.AddForce(finalMoveDir * _acceleration, ForceMode.Acceleration);
 
@@ -103,5 +104,15 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
 
 
+    }
+
+
+    private void Update()
+    {
+        //DEBUG : MAKE USE INPUT SYSTEM/REMOVE LATER
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = BoatController.instance.RespawnPosition.position;
+        }
     }
 }

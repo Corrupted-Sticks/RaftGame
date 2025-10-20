@@ -1,10 +1,8 @@
 using UnityEngine;
 using Unity.Mathematics;
-using UnityEngine.Jobs;
 using System;
-using UnityEditor.Experimental.GraphView;
-using Unity.Collections.LowLevel.Unsafe;
 using Sirenix.OdinInspector;
+using System.Runtime.InteropServices;
 
 [System.Serializable]
 public struct WaterShaderSettings
@@ -25,9 +23,10 @@ public struct WaterShaderSettings
 
 
 [System.Serializable]
+[StructLayout(LayoutKind.Sequential, Pack = 1)]
 public struct WaveData
 {
-    public Vector3 direction;
+    public Vector3DLL direction;
     public float amplitude;
     public float timeScale;
 
@@ -36,8 +35,24 @@ public struct WaveData
     {
         this.timeScale = timeScale;
         amplitude = amp;
-        direction = dir;
+        direction = new Vector3DLL(dir);
     }
+}
+
+[System.Serializable]
+[StructLayout(LayoutKind.Sequential, Pack = 1)]
+public struct Vector3DLL
+{
+    public float x, y, z;
+
+    public Vector3DLL(Vector3 v)
+    {
+        x = v.x;
+        y = v.y;
+        z = v.z;
+    }
+
+    public Vector3 ToUV3() => new Vector3(x, y, z);
 }
 
 public class WaveManager : MonoBehaviour
@@ -47,7 +62,6 @@ public class WaveManager : MonoBehaviour
     public float phase = 0;
     public float depth = 10;
     public float gravity = 9;
-    const float neighbourDistance = 0.25f;
     [Space]
     public Transform WaterPlane;
     [SerializeField] Material defaultWaterMaterial;
@@ -83,14 +97,14 @@ public class WaveManager : MonoBehaviour
 
         float xzFactor = xFactor + zFactor;
 
-        double frequency = GetFrequency(wave.direction, this.gravity, depth) * time;
+        double frequency = GetFrequency(wave.direction.ToUV3(), this.gravity, depth) * time;
 
         return xzFactor - frequency - phase;
 
 
     }
 
-    double GetFrequency(Vector3 direction, float gravty, float depth)
+    double GetFrequency(Vector3 direction, float gravity, float depth)
     {
         float dirLength = direction.magnitude;
         float g = gravity * dirLength;
@@ -105,7 +119,7 @@ public class WaveManager : MonoBehaviour
     Vector3 GetGerstnerWaveOffset(Vector3 position, WaveData wave, float time)
     {
         double theta = GetTheta(wave, position, time * wave.timeScale);
-        Vector3 dir = wave.direction;
+        Vector3 dir = wave.direction.ToUV3();
         float dirMag = dir.magnitude;
         float a = dir.x / dirMag;
         double b = wave.amplitude / math.tanh(dirMag * depth);
@@ -135,16 +149,42 @@ public class WaveManager : MonoBehaviour
     /// <returns>Height of water according to waves assigned, at given position.</returns>
     public float GetWaterHeight(Vector3 position)
     {
-        Vector3 totalDisplacement = Vector3.zero;
+         Vector3 totalDisplacement = Vector3.zero;
 
-        for (int i = 0; i < 4; ++i)
-        {
-            totalDisplacement += GetGerstnerWaveOffset(position, waves[i], Time.time);
-        }
+         for (int i = 0; i < 4; ++i)
+         {
+             totalDisplacement += GetGerstnerWaveOffset(position, waves[i], Time.time);
+         }
 
-        return WaterPlane.position.y + totalDisplacement.y;
+         float old = WaterPlane.position.y + totalDisplacement.y;
+
+
+        float dll = CalculateWaterHeight(
+            new Vector3DLL(position),
+            waves,
+            4,
+            Time.time,
+            new Vector3DLL(WaterPlane.position),
+            depth
+            );
+
+        print(dll - old);
+
+        
+
+        return old;
     }
 
+
+    [DllImport("SDS_Waves")]
+    public static extern float CalculateWaterHeight(
+        Vector3DLL position,
+        [In] WaveData[] waves,
+        int waveCount,
+        float time,
+        Vector3DLL waterPlanePos,
+        float newDepth
+        );
 
 
     [Button("Update Wave From ShaderParams")]

@@ -10,16 +10,26 @@ public class WindManager : MonoBehaviour
     /// </summary>
     [FoldoutGroup("Wind Settings")][ShowInInspector][SerializeField] float _windAngle;
 
-    public float WindAngle { 
-        get { return _windAngle; } 
-        set { 
+    [SerializeField] Transform _windDirectionArrow;
+    [SerializeField] Transform _windDirectionArrowOrigin;
+    [SerializeField] Transform _windEffect;
+    [SerializeField] float _windDirectionArrowDistance = 5;
+
+    public float WindAngle
+    {
+        get { return _windAngle; }
+        set
+        {
             if (value >= 360) _windAngle = value % 360;
+            UpdateWindDirectionArrow();
         }
     }
-    public Vector2 WindDirection { get
+    public Vector3 WindDirection
+    {
+        get
         {
             float rad = _windAngle * Mathf.Deg2Rad;
-            return new Vector2(Mathf.Sin(rad), Mathf.Cos(rad));
+            return new Vector3(Mathf.Sin(rad), 0, Mathf.Cos(rad)).normalized;
 
         }
     }
@@ -40,14 +50,14 @@ public class WindManager : MonoBehaviour
     // auto removed when building.
     private void OnDrawGizmos()
     {
-       
-        if (WindDirection.sqrMagnitude <0)
+
+        if (WindDirection.sqrMagnitude < 0)
             return;
 
         Gizmos.color = arrowColor;
 
         // Normalize to ensure consistent arrow size
-        Vector3 dir = new Vector3(WindDirection.x, 0, WindDirection.y).normalized;
+        Vector3 dir = WindDirection.normalized;
 
         // Arrow base and tip
         Vector3 start = transform.position;
@@ -62,4 +72,31 @@ public class WindManager : MonoBehaviour
         Gizmos.DrawLine(end, end + right * headLength);
         Gizmos.DrawLine(end, end + left * headLength);
     }
+
+    private void FixedUpdate()
+    {
+        UpdateWindDirectionArrow();
+        UpdateWindEffect();
+    }
+
+    void UpdateWindDirectionArrow()
+    {
+        Vector3 originPos = _windDirectionArrowOrigin.position;
+        Vector3 waypointPos = transform.position;
+        float storedOriginY = originPos.y; // we store the Y value of the sail position, as we will set to 0.
+        originPos.y = 0; // setting both y pos to 0 makes the direction arrow only move and rotate around the xz plane.
+        waypointPos.y = 0;
+
+        Vector3 direction = WindDirection;
+        originPos.y = storedOriginY;// revert sail y pos, as we use it for the position offset.
+
+        _windDirectionArrow.position = originPos + (_windDirectionArrowDistance * direction);
+        _windDirectionArrow.rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0f, 0f, 90f); // 2nd quaternion is cuz the arrow would improperly rotate.
+    }
+
+    void UpdateWindEffect()
+    {
+        _windEffect.rotation = Quaternion.LookRotation(WindDirection);
+    }
+
 }

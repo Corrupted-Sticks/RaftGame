@@ -2,10 +2,10 @@ using Unity.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class BuoyentBody3D : MonoBehaviour
+public class BuoyantBody3D : MonoBehaviour
 {
 
-    Rigidbody rb;
+    public Rigidbody rb;
 
     public bool isUnderWater = false;
 

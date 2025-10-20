@@ -56,7 +56,7 @@ public class Trigger_SailControl : MonoBehaviour
         boatControllUI.SetEnterBoatControl(false);
     }
 
-    void ExitControl()
+    public void ExitControl()
     {
         BoatController.instance.ToggleInput(false);
         pmove.ToggleInput(true);
@@ -64,6 +64,7 @@ public class Trigger_SailControl : MonoBehaviour
         isPlayerControlling = false;
         pmove.transform.SetParent(null);
         pmove.RB.isKinematic = false;
+        pmove.Collider.enabled = true;
 
         boatControllUI.SetExitBoatControl(false);
 
