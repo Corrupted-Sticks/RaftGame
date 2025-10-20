@@ -10,15 +10,7 @@ public class PlayerCommands : MonoBehaviour
 
     private PCommand moveUp, moveDown, moveLeft, moveRight, interact;
 
-    //Dictionary<KeyCode, PCommand> oldDefaultBind = new();
-    //public Dictionary<KeyCode, PCommand> newBind { get; private set; } = new();
-
     KeyCode key;
-    /*public KeyCode keyForward { get; private set; } = KeyCode.W;
-    public KeyCode keyBackward { get; private set; } = KeyCode.S;
-    public KeyCode keyLeft { get; private set; } = KeyCode.A;
-    public KeyCode keyRight { get; private set; } = KeyCode.D;
-    public KeyCode keyInteract { get; private set; } = KeyCode.E;*/
 
     List<KeyCode> defaultBinds = new List<KeyCode>()
     {
@@ -60,8 +52,7 @@ public class PlayerCommands : MonoBehaviour
         keyCommands.Add(moveLeft);
         keyCommands.Add(moveRight);
         keyCommands.Add(interact);
-
-        //PrepDefaults();
+        
         PrepBinds();
     }
 
@@ -78,28 +69,12 @@ public class PlayerCommands : MonoBehaviour
                     SetNewBind();
                     needInput = false;
                 }
-                else
-                {
-                    needInput = false;
-                    break;
-                }
             }
         }
     }
 
-    /*void PrepDefaults()
-    {
-        oldDefaultBind.Add(KeyCode.W, moveUp);
-        oldDefaultBind.Add(KeyCode.S, moveDown);
-        oldDefaultBind.Add(KeyCode.A, moveLeft);
-        oldDefaultBind.Add(KeyCode.D, moveRight);
-        oldDefaultBind.Add(KeyCode.E, interact);
-    }*/
-
     void PrepBinds()
     {
-        //int j = 0;
-
         for (int i = 0; i < defaultBinds.Count; i++)
         {
             if (keyBinds.Count < defaultBinds.Count)
@@ -111,13 +86,6 @@ public class PlayerCommands : MonoBehaviour
                 keyBinds[i] = defaultBinds[i];
             }
         }
-
-        /*foreach(KeyValuePair<KeyCode, PCommand> item in oldDefaultBind)
-        {
-            newBind.Add(item.Key, item.Value);
-            keyBinds[j] = item.Key;
-            j++;
-        }*/
     }
 
     public void Rebind(string action)
@@ -131,36 +99,27 @@ public class PlayerCommands : MonoBehaviour
         switch (actionInput)
         {
             case "forward":
-                //newBind.Remove(keyBinds[0]);
                 keyBinds[0] = key;
-                //newBind.Add(keyBinds[0], moveUp);
                 break;
             case "backward":
-                //newBind.Remove(keyBinds[1]);
                 keyBinds[1] = key;
-                //newBind.Add(keyBinds[1], moveDown);
                 break;
             case "left":
-                //newBind.Remove(keyBinds[2]);
                 keyBinds[2] = key;
-                //newBind.Add(keyBinds[2], moveLeft);
                 break;
             case "right":
-                //newBind.Remove(keyBinds[3]);
                 keyBinds[3] = key;
-                //newBind.Add(keyBinds[3], moveRight);
                 break;
             case "interact":
-                //newBind.Remove(keyBinds[4]);
                 keyBinds[4] = key;
-                //newBind.Add(keyBinds[4], interact);
-                break;
-            case "default":
-                //newBind.Clear();
-                PrepBinds();
                 break;
             default:
                 break;
         }
+    }
+
+    public void SetDefault()
+    {
+        PrepBinds();
     }
 }

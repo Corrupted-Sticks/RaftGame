@@ -6,35 +6,59 @@ public class PlayerCMovement : MonoBehaviour
 {
     Rigidbody rb;
 
-    [SerializeField] float acceleration = 0;
-    [SerializeField] float maxSpeed = 0;
+    [SerializeField] public Transform boatTransform;
+    [SerializeField] public float acceleration = 0;
+    [SerializeField] public float maxSpeed = 10;
+
+    int commandInt;
+
+    public bool isOnBoat { get; private set; }
+
+    public Vector3 moveDir;
+    public Vector3 playerVelocity;
+    public Vector3 finalMoveDir;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetKeyDown(PlayerCommands.PCInstance.keyBinds[0])) // Move Forwards
+        if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[0])) // Move Forwards
         {
-            PlayerCommands.PCInstance.keyCommands[0].Execute();
+            commandInt = 0;
+            CallExecute();
         }
-        if (Input.GetKeyDown(PlayerCommands.PCInstance.keyBinds[1])) // Move Backwards
+        if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[1])) // Move Backwards
         {
-            PlayerCommands.PCInstance.keyCommands[1].Execute();
+            commandInt = 1;
+            CallExecute();
         }
-        if (Input.GetKeyDown(PlayerCommands.PCInstance.keyBinds[2])) // Move Left
+        if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[2])) // Move Left
         {
-            PlayerCommands.PCInstance.keyCommands[2].Execute();
+            commandInt = 2;
+            CallExecute();
         }
-        if (Input.GetKeyDown(PlayerCommands.PCInstance.keyBinds[3])) // Move Right
+        if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[3])) // Move Right
         {
-            PlayerCommands.PCInstance.keyCommands[3].Execute();
+            commandInt = 3;
+            CallExecute();
         }
-        if (Input.GetKeyDown(PlayerCommands.PCInstance.keyBinds[4])) // Interact
+        if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[4])) // Interact
         {
-            PlayerCommands.PCInstance.keyCommands[4].Execute();
+            commandInt = 4;
+            CallExecute();
         }
+    }
+
+    void CallExecute()
+    {
+        PlayerCommands.PCInstance.keyCommands[commandInt].Execute(this);
+    }
+
+    public Rigidbody GetRB()
+    {
+        return rb;
     }
 }

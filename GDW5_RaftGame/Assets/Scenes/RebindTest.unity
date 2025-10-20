@@ -204,8 +204,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1915000726}
         m_TargetAssemblyTypeName: PlayerCommands, Assembly-CSharp
-        m_MethodName: Rebind
-        m_Mode: 5
+        m_MethodName: SetDefault
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -285,8 +285,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14e6ed5441fad4041a83946f3aad7a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 0
-  maxSpeed: 0
+  boatTransform: {fileID: 1894145934}
+  acceleration: 1
+  maxSpeed: 10
+  moveDir: {x: 0, y: 0, z: 0}
+  playerVelocity: {x: 0, y: 0, z: 0}
+  finalMoveDir: {x: 0, y: 0, z: 0}
 --- !u!54 &161004611
 Rigidbody:
   m_ObjectHideFlags: 0
