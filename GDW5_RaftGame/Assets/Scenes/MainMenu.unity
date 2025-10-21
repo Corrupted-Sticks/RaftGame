@@ -1227,9 +1227,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 574811754}
-        m_TargetAssemblyTypeName: PlayerCommands, Assembly-CSharp
-        m_MethodName: Rebind
+      - m_Target: {fileID: 404609871}
+        m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+        m_MethodName: GoRebind
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1405,9 +1405,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 574811754}
-        m_TargetAssemblyTypeName: PlayerCommands, Assembly-CSharp
-        m_MethodName: Rebind
+      - m_Target: {fileID: 404609871}
+        m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+        m_MethodName: GoRebind
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2607,9 +2607,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 574811754}
-        m_TargetAssemblyTypeName: PlayerCommands, Assembly-CSharp
-        m_MethodName: Rebind
+      - m_Target: {fileID: 404609871}
+        m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+        m_MethodName: GoRebind
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2885,9 +2885,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 574811754}
-        m_TargetAssemblyTypeName: PlayerCommands, Assembly-CSharp
-        m_MethodName: Rebind
+      - m_Target: {fileID: 404609871}
+        m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+        m_MethodName: GoRebind
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3695,9 +3695,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 574811754}
-        m_TargetAssemblyTypeName: PlayerCommands, Assembly-CSharp
-        m_MethodName: Rebind
+      - m_Target: {fileID: 404609871}
+        m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+        m_MethodName: GoRebind
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4178,9 +4178,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 574811754}
-        m_TargetAssemblyTypeName: PlayerCommands, Assembly-CSharp
-        m_MethodName: SetDefault
+      - m_Target: {fileID: 404609871}
+        m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+        m_MethodName: GoDefault
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

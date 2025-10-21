@@ -25,7 +25,7 @@ public class PlayerCommands : MonoBehaviour
     public List<KeyCode> keyBinds { get; private set; } = new List<KeyCode>();
     public List<PCommand> keyCommands { get; private set; } = new List<PCommand>();
 
-    [SerializeField] List<string> texts = new List<string>();
+    public List<string> texts = new List<string>();
 
     bool needInput = false;
     string actionInput;
