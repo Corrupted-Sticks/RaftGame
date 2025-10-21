@@ -52,6 +52,14 @@ public class PlayerCMovement : MonoBehaviour
         }
     }
 
+    private void Update() // Right now this is purely to go back to main menu. Will be changed later
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneLoader.Instance.LoadScene("MainMenu");
+        }
+    }
+
     void CallExecute()
     {
         PlayerCommands.PCInstance.keyCommands[commandInt].Execute(this);

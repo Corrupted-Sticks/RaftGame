@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class PlayerCommands : MonoBehaviour
 {
@@ -22,21 +23,24 @@ public class PlayerCommands : MonoBehaviour
     };
 
     public List<KeyCode> keyBinds { get; private set; } = new List<KeyCode>();
-
     public List<PCommand> keyCommands { get; private set; } = new List<PCommand>();
+
+    [SerializeField] List<string> texts = new List<string>();
 
     bool needInput = false;
     string actionInput;
 
     private void Awake()
     {
-        if (PCInstance != null && PCInstance != this)
+        if (PCInstance != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
-
-        PCInstance = this;
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            PCInstance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     void Start()
@@ -80,18 +84,23 @@ public class PlayerCommands : MonoBehaviour
             if (keyBinds.Count < defaultBinds.Count)
             {
                 keyBinds.Add(defaultBinds[i]);
+                texts.Add(defaultBinds[i].ToString());
             }
             else
             {
                 keyBinds[i] = defaultBinds[i];
+                texts[i] = defaultBinds[i].ToString();
             }
         }
     }
 
     public void Rebind(string action)
     {
-        actionInput = action;
-        needInput = true;
+        if (!needInput)
+        {
+            actionInput = action;
+            needInput = true;
+        }
     }
 
     void SetNewBind()
@@ -100,18 +109,23 @@ public class PlayerCommands : MonoBehaviour
         {
             case "forward":
                 keyBinds[0] = key;
+                texts[0] = key.ToString();
                 break;
             case "backward":
                 keyBinds[1] = key;
+                texts[1] = key.ToString();
                 break;
             case "left":
                 keyBinds[2] = key;
+                texts[2] = key.ToString();
                 break;
             case "right":
                 keyBinds[3] = key;
+                texts[3] = key.ToString();
                 break;
             case "interact":
                 keyBinds[4] = key;
+                texts[4] = key.ToString();
                 break;
             default:
                 break;
@@ -121,5 +135,10 @@ public class PlayerCommands : MonoBehaviour
     public void SetDefault()
     {
         PrepBinds();
+    }
+
+    public string GetTextBoxString(int num)
+    {
+        return texts[num];
     }
 }
