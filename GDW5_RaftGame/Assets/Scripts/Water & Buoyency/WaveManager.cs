@@ -149,17 +149,7 @@ public class WaveManager : MonoBehaviour
     /// <returns>Height of water according to waves assigned, at given position.</returns>
     public float GetWaterHeight(Vector3 position)
     {
-         Vector3 totalDisplacement = Vector3.zero;
-
-         for (int i = 0; i < 4; ++i)
-         {
-             totalDisplacement += GetGerstnerWaveOffset(position, waves[i], Time.time);
-         }
-
-         float old = WaterPlane.position.y + totalDisplacement.y;
-
-
-        float dll = CalculateWaterHeight(
+        return CalculateWaterHeight(
             new Vector3DLL(position),
             waves,
             4,
@@ -168,11 +158,6 @@ public class WaveManager : MonoBehaviour
             depth
             );
 
-        print(dll - old);
-
-        
-
-        return old;
     }
 
 
