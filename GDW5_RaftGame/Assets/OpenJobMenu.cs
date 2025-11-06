@@ -8,6 +8,8 @@ public class OpenJobMenu : MonoBehaviour
         {
             if (!ShopManager.instance.isShown)
                 ShopManager.instance.Show();
+
+            JobSelectionSpawner.instance.CreateRandomQuantity();
         }
     }
 
@@ -18,6 +20,8 @@ public class OpenJobMenu : MonoBehaviour
         {
             if (ShopManager.instance.isShown)
                 ShopManager.instance.Hide();
+
+            JobSelectionSpawner.instance.ClearCurrentOptions();
         }
     }
 

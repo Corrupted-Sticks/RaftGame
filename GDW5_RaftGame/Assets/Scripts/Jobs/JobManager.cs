@@ -63,7 +63,10 @@ namespace SDS_Jobs
             lastAction.Undo();
         }
 
-       
+       public void ClearUndoStack()
+        {
+            _executedJobActions.Clear();
+        }
 
     }
 
@@ -115,7 +118,7 @@ namespace SDS_Jobs
                 _currentJobs.Push(js.Job);
 
                 Vector3 newPos = Locations.IslandPositions[_currentJobs.Peek().EndLocation];
-                _jwp.transform.position = newPos + Vector3.up * 30;
+                _jwp.transform.position = newPos + Vector3.up *5;
                 _jwp.gameObject.SetActive(true);
                 _jwp.UpdateWaypoint();
 
@@ -155,7 +158,7 @@ namespace SDS_Jobs
             {
 
                 Vector3 newPos = Locations.IslandPositions[_currentJobs.Peek().EndLocation];
-                _jwp.transform.position = newPos + Vector3.up * 30;
+                _jwp.transform.position = newPos + Vector3.up * 5;
                 _jwp.gameObject.SetActive(true);
                 _jwp.UpdateWaypoint();
             }
@@ -178,23 +181,23 @@ namespace SDS_Jobs
 
     public struct Job
     {
-        [SerializeField] Islands _startLocation;
-        public Islands StartLocation { get { return _startLocation; } }
+        [SerializeField] Docks _startLocation;
+        public Docks StartLocation { get { return _startLocation; } }
 
-        [SerializeField] Islands _endLocation;
-        public Islands EndLocation { get { return _endLocation; } }
+        [SerializeField] Docks _endLocation;
+        public Docks EndLocation { get { return _endLocation; } }
 
         // not sure if we want.
         [SerializeField] float TimeLimit;
 
         public Job(int startIsland, int endIsland, int timeLimit = -1)
         {
-            _startLocation = (Islands)startIsland;
-            _endLocation = (Islands)endIsland;
+            _startLocation = (Docks)startIsland;
+            _endLocation = (Docks)endIsland;
             TimeLimit = timeLimit;
         }
 
-        public Job(Islands startIsland, Islands endIsland, int timeLimit = -1)
+        public Job(Docks startIsland, Docks endIsland, int timeLimit = -1)
         {
             _startLocation = startIsland;
             _endLocation = endIsland;

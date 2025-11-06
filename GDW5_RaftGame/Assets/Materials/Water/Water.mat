@@ -148,10 +148,10 @@ Material:
     - _alp: 0.43
     - _alpha: 1
     - _amplitude: 2.93
-    - _amplitude_1: 4.43
-    - _amplitude_2: 0
-    - _amplitude_3: 0
-    - _amplitude_4: 0
+    - _amplitude_1: 2.5
+    - _amplitude_2: 0.9
+    - _amplitude_3: 0.4
+    - _amplitude_4: 0.2
     - _densityRadius: 143.32
     - _densityStrength: -26.17
     - _depth: 9
@@ -179,10 +179,10 @@ Material:
     - _textureNoiseStrength: 2.4
     - _time_scale: 1
     - _timescale: 1
-    - _timescale_1: 1
-    - _timescale_2: 0.5
+    - _timescale_1: 0.18
+    - _timescale_2: 0.3
     - _timescale_3: 1
-    - _timescale_4: 0
+    - _timescale_4: 2
     - _visual_depth: 35
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
