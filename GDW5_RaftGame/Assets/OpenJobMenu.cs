@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class OpenJobMenu : MonoBehaviour
 {
+    private void Start()
+    {
+        print(transform.position);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Boat") || other.CompareTag("Player"))
