@@ -11,7 +11,7 @@ public class JobWaypoint : MonoBehaviour
 
     public void UpdateWaypoint()
     {
-        distanceText.text = GetDistance().ToString("0.###");
+        distanceText.text = GetDistance().ToString("0.#") +" m" ;
         UpdateDirectionArrow();
     }
 

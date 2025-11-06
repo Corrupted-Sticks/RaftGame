@@ -34,13 +34,13 @@ public class WindManager : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR // remove in actual builds, as these are editor only variables.
+//#if UNITY_EDITOR // remove in actual builds, as these are editor only variables.
 
     [FoldoutGroup("Wind Gizmo Settings")][SerializeField] float arrowLength = 2f;
     [FoldoutGroup("Wind Gizmo Settings")][SerializeField] float headLength = 0.5f;
     [FoldoutGroup("Wind Gizmo Settings")][SerializeField] float headAngle = 20f;
     [FoldoutGroup("Wind Gizmo Settings")][SerializeField] Color arrowColor = Color.cyan;
-#endif
+//#endif
 
     private void Awake()
     {

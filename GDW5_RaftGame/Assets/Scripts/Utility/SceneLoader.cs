@@ -22,6 +22,8 @@ public class SceneLoader : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+#if UNITY_EDITOR // do not remove this.
         UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 }

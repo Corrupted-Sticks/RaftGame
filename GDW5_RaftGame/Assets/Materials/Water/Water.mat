@@ -125,7 +125,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _METALLIC: 0
-    - _Met: 0
+    - _Met: 0.28
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -137,7 +137,7 @@ Material:
     - _RefractonScale: 658.2
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _Spec: 0.8
+    - _Spec: 0.66
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
@@ -148,9 +148,9 @@ Material:
     - _alp: 0.43
     - _alpha: 1
     - _amplitude: 2.93
-    - _amplitude_1: 3.5
-    - _amplitude_2: 0.35
-    - _amplitude_3: 0.5
+    - _amplitude_1: 4.43
+    - _amplitude_2: 0
+    - _amplitude_3: 0
     - _amplitude_4: 0
     - _densityRadius: 143.32
     - _densityStrength: -26.17
@@ -175,8 +175,8 @@ Material:
     - _smooth: 1
     - _smoothness: 0
     - _temp: 0
-    - _textureNoiseScale: 1000
-    - _textureNoiseStrength: 1.5
+    - _textureNoiseScale: 1040.1
+    - _textureNoiseStrength: 2.4
     - _time_scale: 1
     - _timescale: 1
     - _timescale_1: 1
@@ -192,7 +192,7 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _colour: {r: 0.32128873, g: 0.5972071, b: 0.7169812, a: 0}
     - _colour_Bright: {r: 0, g: 0.31456757, b: 0.6132076, a: 0.78039217}
-    - _colour_Dark: {r: 0, g: 0.31372544, b: 0.6117647, a: 1}
+    - _colour_Dark: {r: 0, g: 0.36396465, b: 0.7075472, a: 1}
     - _colour_Dark_1: {r: 0, g: 0.50980395, b: 0.6156863, a: 1}
     - _colour_high: {r: 0, g: 0.5248943, b: 0.572, a: 1}
     - _colour_low: {r: 0, g: 0.43046874, b: 0.475, a: 1}
