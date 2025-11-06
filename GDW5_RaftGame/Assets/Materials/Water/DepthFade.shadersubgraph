@@ -328,21 +328,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "4b29c253be6d4f02ab6405933db963b0",
-    "m_Id": 1,
-    "m_DisplayName": "Out_Vector4",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out_Vector4",
-    "m_StageCapability": 2,
-    "m_Value": 0.0,
-    "m_DefaultValue": 0.0,
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.SceneDepthNode",
     "m_ObjectId": "4c90200ac0f849cdbd860e81f826995d",
     "m_Group": {
@@ -690,7 +675,7 @@
     },
     "m_Slots": [
         {
-            "m_Id": "4b29c253be6d4f02ab6405933db963b0"
+            "m_Id": "dc4cefa1f4bb417296762b0cc799ac0f"
         }
     ],
     "synonyms": [],
@@ -773,6 +758,21 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "dc4cefa1f4bb417296762b0cc799ac0f",
+    "m_Id": 1,
+    "m_DisplayName": "Depth_0_1",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Depth_0_1",
+    "m_StageCapability": 2,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
