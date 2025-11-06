@@ -118,7 +118,7 @@ namespace SDS_Jobs
                 _currentJobs.Push(js.Job);
 
                 Vector3 newPos = Locations.IslandPositions[_currentJobs.Peek().EndLocation];
-                _jwp.transform.position = newPos + Vector3.up *5;
+                _jwp.transform.position = newPos;
                 _jwp.gameObject.SetActive(true);
                 _jwp.UpdateWaypoint();
 
