@@ -7,6 +7,7 @@ public class CargoFactory : MonoBehaviour
     [SerializeField] List<GameObject> spawnLocations = new List<GameObject>();
 
     private Dictionary<CARGO_TYPES, BaseSpawner> spawnDict = new();
+    private Dictionary<CARGO_TYPES, CargoObjectPool> poolDict = new();
 
     int spawnInt = 0;
 
@@ -15,6 +16,8 @@ public class CargoFactory : MonoBehaviour
         foreach (BaseSpawner bs in spawns)
         {
             spawnDict.Add(bs.Types, bs);
+            poolDict.Add(bs.Types, gameObject.AddComponent<CargoObjectPool>());
+            poolDict[bs.Types].SetSpawner(bs);
         }
     }
 
@@ -29,7 +32,9 @@ public class CargoFactory : MonoBehaviour
 
         foreach (CARGO_TYPES type in cargo)
         {
-            spawnDict[type].Spawn(spawnLocations[spawnInt]);
+            poolDict[type].Spawn(spawnLocations[spawnInt]);
+
+            //spawnDict[type].Spawn(spawnLocations[spawnInt]);
 
             spawnInt++;
         }
