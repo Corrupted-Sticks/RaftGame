@@ -1,8 +1,9 @@
+using SDS_Jobs;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public abstract class Cargo : MonoBehaviour
+public abstract class Cargo : CargoSubject
 {
     public IObjectPool<Cargo> Pool { get; set; }
 
@@ -11,6 +12,13 @@ public abstract class Cargo : MonoBehaviour
     [SerializeField] public float maxHealth = 100.0f;
     [SerializeField] public float timeToSelfDestruct = 30.0f;
 
+    private JobManager jobManager;
+
+    private void Awake()
+    {
+        jobManager = FindFirstObjectByType<JobManager>();
+    }
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -18,11 +26,12 @@ public abstract class Cargo : MonoBehaviour
 
     public void OnEnable()
     {
-
+        Attach(jobManager);
     }
 
     public void OnDisable()
     {
+        Detach(jobManager);
         ResetCargo();
     }
 
@@ -45,6 +54,15 @@ public abstract class Cargo : MonoBehaviour
     {
         currentHealth -= dmg;
 
-        if (currentHealth <= 0) ReturnToPool();
+        if (currentHealth <= 0) Despawn();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("CargoDeath"))
+        {
+            NotifyObservers();
+            Despawn();
+        }
     }
 }

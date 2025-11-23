@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace SDS_Jobs
 {
-    public class JobManager : MonoBehaviour
+    public class JobManager : CargoObserver
     {
         public static JobManager instance;
         private void Awake()
@@ -63,11 +63,15 @@ namespace SDS_Jobs
             lastAction.Undo();
         }
 
-       public void ClearUndoStack()
+        public void ClearUndoStack()
         {
             _executedJobActions.Clear();
         }
 
+        public override void Notify(CargoSubject subject)
+        {
+            
+        }
     }
 
 
