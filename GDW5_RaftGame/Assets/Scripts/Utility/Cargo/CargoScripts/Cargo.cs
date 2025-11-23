@@ -12,9 +12,9 @@ public abstract class Cargo : CargoSubject
     [SerializeField] public float maxHealth = 100.0f;
     [SerializeField] public float timeToSelfDestruct = 30.0f;
 
-    private JobManager jobManager;
+    public JobManager jobManager;
 
-    private void Awake()
+    protected void Awake()
     {
         jobManager = FindFirstObjectByType<JobManager>();
     }
@@ -24,40 +24,40 @@ public abstract class Cargo : CargoSubject
         currentHealth = maxHealth;
     }
 
-    public void OnEnable()
+    protected void OnEnable()
     {
         Attach(jobManager);
     }
 
-    public void OnDisable()
+    protected void OnDisable()
     {
         Detach(jobManager);
         ResetCargo();
     }
 
-    public void Despawn()
+    protected void Despawn()
     {
         ReturnToPool();
     }
 
-    public void ReturnToPool()
+    protected void ReturnToPool()
     {
         Pool.Release(this);
     }
 
-    public void ResetCargo()
+    protected void ResetCargo()
     {
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float dmg)
+    protected void TakeDamage(float dmg)
     {
         currentHealth -= dmg;
 
         if (currentHealth <= 0) Despawn();
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("CargoDeath"))
         {
