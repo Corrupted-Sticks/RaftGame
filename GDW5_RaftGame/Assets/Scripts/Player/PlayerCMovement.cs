@@ -13,42 +13,54 @@ public class PlayerCMovement : MonoBehaviour
     int commandInt;
 
     public bool isOnBoat { get; private set; }
+    bool inputMoving = false;
 
     public Vector3 moveDir;
     public Vector3 playerVelocity;
     public Vector3 finalMoveDir;
+    private Animator animator;
+    public Collider playerCollider;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+        playerCollider = GetComponent<Collider>();
     }
 
     void FixedUpdate()
     {
+        inputMoving = false;
+
         if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[0])) // Move Forwards
         {
             commandInt = 0;
             CallExecute();
+            inputMoving = true;
         }
         if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[1])) // Move Backwards
         {
             commandInt = 1;
             CallExecute();
+            inputMoving = true;
         }
         if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[2])) // Move Left
         {
             commandInt = 2;
             CallExecute();
+            inputMoving = true;
         }
         if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[3])) // Move Right
         {
             commandInt = 3;
             CallExecute();
+            inputMoving = true;
         }
         if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[4])) // Interact
         {
             commandInt = 4;
             CallExecute();
+            inputMoving = true;
         }
     }
 
@@ -57,6 +69,17 @@ public class PlayerCMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneLoader.Instance.LoadScene("MainMenu");
+        }
+
+        if (moveDir != Vector3.zero && inputMoving)
+        {
+            animator.SetFloat("Speed", 0.5f);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir), 0.15f);
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0);
         }
     }
 

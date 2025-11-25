@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     Collider _collider;
     public Rigidbody RB { get => _rb; }
     public Collider Collider { get => _collider; }
+    private Animator _animator;
 
     [FoldoutGroup("Ground Movement")][SerializeField] float _acceleration = 0;
     [FoldoutGroup("Ground Movement")][SerializeField] float _maxSpeed = 10;
@@ -81,6 +82,7 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     {
         _rb = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
+        _animator = GetComponent<Animator>();
         _maxSpeedSquared = _MaxSpeed * _maxSpeed;
     }
 
@@ -113,6 +115,18 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
         if (Input.GetKeyDown(KeyCode.R))
         {
             transform.position = BoatController.instance.RespawnPosition.position;
+        }
+
+        if (moveDir == Vector3.zero)
+        {
+            _animator.SetFloat("Speed", 0);
+        }
+        else
+        {
+            _animator.SetFloat("Speed", 0.5f);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir), 0.01f);
+            transform.Translate(moveDir * _rb.linearVelocity.magnitude * Time.deltaTime, Space.World);
         }
     }
 }

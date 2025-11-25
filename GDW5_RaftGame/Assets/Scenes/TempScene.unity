@@ -1627,6 +1627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187b05e30f0c080419f523388c4b59b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   isUnderWater: 0
   maxSubmersion: 0.5
   floatPower: 12
@@ -2220,6 +2221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187b05e30f0c080419f523388c4b59b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   isUnderWater: 0
   maxSubmersion: 0.5
   floatPower: 15
@@ -2628,23 +2630,34 @@ MonoBehaviour:
   phase: 0
   depth: 9
   gravity: 9
-  neighbourDistance: 0.25
   WaterPlane: {fileID: 1795647064}
-  visualYOffset: 0
   defaultWaterMaterial: {fileID: 2100000, guid: c7c82614ae0c3494faa241c4737050d5, type: 2}
   waves:
-  - direction: {x: 0.05, y: 0, z: -0.07}
+  - direction:
+      x: 0.05
+      y: 0
+      z: -0.07
     amplitude: 3
     timeScale: 1
-  - direction: {x: 0.5, y: 0, z: 0}
+  - direction:
+      x: 0.5
+      y: 0
+      z: 0
     amplitude: 1.33
     timeScale: 1
-  - direction: {x: 0, y: 0, z: 1}
+  - direction:
+      x: 0
+      y: 0
+      z: 1
     amplitude: 0.58
     timeScale: 1
-  - direction: {x: 0, y: 0, z: 0}
+  - direction:
+      x: 0
+      y: 0
+      z: 0
     amplitude: 0
     timeScale: 1
+  _followTarget: {fileID: 0}
 --- !u!4 &1985629458
 Transform:
   m_ObjectHideFlags: 0
