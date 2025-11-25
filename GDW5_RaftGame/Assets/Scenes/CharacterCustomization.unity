@@ -432,7 +432,19 @@ MonoBehaviour:
   m_Group: {fileID: 211113746}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 202541786}
+        m_TargetAssemblyTypeName: CustomHandler, Assembly-CSharp
+        m_MethodName: GoChange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &155825528
 GameObject:
@@ -532,6 +544,7 @@ GameObject:
   - component: {fileID: 202541784}
   - component: {fileID: 202541783}
   - component: {fileID: 202541782}
+  - component: {fileID: 202541786}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -632,6 +645,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &202541786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202541781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346515ded6caaea4aba52ba0a0f2c21b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &211113744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,6 +1368,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507111580}
   m_CullTransparentMesh: 1
+--- !u!1001 &638435481
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5654780168398597664, guid: 753bf9d848188d34d9141c73466b927f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654780168398597664, guid: 753bf9d848188d34d9141c73466b927f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654780168398597664, guid: 753bf9d848188d34d9141c73466b927f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654780168398597664, guid: 753bf9d848188d34d9141c73466b927f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654780168398597664, guid: 753bf9d848188d34d9141c73466b927f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654780168398597664, guid: 753bf9d848188d34d9141c73466b927f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654780168398597664, guid: 753bf9d848188d34d9141c73466b927f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654780168398597664, guid: 753bf9d848188d34d9141c73466b927f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654780168398597664, guid: 753bf9d848188d34d9141c73466b927f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654780168398597664, guid: 753bf9d848188d34d9141c73466b927f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769731137551480339, guid: 753bf9d848188d34d9141c73466b927f, type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 753bf9d848188d34d9141c73466b927f, type: 3}
 --- !u!1 &703072379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1718,7 +1800,31 @@ MonoBehaviour:
   m_Group: {fileID: 211113746}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 202541786}
+        m_TargetAssemblyTypeName: CustomHandler, Assembly-CSharp
+        m_MethodName: GoChange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 202541786}
+        m_TargetAssemblyTypeName: CustomHandler, Assembly-CSharp
+        m_MethodName: GoChange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1084375373
 GameObject:
@@ -1804,7 +1910,19 @@ MonoBehaviour:
   m_Group: {fileID: 211113746}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 202541786}
+        m_TargetAssemblyTypeName: CustomHandler, Assembly-CSharp
+        m_MethodName: GoChange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1118255266
 GameObject:
@@ -2180,7 +2298,19 @@ MonoBehaviour:
   m_Group: {fileID: 211113746}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 202541786}
+        m_TargetAssemblyTypeName: CustomHandler, Assembly-CSharp
+        m_MethodName: GoChange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1373866868
 GameObject:
@@ -3053,3 +3183,4 @@ SceneRoots:
   - {fileID: 202541785}
   - {fileID: 703072382}
   - {fileID: 449831889}
+  - {fileID: 638435481}
