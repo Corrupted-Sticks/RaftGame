@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCMovement : MonoBehaviour
 {
     Rigidbody rb;
+    public Rigidbody RB { get => rb; }
 
     [SerializeField] public Transform boatTransform;
     [SerializeField] public float acceleration = 0;
@@ -14,53 +15,57 @@ public class PlayerCMovement : MonoBehaviour
 
     public bool isOnBoat { get; private set; }
     bool inputMoving = false;
+    bool canInput = true;
 
     public Vector3 moveDir;
     public Vector3 playerVelocity;
     public Vector3 finalMoveDir;
     private Animator animator;
-    public Collider playerCollider;
+    public Collider Collider;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        playerCollider = GetComponent<Collider>();
+        Collider = GetComponent<Collider>();
     }
 
     void FixedUpdate()
     {
         inputMoving = false;
 
-        if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[0])) // Move Forwards
+        if (canInput)
         {
-            commandInt = 0;
-            CallExecute();
-            inputMoving = true;
-        }
-        if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[1])) // Move Backwards
-        {
-            commandInt = 1;
-            CallExecute();
-            inputMoving = true;
-        }
-        if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[2])) // Move Left
-        {
-            commandInt = 2;
-            CallExecute();
-            inputMoving = true;
-        }
-        if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[3])) // Move Right
-        {
-            commandInt = 3;
-            CallExecute();
-            inputMoving = true;
-        }
-        if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[4])) // Interact
-        {
-            commandInt = 4;
-            CallExecute();
-            inputMoving = true;
+            if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[0])) // Move Forwards
+            {
+                commandInt = 0;
+                CallExecute();
+                inputMoving = true;
+            }
+            if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[1])) // Move Backwards
+            {
+                commandInt = 1;
+                CallExecute();
+                inputMoving = true;
+            }
+            if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[2])) // Move Left
+            {
+                commandInt = 2;
+                CallExecute();
+                inputMoving = true;
+            }
+            if (Input.GetKey(PlayerCommands.PCInstance.keyBinds[3])) // Move Right
+            {
+                commandInt = 3;
+                CallExecute();
+                inputMoving = true;
+            }
+            if (Input.GetKeyDown(PlayerCommands.PCInstance.keyBinds[4])) // Interact
+            {
+                commandInt = 4;
+                CallExecute();
+                inputMoving = true;
+            }
         }
     }
 
@@ -75,7 +80,7 @@ public class PlayerCMovement : MonoBehaviour
         {
             animator.SetFloat("Speed", 0.5f);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir), 0.15f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir.normalized), 0.15f);
         }
         else
         {
@@ -91,5 +96,10 @@ public class PlayerCMovement : MonoBehaviour
     public Rigidbody GetRB()
     {
         return rb;
+    }
+
+    public void ToggleInput(bool toggle)
+    {
+        canInput = toggle;
     }
 }

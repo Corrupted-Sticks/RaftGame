@@ -5,7 +5,8 @@ using UnityEngine;
 public class Trigger_SailControl : MonoBehaviour
 {
     [SerializeField]int playersInside = 0;
-    [SerializeField]PlayerMovement pmove; // current working playerMovement script.
+    //[SerializeField]PlayerMovement pmove; // current working playerMovement script.
+    [SerializeField]PlayerCMovement pmove; // current working playerMovement script.
 
     [SerializeField] bool isPlayerControlling = false;
 
@@ -14,7 +15,8 @@ public class Trigger_SailControl : MonoBehaviour
     {
         if (!collision.CompareTag("Player")) return;
         playersInside++;
-        pmove = collision.GetComponentInChildren<PlayerMovement>();
+        // pmove = collision.GetComponentInChildren<PlayerMovement>();
+        pmove = collision.GetComponentInChildren<PlayerCMovement>();
 
         boatControllUI.SetEnterBoatControl(true);
 
@@ -32,7 +34,7 @@ public class Trigger_SailControl : MonoBehaviour
         if (!isPlayerControlling && Input.GetKeyDown(KeyCode.E)) TakeControl();
 
         // DEBUG : REPLACE WITH INPUT SYSTEM
-        else if (isPlayerControlling && Input.GetKeyDown(KeyCode.Escape)) ExitControl();
+        else if (isPlayerControlling && Input.GetKeyDown(KeyCode.E)) ExitControl();
     }
 
 
