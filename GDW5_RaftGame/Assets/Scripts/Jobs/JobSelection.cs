@@ -37,22 +37,6 @@ public class JobSelection : MonoBehaviour
 
         _buttonText = GetComponentInChildren<TextMeshProUGUI>();
 
-        /*
-        _startIsland = Locations.GetClosestIsland(BoatController.instance.transform.position); // always start at the island you are on when accepting the job.
-        int end = Random.Range(0, (int)Docks.COUNT);
-        int start = (int)_startIsland;
-
-        while (end == start)// if start and end are the same island, keep getting a new end until it isn't. 
-            end = Random.Range(0, (int)Docks.COUNT);
-
-        _endIsland = (Docks)end;
-
-        _buttonText.text = $"{_startIsland} ->{_endIsland}";
-
-        _distance = Mathf.RoundToInt(Vector3.Distance(Locations.IslandPositions[_startIsland], Locations.IslandPositions[_endIsland]));
-
-        _reward = Mathf.FloorToInt(_distance * 0.678f);// arbitrary modifier, later will make to change with difficulty.*/
-
 
     }
 
