@@ -32,9 +32,12 @@ public class CargoFactory : MonoBehaviour
 
         foreach (CARGO_TYPES type in cargo)
         {
-            poolDict[type].Spawn(spawnLocations[spawnInt]);
+            if (spawnInt >= spawnLocations.Count)
+            {
+                poolDict[type].Spawn(spawnLocations[spawnInt]);
 
-            //spawnDict[type].Spawn(spawnLocations[spawnInt]);
+                //spawnDict[type].Spawn(spawnLocations[spawnInt]);
+            }
 
             spawnInt++;
         }
