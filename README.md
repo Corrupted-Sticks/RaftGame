@@ -15,7 +15,7 @@ May(Marcus)  Yorke, 100874913
 Erik Anderson, 100753323
 
 
-<img width="243" height="322" alt="image2" src="https://github.com/user-attachments/assets/5684d36e-4e2b-491c-948c-66aad0377d2b" />
+<img width="243" height="377" alt="image2" src="https://github.com/user-attachments/assets/5684d36e-4e2b-491c-948c-66aad0377d2b" />
 ![IMG_3523](https://github.com/user-attachments/assets/5684d36e-4e2b-491c-948c-66aad0377d2b)
 
 
