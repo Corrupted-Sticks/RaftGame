@@ -27,16 +27,16 @@ public class CargoFactory : MonoBehaviour
     }
 
 
-    public void TEMPERARY_SpawnCargo()
+    public void TEMPERARY_SpawnCargo() // TEMPERARY DEBUG: Replace with job specific cargo types later.
     {
-        
         List<CARGO_TYPES> cargoOptions = new();
-        for(int i = 0; i < 4; ++i)
+        for (int i = 0; i < 4; ++i)
         {
             cargoOptions.Add(
-               (CARGO_TYPES) Random.Range(0, (int)CARGO_TYPES.COUNT) // gets random int from 0-cargo_type, then casts it back to a cargo type.
+               (CARGO_TYPES)Random.Range(0, (int)CARGO_TYPES.COUNT) // gets random int from 0-cargo_type, then casts it back to a cargo type.
             );
         }
+        foreach(var item in cargoOptions) { print(item); }
         SpawnCargo(cargoOptions);
     }
     public void SpawnCargo(List<CARGO_TYPES> cargo)
