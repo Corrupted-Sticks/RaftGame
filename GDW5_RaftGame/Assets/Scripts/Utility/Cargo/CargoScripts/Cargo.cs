@@ -22,6 +22,7 @@ public abstract class Cargo : CargoSubject
     void Start()
     {
         currentHealth = maxHealth;
+        Attach(jobManager);
     }
 
     protected void OnEnable()
