@@ -25,3 +25,11 @@ For the GED Project 1 with May(marcus) and Erik, here is the required informatio
 For the singleton present in the PlayerCommands.cs file I made no improvements as it does exactly what it is supposed to do.
 
 In the script there is a variable for a static instance of PlayerCommands. On awake, the script check if the static instance is NOT equal to null. If that's true then it destroys the gameobject its attached to. If false then it sets the instance to itself and runs the DontDestroyOnLoad function. The reason for this is because this script contains the keybinds for the player. So if the player rebinds forward from W to say T then naturally we want that to be saved between scenes. So if the instance isn't null, then a version of it already exists and shouldn't be overwritten.
+
+## Command Pattern:
+
+![GED_Project_Command](https://github.com/user-attachments/assets/bd077832-d833-4e6f-a203-ad182378eaba)
+
+For the command pattern that is also present in the PlayerCommands.cs file there hasn't been any improvements either.
+
+Inside PlayerCommands it is rather standard for the pattern. There are currently 5 different commands that can be performed. Moving in 4 directions and interacting. Inside the PlayerCMovement.cs file if one of the keys is pressed that correspond to a command, then it executes that command. Each command has its own script that inherits from the abstract PCommand class. I do not see a reason to change this as its doing exactly what I want it to do. In the future I may look to see if I can find a better way to handle the keyrebinding; it currently has a list of the default keybinds should the player want to reset them, a list of the current keybinds, and a list of the string equivalent of the current keybind.
