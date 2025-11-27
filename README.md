@@ -44,4 +44,20 @@ How the factory works is that when the player accepts a job from the board, a li
 
 ## Object Pooling
 
+![GED_Project_ObjectPool](https://github.com/user-attachments/assets/d7f8d08a-1db4-4399-8e39-a402f9a865a7)
+
+For an optimization pattern, I chose object pool as I felt that how I handle cargo objects in the game would benefit from it.
+
+How its set up is that when the factory runs its awake function it fills a dictionary with the keys being the types of cargo (via an enum) and the values being of the class CargoObjectPool. This gives each type of cargo object its own pool. Now, I wouldn't do it like this if there were 100 different types, but as there's only 3 right now it makes it easier to know I'm getting the right type of object from the pool. It tries to get an object from its pool but if there isn't any then it makes one. But if there is then it uses that one. Then if an object would be removed (either if it falls off the boat or if the player finishes the job) the object instead is added back to the pool and is disabled.
+
+By doing it this way I can reuse cargo objects instead of having to create new objects every single time.
+
 ## Observer
+
+![GED_Project_Observer](https://github.com/user-attachments/assets/7cbcc874-77d2-410a-94a9-3908efb78119)
+
+For the observer pattern, I chose to also implement this into the cargo system.
+
+How it works is that the abstract class Cargo inherits the abstract class CargoSubject. Then the different types of cargo inherit the Cargo class. It feels a bit off to have a chain of abstract classes so in the future I may just put it all into the Cargo class. In the CargoSubject class there are the 3 functions you expect to see: Attach, Detach, and NotifyObservers. The JobManager class inherits from a CargoObserver script which only has a Notify function inside. When a cargo object is either instantiated or enabled from the object pool, it finds an object of type JobManager and then attaches it. If the cargo object would be despawned by falling out of the map it calls the NotifyObservers function. What this is set up to do is to tell the JobManager that cargo was lost and reduce the reward accordingly. Then the object is returned to its pool.
+
+I decided to add observer this way as it feels like the easiest way. If the player loses cargo then the cargo can directly tell the JobManager. It overall makes it a lot cleaner.
