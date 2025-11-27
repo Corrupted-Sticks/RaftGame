@@ -28,16 +28,20 @@ public class JobSelection : MonoBehaviour
 
 
     Button _button;
+    void AddCargo()
+    {
+        FindFirstObjectByType<CargoFactory>().TEMPERARY_SpawnCargo();
+    }
 
 
     private void Start()
     {
         _button = GetComponent<Button>();
         _button.onClick.AddListener(() => JobManager.instance.ExecuteJobAction(transform));
+        _button.onClick.AddListener(AddCargo);
 
         _buttonText = GetComponentInChildren<TextMeshProUGUI>();
 
-        FindObjectOfType<CargoFactory>().TEMPERARY_SpawnCargo();
 
         /*
         _startIsland = Locations.GetClosestIsland(BoatController.instance.transform.position); // always start at the island you are on when accepting the job.
