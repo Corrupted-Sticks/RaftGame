@@ -18,6 +18,43 @@ Video Report Link: [Youtube Link](https://youtu.be/NXF1gENuRyc)
 <img width="243" height="322" alt="image" src="https://github.com/user-attachments/assets/04cfa6da-9aa8-4e48-b50c-959404a9591e" />
 
 
+
+
+## Object Pooling
+
+<img width="734" height="693" alt="ObjectPoolDiagram" src="https://github.com/user-attachments/assets/541e7863-fa04-4d7d-9a47-b468e5cf5db8" />
+
+
+For object pooling i chose to implement it in our Job Selection UI.
+
+
+Previously, we just spawned a bunch of ui elements and added components to them, then destroyed them when we were finished using them.
+this is wasteful however.
+
+We now have a pool which is added to the first time we open the menu. we can then load a random amount of these UI elements from the pool, updating whatever information is needed when retrieved, and return them all to the pool when the menu closes.
+
+
+
+
+
+## Observer
+
+<img width="1058" height="975" alt="ObserverDiagram" src="https://github.com/user-attachments/assets/4babdcae-0057-4e6b-beb8-86adbe6005a3" />
+
+
+As for the observer, i chose to implement it in our weather system.
+
+We update our weather based off of whatever job is currently selected.
+
+to implement, i just created a UnityEvent<WeatherInfo>, where WeatherInfo is a struct containing any info about the current weather. 
+this is then called when we modify the CurrentWeather variable through the publically exposed Setter, invoking the event with the given weather info, and updating all listeners.
+
+We plan to have it update things such as rain, thunder, wave speed/height, wind speed and direction and more, but have moved that section of our GDW game's developement to the winter semester. 
+Right now it only changes wind direction, but because it passes the weatherinfo when invoking the event, in the future it is as simple as subscribing another method to the event and it will automatically update when invoked.
+
+
+
+
 ------------------------------------------------------------------------------------------------------
 # Erik Anderson, 100753323
 
@@ -39,6 +76,8 @@ In the script there is a variable for a static instance of PlayerCommands. On aw
 For the command pattern that is also present in the PlayerCommands.cs file there hasn't been any improvements either.
 
 Inside PlayerCommands it is rather standard for the pattern. There are currently 5 different commands that can be performed. Moving in 4 directions and interacting. Inside the PlayerCMovement.cs file if one of the keys is pressed that correspond to a command, then it executes that command. Each command has its own script that inherits from the abstract PCommand class. I do not see a reason to change this as its doing exactly what I want it to do. In the future I may look to see if I can find a better way to handle the keyrebinding; it currently has a list of the default keybinds should the player want to reset them, a list of the current keybinds, and a list of the string equivalent of the current keybind.
+<img width="734" height="693" alt="ObjectPoolDiagram" src="https://github.com/user-attachments/assets/93886657-6cb6-422e-a671-814dcc30058f" />
+<img width="1058" height="975" alt="ObserverDiagram" src="https://github.com/user-attachments/assets/102847f9-5ca9-43d4-9a94-8301769faf24" />
 
 ## Factory
 
