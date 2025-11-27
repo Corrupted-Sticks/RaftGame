@@ -10,7 +10,7 @@ Skybox texture from: [Skybox-Series-Free](https://assetstore.unity.com/packages/
 
 All other sounds, models, textures, and art were done by the other members of our GDW group.
 
-Video Report Link: [Youtube Link](REPLACE ALL TEXT IN THESE BRACKETS WITH THE LINK)
+Video Report Link: [Youtube Link](https://youtu.be/NXF1gENuRyc)
 
 # May(Marcus) Yorke, 100874913
 
