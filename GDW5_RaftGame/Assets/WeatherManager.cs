@@ -21,7 +21,6 @@ namespace SDS_Weather
         public WeatherTypes type;
         public int strength;
         public float windDirection;
-
         public WeatherInfo()
         {
 
@@ -29,7 +28,6 @@ namespace SDS_Weather
             strength = UnityEngine.Random.Range(0, 3);
             windDirection = UnityEngine.Random.Range(0, 360.0f);
         }
-
         public WeatherInfo(WeatherTypes type, int strength, float windDir)
         {
             this.type = type;
@@ -62,7 +60,7 @@ namespace SDS_Weather
             instance = this;
         }
 
-        public void SetWeather(WeatherInfo newWeather) => CurrentWeather = newWeather;
+        //public void SetWeather(WeatherInfo newWeather) => CurrentWeather = newWeather;
 
         public void SetRandomWeather() => CurrentWeather = new WeatherInfo();
 
