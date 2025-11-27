@@ -2668,6 +2668,59 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 020309dd327ed2244849d2de7a0b6703, type: 3}
+--- !u!1 &813986473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 813986475}
+  - component: {fileID: 813986474}
+  m_Layer: 0
+  m_Name: CargoDeathTrigger
+  m_TagString: CargoDeath
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &813986474
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813986473}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1000, y: 1, z: 1000}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &813986475
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813986473}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -300, y: -4, z: 145}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -3040,11 +3093,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 276041366565080258, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000008530359
+      value: -87123.164
       objectReference: {fileID: 0}
     - target: {fileID: 276041366565080258, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000016730713
+      value: 37693.38
       objectReference: {fileID: 0}
     - target: {fileID: 311382486366289974, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_TargetGraphic
@@ -12683,3 +12736,4 @@ SceneRoots:
   - {fileID: 1602511081}
   - {fileID: 2119964848}
   - {fileID: 1786277501}
+  - {fileID: 813986475}
