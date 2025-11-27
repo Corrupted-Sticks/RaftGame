@@ -40,4 +40,8 @@ Inside PlayerCommands it is rather standard for the pattern. There are currently
 
 For the factory pattern in CargoFactory.cs the only change made to it isn't related to the design pattern but simply just catching what could've caused an error (if the factory was sent 5 items to spawn while it only has 4 places to spawn them).
 
-How the factory works is that when the player accepts a job from the board, a list of anywhere from 1 to 4 pieces of cargo (currently there are 3 different types of cargo) is sent to the factory. Then it takes each cargo type in the list and spawns each at designated spots on the boat. 
+How the factory works is that when the player accepts a job from the board, a list of anywhere from 1 to 4 pieces of cargo (currently there are 3 different types of cargo) is sent to the factory. Then it takes each cargo type in the list and spawns each at designated spots on the boat. A factory pattern was used here as it makes it a lot easier to add and remove different things that can spawn. If I wanted I could have 100 different types of cargo. And those cargo objects can apply different effects to themselves when they spawn. Things like varying gravity, less friction, etc. Those examples provided will most likely be added to the game in the winter semester.
+
+## Object Pooling
+
+## Observer
