@@ -7,6 +7,7 @@ For the GED Final Project with May(marcus) and Erik, here is the required inform
 For each of the required design patterns, both of us did one per.
 
 Skybox texture from: [Skybox-Series-Free](https://assetstore.unity.com/packages/2d/textures-materials/sky/skybox-series-free-103633)
+
 All other sounds, models, textures, and art were done by the other members of our GDW group.
 
 # May(Marcus) Yorke, 100874913
