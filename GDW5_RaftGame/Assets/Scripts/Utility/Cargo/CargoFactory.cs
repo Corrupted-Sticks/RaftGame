@@ -45,7 +45,7 @@ public class CargoFactory : MonoBehaviour
 
         foreach (CARGO_TYPES type in cargo)
         {
-            if (spawnInt >= spawnLocations.Count)
+            if (spawnInt <= spawnLocations.Count)
             {
                 poolDict[type].Spawn(spawnLocations[spawnInt]);
 
