@@ -44,4 +44,12 @@ How the factory works is that when the player accepts a job from the board, a li
 
 ## Object Pooling
 
+![GED_Project_ObjectPool](https://github.com/user-attachments/assets/d7f8d08a-1db4-4399-8e39-a402f9a865a7)
+
+For an optimization pattern, I chose object pool as I felt that how I handle cargo objects in the game would benefit from it.
+
+How its set up is that when the factory runs its awake function it fills a dictionary with the keys being the types of cargo (via an enum) and the values being of the class CargoObjectPool. This gives each type of cargo object its own pool. Now, I wouldn't do it like this if there were 100 different types, but as there's only 3 right now it makes it easier to know I'm getting the right type of object from the pool. It tries to get an object from its pool but if there isn't any then it makes one. But if there is then it uses that one. Then if an object would be removed (either if it falls off the boat or if the player finishes the job) the object instead is added back to the pool and is disabled.
+
+By doing it this way I can reuse cargo objects instead of having to create new objects every single time.
+
 ## Observer
