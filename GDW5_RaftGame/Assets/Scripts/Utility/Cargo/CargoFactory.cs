@@ -26,6 +26,19 @@ public class CargoFactory : MonoBehaviour
         SpawnCargo(new List<CARGO_TYPES> { CARGO_TYPES.Cube, CARGO_TYPES.Barrel, CARGO_TYPES.Stretch, CARGO_TYPES.Barrel });
     }
 
+
+    public void TEMPERARY_SpawnCargo()
+    {
+        
+        List<CARGO_TYPES> cargoOptions = new();
+        for(int i = 0; i < 4; ++i)
+        {
+            cargoOptions.Add(
+               (CARGO_TYPES) Random.Range(0, (int)CARGO_TYPES.COUNT) // gets random int from 0-cargo_type, then casts it back to a cargo type.
+            );
+        }
+        SpawnCargo(cargoOptions);
+    }
     public void SpawnCargo(List<CARGO_TYPES> cargo)
     {
         spawnInt = 0;

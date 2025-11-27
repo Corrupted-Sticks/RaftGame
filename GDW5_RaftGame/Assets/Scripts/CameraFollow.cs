@@ -1,3 +1,4 @@
+using SDS_Locations;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour

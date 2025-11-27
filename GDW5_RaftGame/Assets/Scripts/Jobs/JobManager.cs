@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 using System.Runtime.CompilerServices;
 using SDS_Weather;
+using TMPro;
 
 namespace SDS_Jobs
 {
@@ -28,10 +29,21 @@ namespace SDS_Jobs
         JobWaypoint jwp;
         Stack<ICommand> _executedJobActions = new Stack<ICommand>();
 
+        [SerializeField]TextMeshProUGUI _curMoneyText;
 
         [SerializeField] Transform _JobSelectionUIContent;
 
+        int _currentMoney;
 
+        public int CurrentMoney
+        {
+            get => _currentMoney;
+            set
+            {
+                _currentMoney = value;
+                _curMoneyText.text = _currentMoney.ToString();
+            }
+        }
 
 
         private void Start() => jwp = FindFirstObjectByType<JobWaypoint>();
@@ -67,6 +79,31 @@ namespace SDS_Jobs
         public void ClearUndoStack()
         {
             _executedJobActions.Clear();
+        }
+
+        public void CheckJobComplete(Docks dockArrivedAt)
+        {
+            if (_currentJobs.Count <= 0) return;
+            if (dockArrivedAt == _currentJobs.Peek().EndLocation)
+            {
+                Job job = _currentJobs.Pop();
+                CurrentMoney += 1; // DEBUG: REPLACE WITH ACTUAL REWARD LATER
+            }
+            ClearOnJobComplete(dockArrivedAt);
+        }
+
+
+        public void ClearOnJobComplete(Docks dockArrivedAt)
+        {
+            var currentlySelected = _JobSelectionUIContent.GetComponentsInChildren<JobSelection>();
+            foreach (var job in currentlySelected)
+            {
+                if(job.EndIsland == dockArrivedAt)
+                {
+                    CurrentMoney += job.Reward; // DEBUG: Move reward into job struct, not job selecton class.
+                    Destroy(job.gameObject);
+                }
+            }
         }
 
         public override void Notify(CargoSubject subject)

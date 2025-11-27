@@ -1,3 +1,5 @@
+using SDS_Jobs;
+using SDS_Locations;
 using UnityEngine;
 
 public class OpenJobMenu : MonoBehaviour
@@ -12,8 +14,10 @@ public class OpenJobMenu : MonoBehaviour
         {
             if (!ShopManager.instance.isShown)
                 ShopManager.instance.Show();
-
             JobSelectionSpawner.instance.CreateRandomQuantity();
+
+            JobManager.instance.CheckJobComplete(Locations.GetClosestIsland(transform.position));
+
         }
     }
 

@@ -191,8 +191,8 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _colour: {r: 0.32128873, g: 0.5972071, b: 0.7169812, a: 0}
-    - _colour_Bright: {r: 0, g: 0.31456757, b: 0.6132076, a: 0.78039217}
-    - _colour_Dark: {r: 0, g: 0.36396465, b: 0.7075472, a: 1}
+    - _colour_Bright: {r: 0.19530971, g: 0.4676713, b: 0.7264151, a: 0.78039217}
+    - _colour_Dark: {r: 0.3292542, g: 0.40019286, b: 0.46226418, a: 1}
     - _colour_Dark_1: {r: 0, g: 0.50980395, b: 0.6156863, a: 1}
     - _colour_high: {r: 0, g: 0.5248943, b: 0.572, a: 1}
     - _colour_low: {r: 0, g: 0.43046874, b: 0.475, a: 1}
@@ -200,7 +200,7 @@ Material:
     - _direction_2: {r: 0.5, g: 0, b: 0, a: 0}
     - _direction_3: {r: 0, g: 0, b: 1, a: 0}
     - _direction_4: {r: 0.1, g: 0, b: 0.1, a: 0}
-    - _fresnel_colour: {r: 0.17101282, g: 0.3185893, b: 0.5754717, a: 1}
+    - _fresnel_colour: {r: 0.19793521, g: 0.23527706, b: 0.3018868, a: 1}
     - _spec_color: {r: 0, g: 0, b: 0, a: 0}
     - _targetPosition: {r: 0, g: 0, b: 0, a: 0}
     - _tempcol: {r: 0, g: 0, b: 0, a: 1}
