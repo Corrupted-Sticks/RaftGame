@@ -3,8 +3,11 @@ This is the GDW 2025 fall repository for our game Same Day Shipping.
 Same day shipping is a game where the player must ship packages by boat over the ocean to different islands, 
 with weather and other events trying to hinder them. 
 
+For the GED Final Project with May(marcus) and Erik, here is the required information:
+For each of the required design patterns, both of us did one per.
 
-For the GED Project 1 with May(marcus) and Erik, here is the required information:
+Skybox texture from: [Skybox-Series-Free](https://assetstore.unity.com/packages/2d/textures-materials/sky/skybox-series-free-103633)
+All other sounds, models, textures, and art were done by the other members of our GDW group.
 
 # May(Marcus) Yorke, 100874913
 
