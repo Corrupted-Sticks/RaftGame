@@ -1,3 +1,4 @@
+using SDS_Weather;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -20,7 +21,8 @@ public class WindManager : MonoBehaviour
         get { return _windAngle; }
         set
         {
-            if (value >= 360) _windAngle = value % 360;
+            _windAngle = value;
+            if (_windAngle >= 360) _windAngle %= 360;
             UpdateWindDirectionArrow();
         }
     }
@@ -73,6 +75,9 @@ public class WindManager : MonoBehaviour
         Gizmos.DrawLine(end, end + left * headLength);
     }
 
+    private void Start() => WeatherManager.instance.onWeatherChanged.AddListener(
+        (WeatherInfo info) => { WindAngle = info.windDirection; } // when invoked, sets the wind angle, which in the setter also updates the wind arrow.
+        );
     private void FixedUpdate()
     {
         UpdateWindDirectionArrow();

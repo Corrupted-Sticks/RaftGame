@@ -5,6 +5,7 @@ using Unity.VisualScripting.FullSerializer;
 using UnityEngine.UI;
 using System;
 using System.Runtime.CompilerServices;
+using SDS_Weather;
 
 namespace SDS_Jobs
 {
@@ -122,9 +123,18 @@ namespace SDS_Jobs
                 _currentJobs.Push(js.Job);
 
                 Vector3 newPos = Locations.IslandPositions[_currentJobs.Peek().EndLocation];
+                Vector3 curPos = Locations.IslandPositions[_currentJobs.Peek().StartLocation];
                 _jwp.transform.position = newPos;
                 _jwp.gameObject.SetActive(true);
                 _jwp.UpdateWaypoint();
+
+                Vector3 dir = newPos - curPos;
+
+                float windAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+                WeatherManager.instance.CurrentWeather = new WeatherInfo(WeatherTypes.none, 0, windAngle);
+
+
+
 
 
             }

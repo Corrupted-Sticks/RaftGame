@@ -3,15 +3,20 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] Transform Target;
-    [SerializeField] Vector3 offset;
+    [SerializeField] Vector3 zoomedOutOffset;
     [SerializeField] float smoothing;
+
+    [SerializeField] Vector3 zoomedInOffset;
 
     Vector3 velocity = Vector3.zero;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void LateUpdate()
     {
         // desired position with offset
-        Vector3 targetPosition = Target.position + offset;
+        Vector3 targetPosition = Target.position
+                       - Target.forward * zoomedOutOffset.z
+                       + Vector3.up * zoomedOutOffset.y
+                       + Target.right * zoomedOutOffset.x;
 
         // smoothly move the camera
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothing);
