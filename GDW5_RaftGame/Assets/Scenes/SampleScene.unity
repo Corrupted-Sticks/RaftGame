@@ -1954,6 +1954,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 287827158072580579, guid: 63187b11e79b01041944c3a1511859ac, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1031853226312617515, guid: 63187b11e79b01041944c3a1511859ac, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4895852900595261578, guid: 63187b11e79b01041944c3a1511859ac, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3100,11 +3108,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 276041366565080258, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000008209786
+      value: -201997.9
       objectReference: {fileID: 0}
     - target: {fileID: 276041366565080258, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00024176968
+      value: 91974.95
       objectReference: {fileID: 0}
     - target: {fileID: 311382486366289974, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_TargetGraphic
@@ -4205,7 +4213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersInside: 0
-  pmove: {fileID: 0}
+  pmove: {fileID: 2110914898}
   isPlayerControlling: 0
   boatControllUI: {fileID: 2109388574}
 --- !u!65 &1073901085
@@ -12516,6 +12524,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnterBoatControl: {fileID: 1267005869}
   ExitBoatControl: {fileID: 1260866140}
+--- !u!114 &2110914898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1031853226312617515, guid: 63187b11e79b01041944c3a1511859ac, type: 3}
+  m_PrefabInstance: {fileID: 228774287}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176f50ad303ed244d90ba3962d2d25f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2111009405
 GameObject:
   m_ObjectHideFlags: 0

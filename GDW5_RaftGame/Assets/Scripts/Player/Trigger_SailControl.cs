@@ -6,7 +6,7 @@ public class Trigger_SailControl : MonoBehaviour
 {
     [SerializeField]int playersInside = 0;
     //[SerializeField]PlayerMovement pmove; // current working playerMovement script.
-    [SerializeField]PlayerCMovement pmove; // current working playerMovement script.
+    [SerializeField]PlayerMovement pmove; // current working playerMovement script.
 
     [SerializeField] bool isPlayerControlling = false;
 
@@ -16,7 +16,7 @@ public class Trigger_SailControl : MonoBehaviour
         if (!collision.CompareTag("Player")) return;
         playersInside++;
         // pmove = collision.GetComponentInChildren<PlayerMovement>();
-        pmove = collision.GetComponentInChildren<PlayerCMovement>();
+        pmove = collision.GetComponentInChildren<PlayerMovement>();
 
         boatControllUI.SetEnterBoatControl(true);
 
