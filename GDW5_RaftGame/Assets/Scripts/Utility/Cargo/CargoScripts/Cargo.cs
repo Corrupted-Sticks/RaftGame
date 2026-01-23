@@ -1,12 +1,9 @@
 using SDS_Jobs;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public abstract class Cargo : CargoSubject
 {
-    public IObjectPool<Cargo> Pool { get; set; }
-
     public float currentHealth;
 
     [SerializeField] public float maxHealth = 100.0f;
@@ -30,32 +27,20 @@ public abstract class Cargo : CargoSubject
         Attach(jobManager);
     }
 
-    protected void OnDisable()
+    protected void OnDestroy()
     {
         Detach(jobManager);
-        ResetCargo();
-    }
-
-    protected void Despawn()
-    {
-        ReturnToPool();
-    }
-
-    protected void ReturnToPool()
-    {
-        Pool.Release(this);
-    }
-
-    protected void ResetCargo()
-    {
-        currentHealth = maxHealth;
     }
 
     protected void TakeDamage(float dmg)
     {
         currentHealth -= dmg;
 
-        if (currentHealth <= 0) Despawn();
+        if (currentHealth <= 0)
+        {
+            NotifyObservers();
+            Destroy(gameObject);
+        }
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -63,7 +48,7 @@ public abstract class Cargo : CargoSubject
         if (other.CompareTag("CargoDeath"))
         {
             NotifyObservers();
-            Despawn();
+            Destroy(gameObject);
         }
     }
 }

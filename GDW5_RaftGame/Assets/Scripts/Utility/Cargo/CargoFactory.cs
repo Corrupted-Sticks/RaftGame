@@ -7,7 +7,6 @@ public class CargoFactory : MonoBehaviour
     [SerializeField] List<GameObject> spawnLocations = new List<GameObject>();
 
     private Dictionary<CARGO_TYPES, BaseSpawner> spawnDict = new();
-    private Dictionary<CARGO_TYPES, CargoObjectPool> poolDict = new();
 
     int spawnInt = 0;
 
@@ -16,8 +15,6 @@ public class CargoFactory : MonoBehaviour
         foreach (BaseSpawner bs in spawns)
         {
             spawnDict.Add(bs.Types, bs);
-            poolDict.Add(bs.Types, gameObject.AddComponent<CargoObjectPool>());
-            poolDict[bs.Types].SetSpawner(bs);
         }
     }
 
@@ -25,7 +22,6 @@ public class CargoFactory : MonoBehaviour
     {
         SpawnCargo(new List<CARGO_TYPES> { CARGO_TYPES.Cube, CARGO_TYPES.Barrel, CARGO_TYPES.Stretch, CARGO_TYPES.Barrel });
     }
-
 
     public void TEMPERARY_SpawnCargo() // TEMPERARY DEBUG: Replace with job specific cargo types later.
     {
@@ -39,6 +35,7 @@ public class CargoFactory : MonoBehaviour
         foreach(var item in cargoOptions) { print(item); }
         SpawnCargo(cargoOptions);
     }
+
     public void SpawnCargo(List<CARGO_TYPES> cargo)
     {
         spawnInt = 0;
@@ -47,9 +44,7 @@ public class CargoFactory : MonoBehaviour
         {
             if (spawnInt <= spawnLocations.Count)
             {
-                poolDict[type].Spawn(spawnLocations[spawnInt]);
-
-                //spawnDict[type].Spawn(spawnLocations[spawnInt]);
+                spawnDict[type].Spawn(spawnLocations[spawnInt]);
             }
 
             spawnInt++;
