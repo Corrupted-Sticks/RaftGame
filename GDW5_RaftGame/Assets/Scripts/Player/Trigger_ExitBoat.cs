@@ -25,7 +25,7 @@ public class Trigger_ExitBoat : MonoBehaviour
     {
         if(inTrigger && Input.GetKeyDown(KeyCode.E))
         {
-            FindObjectOfType<PlayerCMovement>().transform.position = GetOffPosition.position;
+            FindObjectOfType<PlayerMovement>().transform.position = GetOffPosition.position;
         }
     }
 }
