@@ -2722,8 +2722,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 260550689}
   zoomedOutOffset: {x: 0, y: 50, z: 80}
-  smoothing: 1
-  zoomedInOffset: {x: 0, y: 0, z: 0}
+  smoothing: 0.2
+  zoomedInOffset: {x: 0, y: 4, z: 3.5}
 --- !u!4 &780130750
 Transform:
   m_ObjectHideFlags: 0
@@ -3165,11 +3165,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 276041366565080258, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -656839.6
+      value: -741478.25
       objectReference: {fileID: 0}
     - target: {fileID: 276041366565080258, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 303809.4
+      value: 342959.6
       objectReference: {fileID: 0}
     - target: {fileID: 311382486366289974, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_TargetGraphic
