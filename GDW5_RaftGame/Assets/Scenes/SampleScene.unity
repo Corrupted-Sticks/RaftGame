@@ -2386,10 +2386,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf55b091cb2e804abd2b7b7fba5cbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 1144342660}
+  Target: {fileID: 260550689}
   zoomedOutOffset: {x: 0, y: 50, z: 80}
   smoothing: 1
-  zoomedInOffset: {x: 0, y: 0, z: 0}
+  zoomedInOffset: {x: 0, y: 3, z: 2}
 --- !u!1 &388677046
 GameObject:
   m_ObjectHideFlags: 0
@@ -3108,11 +3108,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 276041366565080258, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -201997.9
+      value: -310009.38
       objectReference: {fileID: 0}
     - target: {fileID: 276041366565080258, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 91974.95
+      value: 142271.02
       objectReference: {fileID: 0}
     - target: {fileID: 311382486366289974, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_TargetGraphic
@@ -4216,6 +4216,7 @@ MonoBehaviour:
   pmove: {fileID: 2110914898}
   isPlayerControlling: 0
   boatControllUI: {fileID: 2109388574}
+  cFollow: {fileID: 330585548}
 --- !u!65 &1073901085
 BoxCollider:
   m_ObjectHideFlags: 0

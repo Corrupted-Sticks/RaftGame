@@ -11,6 +11,8 @@ public class Trigger_SailControl : MonoBehaviour
     [SerializeField] bool isPlayerControlling = false;
 
     [SerializeField]UI_BoatControl boatControllUI;
+
+    [SerializeField] CameraFollow cFollow;
     private void OnTriggerEnter(Collider collision)
     {
         if (!collision.CompareTag("Player")) return;
@@ -19,8 +21,6 @@ public class Trigger_SailControl : MonoBehaviour
         pmove = collision.GetComponentInChildren<PlayerMovement>();
 
         boatControllUI.SetEnterBoatControl(true);
-
-
     }
 
     private void Update()
@@ -31,10 +31,17 @@ public class Trigger_SailControl : MonoBehaviour
 
 
         // DEBUG : REPLACE WITH INPUT SYSTEM
-        if (!isPlayerControlling && Input.GetKeyDown(KeyCode.E)) TakeControl();
-
+        if (!isPlayerControlling && Input.GetKeyDown(KeyCode.E))
+        {
+            TakeControl();
+            cFollow.ToggleCamera();
+        }
         // DEBUG : REPLACE WITH INPUT SYSTEM
-        else if (isPlayerControlling && Input.GetKeyDown(KeyCode.E)) ExitControl();
+        else if (isPlayerControlling && Input.GetKeyDown(KeyCode.E)) 
+        {
+            ExitControl();
+            cFollow.ToggleCamera();
+        }
     }
 
 
@@ -44,7 +51,6 @@ public class Trigger_SailControl : MonoBehaviour
         playersInside--;
         if (playersInside <= 0) boatControllUI.SetEnterBoatControl(false);
     }
-
 
     void TakeControl()
     {
@@ -74,8 +80,5 @@ public class Trigger_SailControl : MonoBehaviour
             pmove = null;
         else
             boatControllUI.SetEnterBoatControl(true);
-
-
     }
-
 }
