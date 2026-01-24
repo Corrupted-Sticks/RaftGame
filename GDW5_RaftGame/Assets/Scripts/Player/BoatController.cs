@@ -6,13 +6,17 @@ using UnityEngine.InputSystem;
 
 public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
 {
-
     public static BoatController instance;
     PlayerInput _Input;                  // Source code representation of asset.
     PlayerInput.PlayerActions _PActions;     // Source code representation of action map.
 
-
     Rigidbody _rb;
+
+    [SerializeField] Transform _cameraPivot;
+    Camera _camera;
+
+    Vector2 heading = new Vector2(0, 0);
+    Vector2 camSensitivity = new Vector2(1f, 1f);
 
     Vector3 moveDir = Vector3.zero;
     public float acceleration;
@@ -28,7 +32,6 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
     public Transform SteeringSail;
     public Transform RespawnPosition;
     public GameObject dock;
-
 
 #if UNITY_EDITOR
     [ShowInInspector] float currentSpeed;
@@ -50,23 +53,20 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _camera = Camera.main;
     }
-
 
     public void ToggleInput(bool value)
     {
         if (value) _Input.Enable();
         else _Input.Disable();
-
     }
-
 
     void FixedUpdate()
     {
         // rotation (left/right movement)
         if (Mathf.Abs(moveDir.x) > 0.01f)
             SteeringSail.transform.Rotate(Vector3.up, moveDir.x*rotationSpeed);
-
 
         // movement  (forward/backwards)
         Vector3 sailForward = SteeringSail.forward;
@@ -81,18 +81,12 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
         _rb.AddForce(forwardForce, ForceMode.Force);
         _rb.linearVelocity = Vector3.ClampMagnitude(_rb.linearVelocity, maxSpeed);
 
-     
         if (_rb.linearVelocity.sqrMagnitude > 2) 
             RotateBoatToFaceSailDirection();
-
 
 #if UNITY_EDITOR
         currentSpeed = _rb.linearVelocity.magnitude;
 #endif
-
-
-
-
     }
 
     void RotateBoatToFaceSailDirection()
@@ -121,12 +115,20 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
     public void OnMove(InputAction.CallbackContext ctx)
     {
         Vector2 raw = ctx.ReadValue<Vector2>();
-        moveDir = new Vector3(raw.x, 0.0f, raw.y);
+        //moveDir = new Vector3(raw.x, 0.0f, raw.y);
+        moveDir = _camera.transform.forward.normalized * raw.y + _camera.transform.right.normalized * raw.x;
     }
 
     public void OnInteract(InputAction.CallbackContext ctx)
     {
 
+    }
+
+    public void OnLook(InputAction.CallbackContext ctx)
+    {
+        heading.x += ctx.ReadValue<Vector2>().x * Time.deltaTime * 6f * camSensitivity.x;
+        heading.y += ctx.ReadValue<Vector2>().y * Time.deltaTime * 10f * camSensitivity.y;
+        _cameraPivot.rotation = Quaternion.Euler(-heading.y, heading.x, 0);
     }
 
     public void ToggleDock() => dock.SetActive(isDockDown = !isDockDown);
@@ -150,5 +152,4 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, comWorld);
     }
-
 }

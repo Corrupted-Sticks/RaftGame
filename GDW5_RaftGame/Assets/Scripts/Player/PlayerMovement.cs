@@ -14,6 +14,12 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     public Collider Collider { get => _collider; }
     private Animator _animator;
 
+    [SerializeField] Transform _cameraPivot;
+    Camera _camera;
+
+    Vector2 heading = new Vector2(0, 0);
+    Vector2 camSensitivity = new Vector2(1f, 1f);
+
     [FoldoutGroup("Ground Movement")][SerializeField] float _acceleration = 0;
     [FoldoutGroup("Ground Movement")][SerializeField] float _maxSpeed = 10;
 
@@ -53,29 +59,32 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
         _Input = new PlayerInput();        // Create asset object.
         _PActions = _Input.Player;         // Extract action map object.
         _PActions.AddCallbacks(this);      // Register callback interface IPlayerActions.
+        _camera = Camera.main;
     }
-
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
         Vector2 raw = ctx.ReadValue<Vector2>();
-        moveDir = new Vector3(raw.x, 0.0f, raw.y);
+        //moveDir = new Vector3(raw.x, 0.0f, raw.y);
+        moveDir = _camera.transform.forward.normalized*raw.y + _camera.transform.right.normalized*raw.x;
     }
     public void OnInteract(InputAction.CallbackContext ctx)
     {
-
+        
     }
 
+    public void OnLook(InputAction.CallbackContext ctx)
+    {
+        heading.x += ctx.ReadValue<Vector2>().x * Time.deltaTime * 6f * camSensitivity.x;
+        heading.y += ctx.ReadValue<Vector2>().y * Time.deltaTime * 10f * camSensitivity.y;
+        _cameraPivot.rotation = Quaternion.Euler(-heading.y, heading.x, 0);
+    }
 
     public void ToggleInput(bool value)
     {
         if (value) _Input.Enable();
         else _Input.Disable();
     }
-
-
-
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -98,16 +107,10 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
         // transform the world direction to be relative to the "boats" rotation. makes the player movement more accurately track the motion of the boat as it rocks.
         Vector3 finalMoveDir = _isOnBoat ? boatTransform.TransformDirection(moveDir.normalized) : moveDir;
 
-
         _rb.AddForce(finalMoveDir * _acceleration, ForceMode.Acceleration);
 
         _rb.linearVelocity = Vector3.ClampMagnitude(_rb.linearVelocity, _MaxSpeed);
-
-
-
-
     }
-
 
     private void Update()
     {

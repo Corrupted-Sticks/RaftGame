@@ -9,6 +9,8 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] Vector3 zoomedInOffset;
 
+    Camera _camera = Camera.main;
+
     Vector3 velocity = Vector3.zero;
 
     bool zoomedIn = true;
@@ -19,7 +21,9 @@ public class CameraFollow : MonoBehaviour
         if (zoomedIn)
         {
             // desired position with offset
-            Vector3 targetPosition = Target.position
+            Vector3 targetPosition = Target.position + new Vector3(0,3f,0);
+
+            Vector3 cameraPosition = Target.position
                            - Target.forward * zoomedInOffset.z
                            + Vector3.up * zoomedInOffset.y
                            + Target.right * zoomedInOffset.x;
@@ -27,25 +31,25 @@ public class CameraFollow : MonoBehaviour
             // smoothly move the camera
             //transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothing);
             transform.position = targetPosition;
-
-            // smooth rotation to look at the player
-            Quaternion targetRotation = Quaternion.LookRotation(Target.position - transform.position, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation * Quaternion.Euler(Vector3.left * 20), Time.deltaTime);
+            _camera.transform.position = Vector3.SmoothDamp(_camera.transform.position, cameraPosition, ref velocity, smoothing);
         }
         else
         {
+            Vector3 targetPosition = Target.position;
+            Debug.Log("Hi!");
             // desired position with offset
-            Vector3 targetPosition = Target.position
+            Vector3 cameraPosition = Target.position
                            - Target.forward * zoomedOutOffset.z
                            + Vector3.up * zoomedOutOffset.y
                            + Target.right * zoomedOutOffset.x;
 
             // smoothly move the camera
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothing);
-
+            _camera.transform.position = Vector3.SmoothDamp(_camera.transform.position, cameraPosition, ref velocity, smoothing);
+            
             // smooth rotation to look at the boat
-            Quaternion targetRotation = Quaternion.LookRotation(Target.position - transform.position, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 3f);
+            //Quaternion targetRotation = Quaternion.LookRotation(Target.position - transform.position, Vector3.up);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 3f);
         }
     }
 

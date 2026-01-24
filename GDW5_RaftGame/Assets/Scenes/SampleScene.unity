@@ -1959,9 +1959,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1031853226312617515, guid: 63187b11e79b01041944c3a1511859ac, type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 330585545}
+    - target: {fileID: 1031853226312617515, guid: 63187b11e79b01041944c3a1511859ac, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1031853226312617515, guid: 63187b11e79b01041944c3a1511859ac, type: 3}
+      propertyPath: _cameraPivot
+      value: 
+      objectReference: {fileID: 780130750}
     - target: {fileID: 4895852900595261578, guid: 63187b11e79b01041944c3a1511859ac, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2323,12 +2331,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: -305.9, y: 89, z: -63.7}
+  m_LocalRotation: {x: 0.2588191, y: -0, z: -0, w: 0.9659258}
+  m_LocalPosition: {x: 0, y: 4.2200003, z: -3.412045}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 780130750}
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -2381,7 +2389,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcf55b091cb2e804abd2b7b7fba5cbb1, type: 3}
   m_Name: 
@@ -2683,6 +2691,55 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 020309dd327ed2244849d2de7a0b6703, type: 3}
+--- !u!1 &780130748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 780130750}
+  - component: {fileID: 780130749}
+  m_Layer: 0
+  m_Name: CamPivot
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &780130749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780130748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf55b091cb2e804abd2b7b7fba5cbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 260550689}
+  zoomedOutOffset: {x: 0, y: 50, z: 80}
+  smoothing: 1
+  zoomedInOffset: {x: 0, y: 0, z: 0}
+--- !u!4 &780130750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780130748}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -297.27, y: 9.99, z: -7.8979554}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 330585546}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &813986473
 GameObject:
   m_ObjectHideFlags: 0
@@ -3108,11 +3165,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 276041366565080258, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -310009.38
+      value: -656839.6
       objectReference: {fileID: 0}
     - target: {fileID: 276041366565080258, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 142271.02
+      value: 303809.4
       objectReference: {fileID: 0}
     - target: {fileID: 311382486366289974, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_TargetGraphic
@@ -4216,7 +4273,7 @@ MonoBehaviour:
   pmove: {fileID: 2110914898}
   isPlayerControlling: 0
   boatControllUI: {fileID: 2109388574}
-  cFollow: {fileID: 330585548}
+  cFollow: {fileID: 780130749}
 --- !u!65 &1073901085
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4349,6 +4406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdecb773fb47984eb41734a01913ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cameraPivot: {fileID: 780130750}
   acceleration: 1150
   maxSpeed: 20
   rotationSpeed: 1.75
@@ -13012,7 +13070,7 @@ SceneRoots:
   - {fileID: 228774287}
   - {fileID: 1244871154}
   - {fileID: 1413671166}
-  - {fileID: 330585546}
+  - {fileID: 780130750}
   - {fileID: 220448133}
   - {fileID: 1255036726}
   - {fileID: 1174107383}
