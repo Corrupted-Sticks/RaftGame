@@ -80,6 +80,13 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
         _cameraPivot.rotation = Quaternion.Euler(-heading.y, heading.x, 0);
     }
 
+    public void OnMenu(InputAction.CallbackContext ctx)
+    {
+        PauseManager.instance.ToggleUI();
+
+        GameManager.instance.CallPause();
+    }
+
     public void ToggleInput(bool value)
     {
         if (value) _Input.Enable();

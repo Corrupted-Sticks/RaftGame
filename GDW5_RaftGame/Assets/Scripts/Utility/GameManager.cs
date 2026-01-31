@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] List<bool> listBools;
 
+    bool isPaused = false;
+
     private void Awake()
     {
         if (instance != null)
@@ -37,5 +39,19 @@ public class GameManager : MonoBehaviour
         }
 
         listBools[listBools.Count - 1] = true;
+    }
+
+    public void CallPause()
+    {
+        if (isPaused)
+        {
+            isPaused = false;
+            Time.timeScale = 1f;
+        }
+        else
+        {
+            isPaused = true;
+            Time.timeScale = 0f;
+        }
     }
 }
