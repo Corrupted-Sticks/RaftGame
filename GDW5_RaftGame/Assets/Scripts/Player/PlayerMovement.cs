@@ -1,5 +1,5 @@
 using Sirenix.OdinInspector;
-using System.Runtime.InteropServices.WindowsRuntime;
+using SDS_Tutorial;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -66,7 +66,13 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     {
         Vector2 raw = ctx.ReadValue<Vector2>();
         //moveDir = new Vector3(raw.x, 0.0f, raw.y);
-        moveDir = _camera.transform.forward.normalized*raw.y + _camera.transform.right.normalized*raw.x;
+        moveDir = _camera.transform.forward.normalized * raw.y + _camera.transform.right.normalized * raw.x;
+
+        if(moveDir.sqrMagnitude >0) // player has moved
+        {
+            SDS_Tutorial.TutorialManager.instance.SetTutorialFlag(TutorialManager.TutorialStep.Moved);
+        }
+
     }
     public void OnInteract(InputAction.CallbackContext ctx)
     {

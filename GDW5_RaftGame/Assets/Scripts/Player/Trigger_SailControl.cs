@@ -62,6 +62,14 @@ public class Trigger_SailControl : MonoBehaviour
         pmove.Collider.enabled = false;
         boatControllUI.SetExitBoatControl(true);
         boatControllUI.SetEnterBoatControl(false);
+
+
+        SDS_Tutorial.TutorialManager.instance.SetTutorialFlag(SDS_Tutorial.TutorialManager.TutorialStep.TurnedMast);
+
+
+
+
+
     }
 
     public void ExitControl()

@@ -3,7 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Same Day Shipping/Create Tutorial Dialogue Object", fileName ="TutorialLines")]
 public class TutorialLines : ScriptableObject
 {
-    public int curLine = 0;
     [TextArea(3,6)]
     [SerializeField] string[] lines;
 

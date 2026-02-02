@@ -12,4 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dbee0a3988fe34cafd790c744c725f, type: 3}
   m_Name: TutorialLines
   m_EditorClassIdentifier: 
-  lines: []
+  lines:
+  - "Arr\u2019 Matey! Pirate life hasn\u2019t been going so well, huh? Guess it\u2019s
+    time to tighten those boot straps and find some work in the delivery industry!
+    First, let\u2019s learn the basics. Use WASD (keyboard) or left joystick (controller)
+    to move around!\r\n"
+  - Nice! Now Press E (keyboard) or right trigger (controller) to grab onto the mast.
+    Move around and see what happens.
+  - This is how you steer the ship in the direction you want. Sailing basics down!
+    Maneuver your ship to a dock and release the mast with E. press F (keyboard)
+    or X (controller) to dock your ship.
+  - On docks you can access the Dock Menu where you can select a job, complete a
+    job, and buy cool stuff! Try walking to the end of the dock to access the Job
+    Menu.
+  - "Go ahead and choose a job you\u2019d like to do. You can only take on one job
+    at once and as soon as you accept it, the timer starts! Press the X button at
+    the top right of the menu to exit."
+  - You can see all the cargo you need to deliver on the dock in front of you! One
+    player should head back onto the ship by pressing F (keyboard) or A (controller)
+    while looking at the ship.
+  - To get the cargo on the ship, the player on the dock needs to pass the cargo
+    to a player on the ship. Use E  (keyboard) or right trigger (controller) to grab
+    and pick up the cargo. Put it all onto the ship and make sure not to drop any
+    in the water!
+  - 'Cargo secured! Head back onto the ship by pressing F (keyboard) or A (controller)
+    while next to the ship. '
+  - "Time to set sail! You\u2019ll need a compass and a map to help you navigate.
+    The red arrow around the mast points towards your destination.  Hold TAB (keyboard)
+    or Y (controller) to access the map"
+  - Dock your ship at the cargo destination!
+  - Have one player pass all the cargo to the other player on the dock.
+  - Now that all the cargo is on the dock, access the Dock Menu and register your
+    job as being complete!
+  - "Congrats! You\u2019ve completed your first job!"

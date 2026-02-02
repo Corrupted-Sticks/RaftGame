@@ -6,6 +6,14 @@ namespace SDS_Tutorial
     public class TutorialManager : MonoBehaviour
     {
 
+        public static TutorialManager instance;
+
+        private void Awake()
+        {
+            if (instance != null) Destroy(instance.gameObject);
+            instance = this;
+        }
+        int currentLine = 0;
         [SerializeField] TutorialLines lines;
         [SerializeField] TextMeshProUGUI tutorialText;
 
@@ -26,6 +34,7 @@ namespace SDS_Tutorial
 
         public enum TutorialStep
         {
+            Start,
             Moved,
             TurnedMast,
             Disembarked,
@@ -42,8 +51,9 @@ namespace SDS_Tutorial
         }
 
 
-        Dictionary<TutorialStep, bool> stepFlags = new ()
+        Dictionary<TutorialStep, bool> stepFlags = new()
         {
+            { TutorialStep.Start, false },
             { TutorialStep.Moved, false }, // has moved with wasd (and controller once implemented)
             { TutorialStep.TurnedMast, false }, // has grabbed mast
             { TutorialStep.Disembarked, false }, // has navigated to a dock and pressed F to depart from the boat.
