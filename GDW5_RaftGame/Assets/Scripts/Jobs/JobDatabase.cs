@@ -38,7 +38,6 @@ public class JobDatabase : ScriptableObject
             {
                 list = new List<JobObject>();
                 jobsByStartDock.Add(job.StartDock, list);
-                Debug.LogError("new made" + job.StartDock.ToString());
             }
             list.Add(job);
         }
