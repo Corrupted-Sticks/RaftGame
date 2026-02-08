@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592466be0c29b8a44a327bacfafbbf69, type: 3}
+  m_Name: Outcoast 1
+  m_EditorClassIdentifier: 
+  npcName: 
+  cargo: 000000000200000002000000
+  reward: 1000
+  time: 300
+  description: "\u201CHey you! I need you to send this stuff to The Maw. I know you
+    won\u2019t believe me but I am a time traveler. There\u2019s a bunch of stuff
+    in there that needs to get to The Maw otherwise our future might be in danger.
+    You think I\u2019m crazy? Look man, either take the 1000 coins and do it or I\u2019ll
+    find someone else! I\u2019m not crazy, I swear!\u201D"
+  startDock: 15
+  endDock: 9

@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
 using UnityEngine;
 using SDS_Locations;
 using SDS_Jobs;
@@ -14,8 +12,6 @@ public class JobSelection : MonoBehaviour
     [SerializeField] Docks _endIsland;
     public Docks EndIsland { get => _endIsland; }
 
-    public Job Job { get => new Job(_startIsland, _endIsland); }
-
     TextMeshProUGUI _buttonText;
 
 
@@ -28,54 +24,42 @@ public class JobSelection : MonoBehaviour
 
 
     Button _button;
-    void AddCargo()
-    {
-        FindFirstObjectByType<CargoFactory>().TEMPERARY_SpawnCargo();
-    }
+
+    JobObject _job;
+
 
 
     private void Start()
     {
         _button = GetComponent<Button>();
-        _button.onClick.AddListener(() => JobManager.instance.ExecuteJobAction(transform));
-        _button.onClick.AddListener(AddCargo);
+        
+        _button.onClick.AddListener(OnSelect);
 
         _buttonText = GetComponentInChildren<TextMeshProUGUI>();
 
-
-        /*
-        _startIsland = Locations.GetClosestIsland(BoatController.instance.transform.position); // always start at the island you are on when accepting the job.
-        int end = Random.Range(0, (int)Docks.COUNT);
-        int start = (int)_startIsland;
-
-        while (end == start)// if start and end are the same island, keep getting a new end until it isn't. 
-            end = Random.Range(0, (int)Docks.COUNT);
-
-        _endIsland = (Docks)end;
-
-        _buttonText.text = $"{_startIsland} ->{_endIsland}";
-
-        _distance = Mathf.RoundToInt(Vector3.Distance(Locations.IslandPositions[_startIsland], Locations.IslandPositions[_endIsland]));
-
-        _reward = Mathf.FloorToInt(_distance * 0.678f);// arbitrary modifier, later will make to change with difficulty.*/
-
-
     }
 
-    public void UpdateInfo(Docks startDock, Docks endDock)
+
+    public void OnSelect()
+    {
+        JobManager.instance.OnJobSelect(_button, _job);
+    }
+    public void UpdateInfo(JobObject job)
     {
 
         _buttonText = GetComponentInChildren<TextMeshProUGUI>();
 
-        _startIsland = startDock; // always start at the island you are on when accepting the job.
+        _startIsland = job.StartDock; // always start at the island you are on when accepting the job.
 
-        _endIsland = endDock;
+        _endIsland = job.EndDock;
 
-        _buttonText.text = $"{_startIsland} ->{_endIsland}";
+        _buttonText.text = $"{Locations.GetIslandDisplayName(_endIsland)}";
 
         _distance = Mathf.RoundToInt(Vector3.Distance(Locations.IslandPositions[_startIsland], Locations.IslandPositions[_endIsland]));
 
-        _reward = Mathf.FloorToInt(_distance * 0.678f);// arbitrary modifier, later will make to change with difficulty.
+        _reward = job.Reward;
+
+        _job = job;
     }
 
 

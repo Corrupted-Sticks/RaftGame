@@ -7,6 +7,8 @@ public class JobSelectionSpawner : MonoBehaviour
 {
     public static JobSelectionSpawner instance;
 
+    [SerializeField] JobDatabase jobDatabase;
+
     [SerializeField] private GameObject _jobSelectionPrefab;
 
     private readonly Queue<JobSelection> _pool = new(); 
@@ -32,8 +34,6 @@ public class JobSelectionSpawner : MonoBehaviour
                 _pool.Enqueue(sel);
             }
         }
-
-        JobManager.instance.ClearUndoStack();
     }
 
     /// <summary>
@@ -57,21 +57,26 @@ public class JobSelectionSpawner : MonoBehaviour
     /// </summary>
     public void CreateRandomQuantity()
     {
-        int quantity = Random.Range(3, 9);
 
-        Docks startDock = Locations.GetClosestIsland(BoatController.instance.transform.position);
-        HashSet<int> islandIndecies = new();
+        var jobs = jobDatabase.GetJobsFromClosestDock();
+
+        if (jobs == null) { { Debug.LogError("jobs null"); return; } }
+        if (jobs.Count <= 0) { Debug.LogError("No jobs found for closest dock"); return; }
+        int quantity = Random.Range(1, jobs.Count);
+
+        
+        HashSet<JobObject> islandIndecies = new();
 
         while (islandIndecies.Count < quantity)
         {
-            islandIndecies.Add(Random.Range(0, (int)Docks.COUNT));
+            islandIndecies.Add(jobs[Random.Range(0,jobs.Count)]);
         }
 
-        foreach (int i in islandIndecies)
+        foreach (JobObject obj in islandIndecies)
         {
             var selection = GetPooled();
             selection.transform.SetParent(transform, false);
-            selection.UpdateInfo(startDock, (Docks)i);
+            selection.UpdateInfo(obj);
         }
     }
 }

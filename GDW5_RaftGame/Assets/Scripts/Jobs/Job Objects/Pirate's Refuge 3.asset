@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592466be0c29b8a44a327bacfafbbf69, type: 3}
+  m_Name: Pirate's Refuge 3
+  m_EditorClassIdentifier: 
+  npcName: 
+  cargo: 02000000020000000000000000000000020000000200000000000000010000000100000000000000
+  reward: 6000
+  time: 480
+  description: "\u201CHey kid. Yeah, you! I need you to send these to Dead Man\u2019s
+    Sanctuary this instant. You don\u2019t got time? Will 6000 coin give ya time?
+    Look, you don\u2019t want to get on my bad side. Either deliver the goods or
+    you\u2019ll be wishing you had. Ya hear me?\u201D"
+  startDock: 14
+  endDock: 3

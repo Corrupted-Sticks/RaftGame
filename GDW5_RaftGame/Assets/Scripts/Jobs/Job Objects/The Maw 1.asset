@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592466be0c29b8a44a327bacfafbbf69, type: 3}
+  m_Name: The Maw 1
+  m_EditorClassIdentifier: 
+  npcName: 
+  cargo: 0000000000000000000000000000000000000000
+  reward: 2000
+  time: 240
+  description: "\u201CHey! I need these 5 crates to get to Whirlpool Peak. I\u2019ll
+    give you 2000 coins, but I need it done quickly.\u201D"
+  startDock: 9
+  endDock: 0

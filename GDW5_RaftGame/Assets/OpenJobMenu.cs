@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class OpenJobMenu : MonoBehaviour
 {
-    private void Start()
-    {
-        print(transform.position);
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Boat") || other.CompareTag("Player"))
         {
-            if (!ShopManager.instance.isShown)
-                ShopManager.instance.Show();
+            if (!ShopManager.instance.isShown) ShopManager.instance.Show();
             JobSelectionSpawner.instance.CreateRandomQuantity();
 
             JobManager.instance.CheckJobComplete(Locations.GetClosestIsland(transform.position));
@@ -26,8 +21,7 @@ public class OpenJobMenu : MonoBehaviour
     {
         if (other.CompareTag("Boat") || other.CompareTag("Player"))
         {
-            if (ShopManager.instance.isShown)
-                ShopManager.instance.Hide();
+            if (ShopManager.instance.isShown)ShopManager.instance.Hide();
 
             JobSelectionSpawner.instance.ClearCurrentOptions();
         }

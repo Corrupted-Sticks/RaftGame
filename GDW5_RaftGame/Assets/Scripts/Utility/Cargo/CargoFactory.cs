@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CargoFactory : MonoBehaviour
 {
+    public static CargoFactory instance;
     [SerializeField] List<BaseSpawner> spawns = new List<BaseSpawner>();
     [SerializeField] List<GameObject> spawnLocations = new List<GameObject>();
 
@@ -12,41 +13,22 @@ public class CargoFactory : MonoBehaviour
 
     private void Awake()
     {
+
+        if(instance != null)Destroy(instance);
+        instance = this;
+
         foreach (BaseSpawner bs in spawns)
         {
             spawnDict.Add(bs.Types, bs);
         }
     }
 
-    public void sendTest()
-    {
-        SpawnCargo(new List<CARGO_TYPES> { CARGO_TYPES.Cube, CARGO_TYPES.Barrel, CARGO_TYPES.Stretch, CARGO_TYPES.Barrel });
-    }
-
-    public void TEMPERARY_SpawnCargo() // TEMPERARY DEBUG: Replace with job specific cargo types later.
-    {
-        List<CARGO_TYPES> cargoOptions = new();
-        for (int i = 0; i < 4; ++i)
-        {
-            cargoOptions.Add(
-               (CARGO_TYPES)Random.Range(0, (int)CARGO_TYPES.COUNT) // gets random int from 0-cargo_type, then casts it back to a cargo type.
-            );
-        }
-        foreach(var item in cargoOptions) { print(item); }
-        SpawnCargo(cargoOptions);
-    }
 
     public void SpawnCargo(List<CARGO_TYPES> cargo)
     {
-        spawnInt = 0;
-
         foreach (CARGO_TYPES type in cargo)
         {
-            if (spawnInt <= spawnLocations.Count)
-            {
-                spawnDict[type].Spawn(spawnLocations[spawnInt]);
-            }
-
+            spawnDict[type].Spawn(spawnLocations[spawnInt % 4]);
             spawnInt++;
         }
     }
