@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592466be0c29b8a44a327bacfafbbf69, type: 3}
+  m_Name: Whirlpool Peak 1
+  m_EditorClassIdentifier: 
+  npcName: 
+  cargo: 0000000000000000020000000200000000000000
+  reward: 1000
+  time: 300
+  description: "\u201CMan, I\u2019m glad I moved out of my parents\u2019 place, but
+    living on my own is tough! I guess you guys know. Always living and working on
+    that ship, huh? I hate cooking for myself, but my mom\u2019s cooking was\u2026
+    not the best. Those casseroles man\u2026 Oh ya, sorry! Can you send these work
+    orders to the Outcoast for me?\u201D"
+  startDock: 12
+  endDock: 15

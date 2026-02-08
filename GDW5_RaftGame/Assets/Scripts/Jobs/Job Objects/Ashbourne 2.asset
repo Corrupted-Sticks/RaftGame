@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592466be0c29b8a44a327bacfafbbf69, type: 3}
+  m_Name: Ashbourne 2
+  m_EditorClassIdentifier: 
+  npcName: 
+  cargo: 00000000000000000200000002000000020000000100000001000000
+  reward: 1500
+  time: 300
+  description: "\u201CMy stupid supplier gave me a bunch of broken material. Return
+    it for me, will ya? I don\u2019t care if you break it more during the journey.
+    It\u2019s all garbage anyways\u2026 ugh. I\u2019ll give you 1500 coin. Gonna
+    make the supplier pay for the return shipping regardless.\u201D"
+  startDock: 10
+  endDock: 8

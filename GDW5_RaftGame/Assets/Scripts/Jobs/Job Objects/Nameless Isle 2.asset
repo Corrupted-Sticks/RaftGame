@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592466be0c29b8a44a327bacfafbbf69, type: 3}
+  m_Name: Nameless Isle 2
+  m_EditorClassIdentifier: 
+  npcName: 
+  cargo: 02000000020000000200000000000000
+  reward: 4000
+  time: 420
+  description: '"Wow, you look rough. Are you really the only ones doing deliveries
+    here? Pirates no less?! Who uses pirates to make deliveries?! That''s like 101
+    on how to get all your stuff stolen. Seems like I got no choice. Deliver these
+    goods to Outcoast Island. How about 4000 coin for ya? Ya? Nice! Oh, and please
+    don''t steal my stuff."'
+  startDock: 5
+  endDock: 15

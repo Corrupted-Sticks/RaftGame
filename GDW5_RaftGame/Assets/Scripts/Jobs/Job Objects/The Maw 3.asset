@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592466be0c29b8a44a327bacfafbbf69, type: 3}
+  m_Name: The Maw 3
+  m_EditorClassIdentifier: 
+  npcName: 
+  cargo: 0000000000000000000000000000000000000000
+  reward: 1500
+  time: 600
+  description: "\u201CI\u2019m traveling solo and need to send a lot of souvenirs
+    back home for my family. Do you mind? I\u2019ll give you 1500 coins. 5 crates
+    of souvenirs is a lot? How did I carry this all while I was solo traveling? What
+    do you mean? You can never have too many souvenirs!\u201D"
+  startDock: 8
+  endDock: 3

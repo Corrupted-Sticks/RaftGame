@@ -33,6 +33,10 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
     public Transform RespawnPosition;
     public GameObject dock;
 
+    bool _isDocked = false;
+    public bool IsDocked => _isDocked;
+
+
 #if UNITY_EDITOR
     [ShowInInspector] float currentSpeed;
 
@@ -85,7 +89,7 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
             RotateBoatToFaceSailDirection();
 
 #if UNITY_EDITOR
-        currentSpeed = _rb.linearVelocity.magnitude;
+            currentSpeed = _rb.linearVelocity.magnitude;
 #endif
     }
 

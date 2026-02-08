@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592466be0c29b8a44a327bacfafbbf69, type: 3}
+  m_Name: Hillfar 1
+  m_EditorClassIdentifier: 
+  npcName: Unnamed
+  cargo: 00000000000000000000000000000000
+  reward: 1000
+  time: 600
+  description: "\u201CI\u2019m too lazy to make the trip myself. Can you take these
+    4 crates to Dead Man\u2019s Sanctuary for me? I got 1000 coins I can give you
+    as thanks.\u201D"
+  startDock: 11
+  endDock: 2
