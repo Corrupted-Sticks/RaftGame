@@ -25,11 +25,18 @@ namespace SDS_Jobs
         }
 
         [SerializeField] JobWaypoint _waypoint;
-        Stack<Job> _currentJobs = new Stack<Job>();
+
+        [SerializeField] Button currentlySelectedButton;
+        JobObject currentJob = null;
+
         JobWaypoint jwp;
         Stack<ICommand> _executedJobActions = new Stack<ICommand>();
 
-        [SerializeField]TextMeshProUGUI _curMoneyText;
+        [SerializeField] TextMeshProUGUI _curMoneyText;
+
+        [SerializeField] TextMeshProUGUI _jobDescription;
+
+        [SerializeField] Button _TurnInButton;
 
         [SerializeField] Transform _JobSelectionUIContent;
 
@@ -53,208 +60,40 @@ namespace SDS_Jobs
         /// <summary>
         /// called to triggers a new job action.
         /// </summary>
-        public void ExecuteJobAction(Transform targetObject)
+        public void OnJobSelect(Button newButton, JobObject jObj)
         {
-            ICommand jobAction = new JobAction(targetObject, _JobSelectionUIContent, jwp, _currentJobs, _executedJobActions);
-
-            jobAction.Execute();
+            if (currentlySelectedButton != null) currentlySelectedButton.interactable = true;
+            currentlySelectedButton = newButton;
+            _jobDescription.text = jObj.Description;
+            currentJob = jObj;
         }
 
 
-        /// <summary>
-        /// called to undo job action.
-        /// </summary>
-        public void UndoLastAction()
+        public void AcceptJob()
         {
-            if (_executedJobActions.Count <= 0)
-            {
-                Debug.Log("No job actions to undo.");
-                return;
-            }
-
-            ICommand lastAction = _executedJobActions.Peek();
-            lastAction.Undo();
+            CargoFactory.instance.SpawnCargo(currentJob.CargoTypes);
         }
 
-        public void ClearUndoStack()
-        {
-            _executedJobActions.Clear();
-        }
+
 
         public void CheckJobComplete(Docks dockArrivedAt)
         {
-            if (_currentJobs.Count <= 0) return;
-            if (dockArrivedAt == _currentJobs.Peek().EndLocation)
-            {
-                Job job = _currentJobs.Pop();
-                CurrentMoney += 1; // DEBUG: REPLACE WITH ACTUAL REWARD LATER
-            }
-            ClearOnJobComplete(dockArrivedAt);
+            if (currentJob == null) return;
+            if (dockArrivedAt == currentJob.EndDock) _TurnInButton.interactable = true;
         }
 
 
-        public void ClearOnJobComplete(Docks dockArrivedAt)
+        public void CompleteJob()
         {
-            var currentlySelected = _JobSelectionUIContent.GetComponentsInChildren<JobSelection>();
-            foreach (var job in currentlySelected)
-            {
-                if(job.EndIsland == dockArrivedAt)
-                {
-                    CurrentMoney += job.Reward; // DEBUG: Move reward into job struct, not job selecton class.
-                    Destroy(job.gameObject);
-                }
-            }
+            CurrentMoney += currentJob.Reward;
+            _TurnInButton.interactable = false;
+            currentJob = null;
         }
 
         public override void Notify(CargoSubject subject)
         {
-            
+
         }
-    }
-
-
-    public class JobAction : ICommand
-    {
-        /// <summary>
-        /// the actual object we are moving.
-        /// </summary>
-        Transform _targetObject;
-        /// <summary>
-        /// since the job action will handle accepting/unaccepting jobs, it will move the UI object from the list of jobs to YOUR list of jobs. this is the transform for each.
-        /// </summary>
-        Transform _targetParent;
-
-        Transform _originalParent;
-
-        Vector2 _originalPositionOffset;
-
-        Stack<Job> _currentJobs;
-
-        Stack<ICommand> _executedJobs;
-        JobWaypoint _jwp;
-
-        public JobAction(Transform targetObject, Transform targetParent, JobWaypoint jwp, Stack<Job> jobStack, Stack<ICommand> executedJobs)
-        {
-            _targetObject = targetObject;
-            _targetParent = targetParent;
-            _originalParent = targetObject.parent;
-            _currentJobs = jobStack;
-            _jwp = jwp;
-            _executedJobs = executedJobs;
-            _originalPositionOffset = targetObject.localPosition;
-        }
-
-        void ICommand.Execute()
-        {
-            if (_targetParent == null)
-            {
-                Debug.Log("targetParent null");
-                return;
-            }
-
-
-
-
-            if (_targetObject.TryGetComponent(out JobSelection js))
-            {
-                _currentJobs.Push(js.Job);
-
-                Vector3 newPos = Locations.IslandPositions[_currentJobs.Peek().EndLocation];
-                Vector3 curPos = Locations.IslandPositions[_currentJobs.Peek().StartLocation];
-                _jwp.transform.position = newPos;
-                _jwp.gameObject.SetActive(true);
-                _jwp.UpdateWaypoint();
-
-                Vector3 dir = newPos - curPos;
-
-                float windAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-                WeatherManager.instance.CurrentWeather = new WeatherInfo(WeatherTypes.none, 0, windAngle);
-
-
-
-
-
-            }
-            else
-            {
-                Debug.Log("Error getting the JobSelection from target UI.");
-                return;
-            }
-
-            if (_targetObject.TryGetComponent(out Button button))
-            {
-                button.enabled = false;
-            }
-
-            _targetObject.SetParent(_targetParent);
-            _targetObject.localPosition = Vector2.zero;
-            _executedJobs.Push(this);
-        }
-
-        void ICommand.Undo()
-        {
-            if (_originalParent == null)
-            {
-                Debug.Log("originalParent null");
-                return;
-            }
-
-            _executedJobs.Pop();
-            _currentJobs.Pop();
-
-
-            if (_currentJobs.Count <= 0)
-                _jwp.gameObject.SetActive(false);
-            else
-            {
-
-                Vector3 newPos = Locations.IslandPositions[_currentJobs.Peek().EndLocation];
-                _jwp.transform.position = newPos + Vector3.up * 5;
-                _jwp.gameObject.SetActive(true);
-                _jwp.UpdateWaypoint();
-            }
-
-           
-
-
-
-            if (_targetObject.TryGetComponent(out Button button))
-            {
-                button.enabled = true;
-            }
-
-            _targetObject.SetParent(_originalParent);
-            _targetObject.localPosition = _originalPositionOffset;
-        }
-    }
-
-
-
-    public struct Job
-    {
-        [SerializeField] Docks _startLocation;
-        public Docks StartLocation { get { return _startLocation; } }
-
-        [SerializeField] Docks _endLocation;
-        public Docks EndLocation { get { return _endLocation; } }
-
-        // not sure if we want.
-        [SerializeField] float TimeLimit;
-
-        public Job(int startIsland, int endIsland, int timeLimit = -1)
-        {
-            _startLocation = (Docks)startIsland;
-            _endLocation = (Docks)endIsland;
-            TimeLimit = timeLimit;
-        }
-
-        public Job(Docks startIsland, Docks endIsland, int timeLimit = -1)
-        {
-            _startLocation = startIsland;
-            _endLocation = endIsland;
-            TimeLimit = timeLimit;
-        }
-
-
     }
 }
+
