@@ -3155,7 +3155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945bf4c63fb474f4f8e10fb1e3a9ab1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jobDatabase: {fileID: 0}
+  jobDatabase: {fileID: 11400000, guid: 1535d120019552247acdaf7db868a6f7, type: 2}
   _jobSelectionPrefab: {fileID: 2753086371059442092, guid: 42ec0a3c473127743bcfbc6631355665, type: 3}
 --- !u!1 &97097345 stripped
 GameObject:
@@ -8054,11 +8054,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 276041366565080258, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -863055.06
+      value: -881094.56
       objectReference: {fileID: 0}
     - target: {fileID: 276041366565080258, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 336554.8
+      value: 343554.44
       objectReference: {fileID: 0}
     - target: {fileID: 311382486366289974, guid: 85973c2faa2540140af8da27ec2c3092, type: 3}
       propertyPath: m_TargetGraphic
