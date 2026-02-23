@@ -12,7 +12,7 @@ public class ShopManager : MonoBehaviour
     }
 
 
-    public bool isShown { get => canvas.enabled = false; }
+    public bool isShown { get => canvas.enabled; }
     public void Hide()
     {
         canvas.enabled = false;

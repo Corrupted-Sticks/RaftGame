@@ -129,9 +129,11 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
 
     public void OnLook(InputAction.CallbackContext ctx)
     {
+        if (ShopManager.instance.isShown) return;
         heading.x += ctx.ReadValue<Vector2>().x * Time.deltaTime * 6f * camSensitivity.x;
         heading.y += ctx.ReadValue<Vector2>().y * Time.deltaTime * 10f * camSensitivity.y;
-        if (ShopManager.instance.isShown) return; 
+        
+        heading.y = Mathf.Clamp(heading.y,-30, 30);
         _cameraPivot.rotation = Quaternion.Euler(-heading.y, heading.x, 0);
     }
 

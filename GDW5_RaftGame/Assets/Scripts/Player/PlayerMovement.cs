@@ -64,6 +64,8 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
+        if (ShopManager.instance.isShown) return;
+
         Vector2 raw = ctx.ReadValue<Vector2>();
         //moveDir = new Vector3(raw.x, 0.0f, raw.y);
         moveDir = _camera.transform.forward.normalized*raw.y + _camera.transform.right.normalized*raw.x;
@@ -75,8 +77,10 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
     public void OnLook(InputAction.CallbackContext ctx)
     {
+        if (ShopManager.instance.isShown) return;
         heading.x += ctx.ReadValue<Vector2>().x * Time.deltaTime * 6f * camSensitivity.x;
         heading.y += ctx.ReadValue<Vector2>().y * Time.deltaTime * 10f * camSensitivity.y;
+        heading.y = Mathf.Clamp(heading.y, -30, 30);
         _cameraPivot.rotation = Quaternion.Euler(-heading.y, heading.x, 0);
     }
 

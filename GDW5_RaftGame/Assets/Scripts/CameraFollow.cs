@@ -17,8 +17,9 @@ public class CameraFollow : MonoBehaviour
 
 
     [SerializeField] float minPitch = -30f;
+    public float MinPitch => minPitch;
     [SerializeField] float maxPitch = 60f;
-
+    public float MaxPitch => maxPitch;
     private void Start()
     {
         _camera = Camera.main;
@@ -43,7 +44,7 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    static float ClampAngle(float angle, float min, float max)
+    public static float ClampAngle(float angle, float min, float max)
     {
         if (angle > 180f) angle -= 360f;
         return Mathf.Clamp(angle, min, max);
