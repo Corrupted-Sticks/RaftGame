@@ -64,8 +64,6 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (ShopManager.instance.isShown) return;
-
         Vector2 raw = ctx.ReadValue<Vector2>();
         //moveDir = new Vector3(raw.x, 0.0f, raw.y);
         moveDir = _camera.transform.forward.normalized*raw.y + _camera.transform.right.normalized*raw.x;
