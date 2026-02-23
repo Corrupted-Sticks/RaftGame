@@ -14,6 +14,8 @@ public class WorldMap : MonoBehaviour
     public Transform player;
     public Transform waypoint;
 
+
+    [SerializeField] GameObject map;
     Vector2 mapSize;
 
     void Awake()
@@ -25,6 +27,15 @@ public class WorldMap : MonoBehaviour
     void Start()
     {
         mapSize = mapRect.rect.size;
+        
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            map.SetActive(!map.activeInHierarchy);
+        }
     }
 
     void LateUpdate()

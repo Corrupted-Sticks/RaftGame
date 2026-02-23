@@ -29,9 +29,6 @@ namespace SDS_Jobs
         [SerializeField] Button currentlySelectedButton;
         JobObject currentJob = null;
 
-        JobWaypoint jwp;
-        Stack<ICommand> _executedJobActions = new Stack<ICommand>();
-
         [SerializeField] TextMeshProUGUI _curMoneyText;
 
         [SerializeField] TextMeshProUGUI _jobDescription;
@@ -53,7 +50,7 @@ namespace SDS_Jobs
         }
 
 
-        private void Start() => jwp = FindFirstObjectByType<JobWaypoint>();
+        private void Start() => _waypoint = FindFirstObjectByType<JobWaypoint>();
         private void FixedUpdate() => _waypoint.UpdateWaypoint();
 
 
@@ -72,6 +69,7 @@ namespace SDS_Jobs
         public void AcceptJob()
         {
             CargoFactory.instance.SpawnCargo(currentJob.CargoTypes);
+            _waypoint.transform.position = Locations.IslandPositions[currentJob.EndDock];
         }
 
 
@@ -87,6 +85,12 @@ namespace SDS_Jobs
         {
             CurrentMoney += currentJob.Reward;
             _TurnInButton.interactable = false;
+            CubeCargo[] cube = FindObjectsByType<CubeCargo>(FindObjectsSortMode.None);
+            foreach (var cargo in cube) Destroy(cargo.gameObject);
+            BarrelCargo[] barrel = FindObjectsByType<BarrelCargo>(FindObjectsSortMode.None);
+            foreach (var cargo in barrel) Destroy(cargo.gameObject);
+            StretchCargo[] stretch = FindObjectsByType<StretchCargo>(FindObjectsSortMode.None);
+            foreach (var cargo in stretch) Destroy(cargo.gameObject);
             currentJob = null;
         }
 

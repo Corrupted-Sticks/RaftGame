@@ -15,35 +15,38 @@ public class CameraFollow : MonoBehaviour
 
     bool zoomedIn = true;
 
+
+    [SerializeField] float minPitch = -30f;
+    [SerializeField] float maxPitch = 60f;
+
     private void Start()
     {
         _camera = Camera.main;
     }
-
+    Vector3 currentOffset;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void LateUpdate()
     {
-        if (zoomedIn)
+        Vector3 targetPosition = Target.position;
+        transform.position = targetPosition;
+
+        Vector3 dir = Target.position - transform.position;
+
+        if (dir.sqrMagnitude > 0.0001f)
         {
-            // desired position with offset
-            Vector3 targetPosition = Target.position;
+            Quaternion look = Quaternion.LookRotation(dir, Vector3.up);
 
-            // smoothly move the camera
-            //transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothing);
-            transform.position = targetPosition;
+            Vector3 euler = look.eulerAngles;
+            euler.x = ClampAngle(euler.x, minPitch, maxPitch);
+
+            transform.rotation = Quaternion.Euler(euler);
         }
-        else
-        {
-            // desired position with offset
-            Vector3 targetPosition = Target.position;
+    }
 
-            // smoothly move the camera
-            transform.position = targetPosition;
-
-            // smooth rotation to look at the boat
-            //Quaternion targetRotation = Quaternion.LookRotation(Target.position - transform.position, Vector3.up);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 3f);
-        }
+    static float ClampAngle(float angle, float min, float max)
+    {
+        if (angle > 180f) angle -= 360f;
+        return Mathf.Clamp(angle, min, max);
     }
 
     public void ToggleCamera()

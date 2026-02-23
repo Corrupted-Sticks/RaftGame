@@ -1,5 +1,6 @@
 using SDS_Locations;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Same Day Shipping/New Job Category", fileName = "Job Category")]
@@ -31,14 +32,14 @@ public class JobDatabase : ScriptableObject
         if (jobsByStartDock != null) return; // exit if already built.
 
         jobsByStartDock = new Dictionary<Docks, List<JobObject>>();
-
+        Debug.Log("Rebuilt job database");
         foreach (var job in allJobs)
         {
             if (!jobsByStartDock.TryGetValue(job.StartDock, out var list))
             {
                 list = new List<JobObject>();
                 jobsByStartDock.Add(job.StartDock, list);
-                Debug.LogError("new made" + job.StartDock.ToString());
+              
             }
             list.Add(job);
         }
