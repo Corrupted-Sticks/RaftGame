@@ -27,7 +27,7 @@ namespace SDS_Jobs
         [SerializeField] JobWaypoint _waypoint;
 
         [SerializeField] Button currentlySelectedButton;
-        JobObject currentJob = null;
+        public JobObject currentJob = null;
 
         [SerializeField] TextMeshProUGUI _curMoneyText;
 
@@ -49,10 +49,8 @@ namespace SDS_Jobs
             }
         }
 
-
         private void Start() => _waypoint = FindFirstObjectByType<JobWaypoint>();
         private void FixedUpdate() => _waypoint.UpdateWaypoint();
-
 
         /// <summary>
         /// called to triggers a new job action.
@@ -65,21 +63,19 @@ namespace SDS_Jobs
             currentJob = jObj;
         }
 
-
         public void AcceptJob()
         {
+            HUDManager.instance.SendJobObj(currentJob);
+
             CargoFactory.instance.SpawnCargo(currentJob.CargoTypes);
             _waypoint.transform.position = Locations.IslandPositions[currentJob.EndDock];
         }
-
-
 
         public void CheckJobComplete(Docks dockArrivedAt)
         {
             if (currentJob == null) return;
             if (dockArrivedAt == currentJob.EndDock) _TurnInButton.interactable = true;
         }
-
 
         public void CompleteJob()
         {
@@ -92,11 +88,14 @@ namespace SDS_Jobs
             StretchCargo[] stretch = FindObjectsByType<StretchCargo>(FindObjectsSortMode.None);
             foreach (var cargo in stretch) Destroy(cargo.gameObject);
             currentJob = null;
+
+            HUDManager.instance.ResetHUDJob();
+            HUDManager.instance.SetMoney(CurrentMoney);
         }
 
         public override void Notify(CargoSubject subject)
         {
-
+            HUDManager.instance.SetLostCargo(); //Ticks the number of cargo lost by 1 in the HUD
         }
     }
 }

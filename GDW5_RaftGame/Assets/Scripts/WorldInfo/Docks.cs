@@ -4,7 +4,6 @@ using Sirenix.OdinInspector;
 
 namespace SDS_Locations
 {
-
     public enum Docks
     {
         DewsburyN,
