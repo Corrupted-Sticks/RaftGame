@@ -37,7 +37,7 @@ namespace SDS_Jobs
 
         [SerializeField] Transform _JobSelectionUIContent;
 
-        int _currentMoney;
+        [SerializeField] int _currentMoney;
 
         public int CurrentMoney
         {

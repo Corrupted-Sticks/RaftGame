@@ -25,6 +25,9 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
     public float rotationSpeed;
     public float boatRotationSpeed;
 
+    float speedUpgrade = 1;
+    float turnUpgrade = 1;
+
     public bool isDockDown = false;
     /// <summary>
     /// the actual sail that controlls the direction of the boat.
@@ -42,6 +45,8 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
 
 #endif
 
+
+    
     void OnDisable() => _Input.Disable();
     void OnDestroy() => _Input.Disable();
     void Awake()
@@ -70,7 +75,7 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
     {
         // rotation (left/right movement)
         if (Mathf.Abs(moveDir.x) > 0.01f)
-            SteeringSail.transform.Rotate(Vector3.up, moveDir.x*rotationSpeed);
+            SteeringSail.transform.Rotate(Vector3.up, moveDir.x*rotationSpeed*turnUpgrade);
 
         // movement  (forward/backwards)
         Vector3 sailForward = SteeringSail.forward;
@@ -81,9 +86,9 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
         // at minimum, move half speed in opposite direction to the wind. closer to wind direction you point the sail, the faster it goes.
         float windFactor = minWindMultiplier + Mathf.Max(.35f, Vector3.Dot(trueForwards, windDir));
 
-        Vector3 forwardForce = trueForwards * moveDir.z * acceleration * windFactor;
+        Vector3 forwardForce = trueForwards * moveDir.z * acceleration * speedUpgrade * windFactor;
         _rb.AddForce(forwardForce, ForceMode.Force);
-        _rb.linearVelocity = Vector3.ClampMagnitude(_rb.linearVelocity, maxSpeed);
+        _rb.linearVelocity = Vector3.ClampMagnitude(_rb.linearVelocity, maxSpeed * speedUpgrade);
 
         if (_rb.linearVelocity.sqrMagnitude > 2) 
             RotateBoatToFaceSailDirection();
@@ -92,7 +97,12 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
             currentSpeed = _rb.linearVelocity.magnitude;
 #endif
     }
-
+    public void SetSpeedUpgrade(float mult) {
+        speedUpgrade = mult;
+    }
+    public void SetTurnUpgrade(float mult) {
+        turnUpgrade = mult;
+    }
     void RotateBoatToFaceSailDirection()
     {
         // Get the sail's local y rotation relative to the boat
