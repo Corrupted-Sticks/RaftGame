@@ -41,12 +41,14 @@ public class Trigger_SailControl : MonoBehaviour
         {
             TakeControl();
             cFollow.ToggleCamera();
+            AudioManager.instance.PlaySFX(2); //Sail sfx
         }
         // DEBUG : REPLACE WITH INPUT SYSTEM
         else if (isPlayerControlling && Input.GetKeyDown(KeyCode.E)) 
         {
             ExitControl();
             cFollow.ToggleCamera();
+            AudioManager.instance.PlaySFX(3); //Anchor sfx
         }
     }
 

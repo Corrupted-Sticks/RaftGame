@@ -91,6 +91,7 @@ namespace SDS_Jobs
 
             HUDManager.instance.ResetHUDJob();
             HUDManager.instance.SetMoney(CurrentMoney);
+            AudioManager.instance.PlaySFX(0); //Success!
         }
 
         public override void Notify(CargoSubject subject)
