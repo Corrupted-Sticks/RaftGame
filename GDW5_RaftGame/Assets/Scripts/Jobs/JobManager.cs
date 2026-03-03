@@ -46,6 +46,7 @@ namespace SDS_Jobs
             {
                 _currentMoney = value;
                 _curMoneyText.text = _currentMoney.ToString();
+                HUDManager.instance.SetMoney(value);
             }
         }
 
@@ -79,6 +80,7 @@ namespace SDS_Jobs
 
         public void CompleteJob()
         {
+            if(currentJob == null) return;
             CurrentMoney += currentJob.Reward;
             _TurnInButton.interactable = false;
             CubeCargo[] cube = FindObjectsByType<CubeCargo>(FindObjectsSortMode.None);

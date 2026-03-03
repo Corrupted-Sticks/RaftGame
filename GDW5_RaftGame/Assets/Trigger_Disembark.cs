@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Trigger_Disembark : MonoBehaviour
 {
-    bool inTrigger = false; // int that counts how many players are in the trigger, as a simple bool check would have issues with multiple players.
+    [SerializeField] bool inTrigger = false; // int that counts how many players are in the trigger, as a simple bool check would have issues with multiple players.
 
-    bool isOnBoat = true; // start on boat.
+    [SerializeField] bool isOnBoat = true; // start on boat.
 
     private void OnTriggerStay(Collider other)
     {
@@ -19,21 +19,24 @@ public class Trigger_Disembark : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) ) Disembark();
+        if (
+            Input.GetKeyDown(KeyCode.F) && inTrigger
+            ) Disembark();
 
     }
 
     void Disembark()
     {
-        isOnBoat = !isOnBoat; // togle on boat status, then move.
+
         Transform player = FindFirstObjectByType<PlayerMovement>().transform;
         if (!isOnBoat)
         {
             player.position = BoatController.instance.transform.position;
             inTrigger = false;
         }
-        else
-        player.position = transform.position;
+        else player.position = transform.position;
+
+        isOnBoat = !isOnBoat; // togle on boat status
     }
 
 }

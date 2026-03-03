@@ -48,6 +48,7 @@ public class HUDManager : MonoBehaviour
 
     public void SendJobObj(JobObject jObj)
     {
+        if (jObj == null) return;
         cargoIcon.SetActive(true);
 
         SetCargoText(jObj.CargoTypes.Count);
