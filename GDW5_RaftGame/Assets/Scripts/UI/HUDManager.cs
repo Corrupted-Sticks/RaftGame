@@ -50,6 +50,7 @@ public class HUDManager : MonoBehaviour
     {
         if (jObj == null) return;
         cargoIcon.SetActive(true);
+        rewardText.gameObject.SetActive(true);
 
         SetCargoText(jObj.CargoTypes.Count);
         SetRewardText(jObj.Reward);
@@ -67,7 +68,7 @@ public class HUDManager : MonoBehaviour
 
     void SetRewardText(int num)
     {
-        rewardText.text = "Reward: $" + num.ToString();
+        rewardText.text = "+$" + num.ToString();
     }
 
     void SetTimeText(int time)
@@ -75,17 +76,17 @@ public class HUDManager : MonoBehaviour
         int minutes = time / 60;
         int seconds = time % 60;
 
-        timeText.text = "Time: " + minutes.ToString() + ":" + seconds.ToString();
+        timeText.text = minutes.ToString() + ":" + seconds.ToString();
     }
 
     void SetFromText(Docks dock)
     {
-        fromText.text = "From: " + Locations.GetIslandDisplayName(dock);
+        fromText.text = Locations.GetIslandDisplayName(dock);
     }
 
     void SetToText(Docks dock)
     {
-        toText.text = "To: " + Locations.GetIslandDisplayName(dock);
+        toText.text = Locations.GetIslandDisplayName(dock);
     }
 
     public void ResetHUDJob()
@@ -93,10 +94,11 @@ public class HUDManager : MonoBehaviour
         cargoText.text = "0";
         lostCargo = 0;
         lostCargoText.text = "0";
-        rewardText.text = "Reward: $000000";
-        timeText.text = "Time: 00:00";
-        fromText.text = "From: N/A";
-        toText.text = "To: N/A";
+        rewardText.text = "+$000000";
+        timeText.text = "00:00";
+        fromText.text = "???";
+        toText.text = "???";
         cargoIcon.SetActive(false);
+        rewardText.gameObject.SetActive(false);
     }
 }
