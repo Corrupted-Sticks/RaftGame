@@ -25415,6 +25415,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 57763302989993392}
     m_Modifications:
+    - target: {fileID: 907215542681140037, guid: 2a75c79f81cf4994e988a7efc2885404, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8940843448798228264, guid: 1e9e251eca8d741299e46ef4024ec220, type: 3}
+    - target: {fileID: 5111797908595447228, guid: 2a75c79f81cf4994e988a7efc2885404, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8940843448798228264, guid: 1e9e251eca8d741299e46ef4024ec220, type: 3}
+    - target: {fileID: 6522152063029777450, guid: 2a75c79f81cf4994e988a7efc2885404, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8940843448798228264, guid: 1e9e251eca8d741299e46ef4024ec220, type: 3}
     - target: {fileID: 7505245995139036495, guid: 2a75c79f81cf4994e988a7efc2885404, type: 3}
       propertyPath: m_Name
       value: Props
