@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,8 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 {
     PlayerInput _Input;                  // Source code representation of asset.
     PlayerInput.PlayerActions _PActions;     // Source code representation of action map.
+
+    [SerializeField] bool usingController = false;
 
     Rigidbody _rb;
     Collider _collider;
@@ -59,6 +62,23 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
         _Input = new PlayerInput();        // Create asset object.
         _PActions = _Input.Player;         // Extract action map object.
         _PActions.AddCallbacks(this);      // Register callback interface IPlayerActions.
+
+
+        if (usingController)
+        {
+            _Input.devices = new InputDevice[]
+            {
+            Gamepad.current
+            };
+        }
+        else
+        {
+            _Input.devices = new InputDevice[]
+            {
+                Keyboard.current
+            };
+        }
+
         _camera = Camera.main;
     }
 
@@ -66,11 +86,11 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     {
         Vector2 raw = ctx.ReadValue<Vector2>();
         //moveDir = new Vector3(raw.x, 0.0f, raw.y);
-        moveDir = _camera.transform.forward.normalized*raw.y + _camera.transform.right.normalized*raw.x;
+        moveDir = _camera.transform.forward.normalized * raw.y + _camera.transform.right.normalized * raw.x;
     }
     public void OnInteract(InputAction.CallbackContext ctx)
     {
-        
+
     }
 
     public void OnLook(InputAction.CallbackContext ctx)
@@ -89,6 +109,10 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
         GameManager.instance.CallPause();
     }
 
+    public void OnResetPlayer(InputAction.CallbackContext ctx)
+    {
+        transform.position = BoatController.instance.RespawnPosition.position;
+    }
     public void ToggleInput(bool value)
     {
         if (value) _Input.Enable();
@@ -123,11 +147,6 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
     private void Update()
     {
-        //DEBUG : MAKE USE INPUT SYSTEM/REMOVE LATER
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            transform.position = BoatController.instance.RespawnPosition.position;
-        }
 
         if (moveDir == Vector3.zero)
         {

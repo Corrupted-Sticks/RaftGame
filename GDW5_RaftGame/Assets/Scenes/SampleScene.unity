@@ -20035,7 +20035,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   isUnderWater: 0
   maxSubmersion: 0.5
-  floatPower: 15
+  floatPower: 25
   waterDrag: 1
   waterAngularDrag: 40
   airDrag: 0

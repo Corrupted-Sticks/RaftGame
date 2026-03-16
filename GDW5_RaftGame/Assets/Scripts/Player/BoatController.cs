@@ -153,7 +153,10 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
 
         GameManager.instance.CallPause();
     }
+    public void OnResetPlayer(InputAction.CallbackContext ctx)
+    {
 
+    }
     public void ToggleDock() => dock.SetActive(isDockDown = !isDockDown);
     public void ToggleDock(bool value)
     {
