@@ -10734,7 +10734,7 @@ MonoBehaviour:
   mapRect: {fileID: 2133691779}
   playerIcon: {fileID: 1870996454}
   waypointIcon: {fileID: 766715240}
-  player: {fileID: 0}
+  player: {fileID: 2037230942}
   waypoint: {fileID: 46401039}
   map: {fileID: 2133691778}
 --- !u!1 &1155404824
