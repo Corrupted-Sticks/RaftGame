@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6464949166456974696}
   - component: {fileID: 5545989727635051287}
   - component: {fileID: 6515948272600839837}
+  - component: {fileID: -5564951660978414345}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -99,6 +100,25 @@ MonoBehaviour:
   maxHealth: 100
   timeToSelfDestruct: 30
   jobManager: {fileID: 0}
+--- !u!114 &-5564951660978414345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3509608147432464519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a659d3f9dfd0740aa1a0075ae63704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jointMotionsConfig:
+    angularXMotion: 0
+    angularYMotion: 0
+    angularZMotion: 0
+    angularXLimit: 0
+    angularYLimit: 0
+    angularZLimit: 0
 --- !u!1001 &2028029204587890929
 PrefabInstance:
   m_ObjectHideFlags: 0
