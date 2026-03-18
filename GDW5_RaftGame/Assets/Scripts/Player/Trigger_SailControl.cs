@@ -16,19 +16,7 @@ public class Trigger_SailControl : MonoBehaviour
 
     bool tutorialDone = false;
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (!collision.CompareTag("Player")) return;
-        playersInside++;
-        // pmove = collision.GetComponentInChildren<PlayerMovement>();
-        pmove = collision.GetComponentInChildren<PlayerMovement>();
-
-        if (!tutorialDone)
-        {
-            boatControllUI.SetUIImage(true);
-            boatControllUI.SetEnterBoatControl(true);
-        }
-    }
+    Vector3 playerLocal = Vector3.zero;
 
     private void Update()
     {
@@ -50,12 +38,32 @@ public class Trigger_SailControl : MonoBehaviour
             cFollow.ToggleCamera();
             AudioManager.instance.PlaySFX(3); //Anchor sfx
         }
+
+        if (pmove != null && isPlayerControlling)
+        {
+            pmove.gameObject.transform.localPosition = playerLocal;
+        }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (!collision.CompareTag("Player")) return;
+        if (!isPlayerControlling) pmove = collision.GetComponentInParent<PlayerMovement>();
+        if (collision.GetComponentInParent<PlayerMovement>() == pmove && playersInside != 0) return;
+        playersInside++;
+
+        if (!tutorialDone)
+        {
+            boatControllUI.SetUIImage(true);
+            boatControllUI.SetEnterBoatControl(true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
         playersInside--;
+        if (isPlayerControlling && playersInside == 0) playersInside++; 
         if (playersInside <= 0) boatControllUI.SetEnterBoatControl(false);
     }
 
@@ -65,8 +73,9 @@ public class Trigger_SailControl : MonoBehaviour
         pmove.ToggleInput(false);
         isPlayerControlling = true;
         pmove.transform.SetParent(transform.root);
-        pmove.RB.isKinematic = true;
-        pmove.Collider.enabled = false;
+        playerLocal = pmove.gameObject.transform.localPosition;
+        //pmove.RB.isKinematic = true;
+        //pmove.Collider.enabled = false;
 
         if (!tutorialDone)
         {
@@ -82,8 +91,8 @@ public class Trigger_SailControl : MonoBehaviour
         pmove.enabled = true;
         isPlayerControlling = false;
         pmove.transform.SetParent(null);
-        pmove.RB.isKinematic = false;
-        pmove.Collider.enabled = true;
+        //pmove.RB.isKinematic = false;
+        //pmove.Collider.enabled = true;
 
         boatControllUI.SetExitBoatControl(false);
         boatControllUI.SetUIImage(false);

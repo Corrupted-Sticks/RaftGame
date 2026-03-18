@@ -79,8 +79,8 @@ public class PhysicsModule : Module
 
     private void FixedUpdate()
     {
-        UpdateTargetRotation();
-        ApplyCustomDrag();
+        //UpdateTargetRotation();
+        //ApplyCustomDrag();
 
         switch (_balanceMode)
         {

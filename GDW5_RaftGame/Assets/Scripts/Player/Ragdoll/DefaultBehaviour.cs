@@ -17,7 +17,7 @@ public class DefaultBehaviour : MonoBehaviour
     private void OnValidate()
     {
         if (_activeRagdoll == null) _activeRagdoll = GetComponent<ActiveRagdoll>();
-        if (_physicsModule == null) _physicsModule = GetComponent<PhysicsModule>();
+        //if (_physicsModule == null) _physicsModule = GetComponent<PhysicsModule>();
         if (_animationModule == null) _animationModule = GetComponent<AnimationModule>();
         if (_gripModule == null) _gripModule = GetComponent<GripModule>();
     }
@@ -29,8 +29,8 @@ public class DefaultBehaviour : MonoBehaviour
         // the ActiveRagdoll actions in a very simple way. But any implementation is
         // possible, such as assigning those same actions to the output of an AI system.
 
-        _activeRagdoll.Input.OnMoveDelegates += MovementInput;
-        _activeRagdoll.Input.OnMoveDelegates += _physicsModule.ManualTorqueInput;
+        //_activeRagdoll.Input.OnMoveDelegates += MovementInput;
+       // _activeRagdoll.Input.OnMoveDelegates += _physicsModule.ManualTorqueInput;
         _activeRagdoll.Input.OnFloorChangedDelegates += ProcessFloorChanged;
 
         _activeRagdoll.Input.OnLeftArmDelegates += _animationModule.UseLeftArm;

@@ -12,9 +12,10 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     Collider _collider;
     public Rigidbody RB { get => _rb; }
     public Collider Collider { get => _collider; }
-    private Animator _animator;
+    [SerializeField] private Animator _animator;
 
     [SerializeField] Transform _cameraPivot;
+    public Rigidbody hipBone;
     Camera _camera;
 
     Vector2 heading = new Vector2(0, 0);
@@ -66,7 +67,9 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     {
         Vector2 raw = ctx.ReadValue<Vector2>();
         //moveDir = new Vector3(raw.x, 0.0f, raw.y);
-        moveDir = _camera.transform.forward.normalized*raw.y + _camera.transform.right.normalized*raw.x;
+        //moveDir = Quaternion.Euler(_camera.transform.rotation.x, 0, 0) * _camera.transform.forward.normalized * raw.y + Quaternion.Euler(0, _camera.transform.rotation.y, 0) * _camera.transform.right.normalized * raw.x;
+        moveDir = new Vector3(raw.x, 0f, raw.y);
+        moveDir = _camera.transform.TransformDirection(moveDir);
     }
     public void OnInteract(InputAction.CallbackContext ctx)
     {
@@ -100,7 +103,7 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     {
         _rb = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
         _maxSpeedSquared = _MaxSpeed * _maxSpeed;
     }
 
@@ -118,7 +121,7 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
         _rb.AddForce(finalMoveDir * _acceleration, ForceMode.Acceleration);
 
-        _rb.linearVelocity = Vector3.ClampMagnitude(_rb.linearVelocity, _MaxSpeed);
+        //_rb.linearVelocity = Vector3.ClampMagnitude(_rb.linearVelocity, _MaxSpeed);
     }
 
     private void Update()
@@ -137,8 +140,12 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
         {
             _animator.SetFloat("Speed", 0.5f);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir), 0.01f);
-            transform.Translate(moveDir * _rb.linearVelocity.magnitude * Time.deltaTime, Space.World);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDir), 0.01f);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDir), 0.2f);
+            //transform.rotation = Quaternion.Euler(0,_camera.transform.rotation.eulerAngles.y,0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,_camera.transform.rotation.eulerAngles.y,0), Time.deltaTime * 5f);
+            //transform.Translate(moveDir * _rb.linearVelocity.magnitude * Time.deltaTime, Space.World);
+            transform.Translate(Quaternion.Euler(0,_camera.transform.rotation.eulerAngles.y,0) * moveDir * 3f * Time.deltaTime, Space.World);
         }
     }
 }

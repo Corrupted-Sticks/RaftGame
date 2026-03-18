@@ -11,6 +11,8 @@ public class CameraFollow : MonoBehaviour
 
     Camera _camera;
 
+    Transform storedTarget;
+
     Vector3 velocity = Vector3.zero;
 
     bool zoomedIn = true;
@@ -23,6 +25,7 @@ public class CameraFollow : MonoBehaviour
     private void Start()
     {
         _camera = Camera.main;
+        storedTarget = Target;
     }
     Vector3 currentOffset;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -56,7 +59,7 @@ public class CameraFollow : MonoBehaviour
 
         if (zoomedIn)
         {
-            Target = FindFirstObjectByType<PlayerMovement>().gameObject.transform;
+            Target = storedTarget;
 
             Vector3 cameraPosition = transform.position
                            - transform.forward * zoomedInOffset.z

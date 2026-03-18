@@ -44,7 +44,7 @@ public class InputModule : Module
 
     void Update()
     {
-        UpdateOnFloor();
+        //UpdateOnFloor();
     }
 
     public delegate void onFloorChangedDelegate(bool onFloor);

@@ -125,7 +125,7 @@ public class ActiveRagdoll : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //SyncAnimatedBody();
+        SyncAnimatedBody();
     }
 
     /// <summary> Updates the rotation and position of the animated body's root
