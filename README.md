@@ -6,5 +6,3 @@ with weather and other events trying to hinder them.
 Skybox texture from: [Skybox-Series-Free](https://assetstore.unity.com/packages/2d/textures-materials/sky/skybox-series-free-103633)
 
 All other sounds, models, textures, and art were done by the other members of our GDW group.
-
-Video Report Link: [Youtube Link](https://youtu.be/NXF1gENuRyc)
