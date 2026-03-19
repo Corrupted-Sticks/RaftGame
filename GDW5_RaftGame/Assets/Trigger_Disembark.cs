@@ -28,13 +28,18 @@ public class Trigger_Disembark : MonoBehaviour
     void Disembark()
     {
 
-        Transform player = FindFirstObjectByType<PlayerMovement>().transform;
+        PlayerMovement player = FindFirstObjectByType<PlayerMovement>();
         if (!isOnBoat)
         {
-            player.position = BoatController.instance.transform.position;
+            player.HipBone.position = BoatController.instance.transform.position;
+            player.transform.SetParent(null);
             inTrigger = false;
         }
-        else player.position = transform.position;
+        else
+        {
+            player.HipBone.position = transform.position;
+            player.transform.SetParent(BoatController.instance.transform);
+        }
 
         isOnBoat = !isOnBoat; // togle on boat status
     }

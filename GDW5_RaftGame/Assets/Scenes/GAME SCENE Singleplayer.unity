@@ -1188,7 +1188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersInside: 0
-  pmove: {fileID: 0}
+  _pmove: {fileID: 0}
   isPlayerControlling: 0
   boatControllUI: {fileID: 2109388574}
   cFollow: {fileID: 780130749}
@@ -2255,11 +2255,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176f50ad303ed244d90ba3962d2d25f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isController: 0
   _animator: {fileID: 286857157}
   _cameraPivot: {fileID: 780130750}
   hipBone: {fileID: 781347274}
   _acceleration: 0
   _maxSpeed: 10
+  canMove: 1
   _isOnBoat: 0
   boatTransform: {fileID: 0}
   moveDir: {x: 0, y: 0, z: 0}
@@ -3424,11 +3426,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176f50ad303ed244d90ba3962d2d25f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isController: 0
   _animator: {fileID: 0}
   _cameraPivot: {fileID: 0}
   hipBone: {fileID: 0}
   _acceleration: 15
   _maxSpeed: 10
+  canMove: 1
   _isOnBoat: 0
   boatTransform: {fileID: 0}
   moveDir: {x: 0, y: 0, z: 0}
@@ -20302,7 +20306,7 @@ Transform:
   m_GameObject: {fileID: 1797324216}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.865, z: -3.371}
+  m_LocalPosition: {x: -0, y: 1.136, z: -1.961}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27824,11 +27828,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176f50ad303ed244d90ba3962d2d25f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isController: 0
   _animator: {fileID: 0}
   _cameraPivot: {fileID: 780130750}
   hipBone: {fileID: 0}
   _acceleration: 15
   _maxSpeed: 10
+  canMove: 1
   _isOnBoat: 0
   boatTransform: {fileID: 0}
   moveDir: {x: 0, y: 0, z: 0}
