@@ -10,13 +10,22 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
     Rigidbody _rb;
     Collider _collider;
+
+    [SerializeField] bool isController = false;
+
+    InputDevice _device;
+
     public Rigidbody RB { get => _rb; }
     public Collider Collider { get => _collider; }
     [SerializeField] private Animator _animator;
 
+    [SerializeField] Transform _armature;
+
     [SerializeField] Transform _cameraPivot;
     public Rigidbody hipBone;
     Camera _camera;
+
+    Trigger_SailControl _sailControl;
 
     Vector2 heading = new Vector2(0, 0);
     Vector2 camSensitivity = new Vector2(1f, 1f);
@@ -40,6 +49,8 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
         get => _isOnBoat;
         set { }
     }
+
+    public bool canMove = true;
     [FoldoutGroup("Ground Movement")][SerializeField] bool _isOnBoat;
     /// <summary>
     /// used to modify move direction to accurately move the player with respect to the boat's rotation from buoyancy
@@ -60,11 +71,25 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
         _Input = new PlayerInput();        // Create asset object.
         _PActions = _Input.Player;         // Extract action map object.
         _PActions.AddCallbacks(this);      // Register callback interface IPlayerActions.
-        _camera = Camera.main;
+
+        if (isController)
+        {
+            _device = Gamepad.current;
+            _Input.devices = new InputDevice[] { Gamepad.current };
+        }
+        else
+        {
+            _device = Keyboard.current;
+            _Input.devices = new InputDevice[] { Keyboard.current, Mouse.current};
+        }
+
+            _camera = Camera.main;
+        _sailControl = FindFirstObjectByType<Trigger_SailControl>();
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
+        if (!canMove || ctx.control.device != _device) return;
         Vector2 raw = ctx.ReadValue<Vector2>();
         //moveDir = new Vector3(raw.x, 0.0f, raw.y);
         //moveDir = Quaternion.Euler(_camera.transform.rotation.x, 0, 0) * _camera.transform.forward.normalized * raw.y + Quaternion.Euler(0, _camera.transform.rotation.y, 0) * _camera.transform.right.normalized * raw.x;
@@ -73,12 +98,26 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     }
     public void OnInteract(InputAction.CallbackContext ctx)
     {
-        
+        if (!ctx.started || ctx.control.device != _device) return;
+        if (_sailControl.playersInside > 0)
+        {
+            if (_sailControl.isPlayerControlling)
+            {
+                _sailControl.ExitControl(this);
+              
+            }
+            else
+            {
+                _sailControl.TakeControl(this);
+
+               
+            }
+        }
     }
 
     public void OnLook(InputAction.CallbackContext ctx)
     {
-        if (ShopManager.instance.isShown) return;
+        if ( ShopManager.instance.isShown) return;
         heading.x += ctx.ReadValue<Vector2>().x * Time.deltaTime * 6f * camSensitivity.x;
         heading.y += ctx.ReadValue<Vector2>().y * Time.deltaTime * 10f * camSensitivity.y;
         heading.y = Mathf.Clamp(heading.y, -30, 30);
@@ -124,13 +163,17 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
         //_rb.linearVelocity = Vector3.ClampMagnitude(_rb.linearVelocity, _MaxSpeed);
     }
 
+
+    public void OnReset(InputAction.CallbackContext ctx)
+    {
+        transform.position = BoatController.instance.RespawnPosition.position;
+        _armature.position = BoatController.instance.RespawnPosition.position;
+    }
+
+
     private void Update()
     {
-        //DEBUG : MAKE USE INPUT SYSTEM/REMOVE LATER
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            transform.position = BoatController.instance.RespawnPosition.position;
-        }
+
 
         if (moveDir == Vector3.zero)
         {
@@ -143,9 +186,9 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDir), 0.01f);
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDir), 0.2f);
             //transform.rotation = Quaternion.Euler(0,_camera.transform.rotation.eulerAngles.y,0);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,_camera.transform.rotation.eulerAngles.y,0), Time.deltaTime * 5f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, _camera.transform.rotation.eulerAngles.y, 0), Time.deltaTime * 5f);
             //transform.Translate(moveDir * _rb.linearVelocity.magnitude * Time.deltaTime, Space.World);
-            transform.Translate(Quaternion.Euler(0,_camera.transform.rotation.eulerAngles.y,0) * moveDir * 3f * Time.deltaTime, Space.World);
+            transform.Translate(Quaternion.Euler(0, _camera.transform.rotation.eulerAngles.y, 0) * moveDir * 3f * Time.deltaTime, Space.World);
         }
     }
 }

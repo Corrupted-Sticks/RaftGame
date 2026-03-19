@@ -147,6 +147,8 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
         _cameraPivot.rotation = Quaternion.Euler(-heading.y, heading.x, 0);
     }
 
+    public void OnReset(InputAction.CallbackContext ctx) { }
+
     public void OnMenu(InputAction.CallbackContext ctx)
     {
         PauseManager.instance.ToggleUI();
