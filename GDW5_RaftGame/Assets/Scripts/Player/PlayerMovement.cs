@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
     Trigger_SailControl _sailControl;
 
+    Vector3 rawMoveDir = Vector3.zero;
     Vector2 heading = new Vector2(0, 0);
     Vector2 camSensitivity = new Vector2(1f, 1f);
 
@@ -88,12 +89,12 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || !canMove || ctx.control.device != _device) return;
+        if (!canMove || ctx.control.device != _device) return;
         Vector2 raw = ctx.ReadValue<Vector2>();
         //moveDir = new Vector3(raw.x, 0.0f, raw.y);
         //moveDir = Quaternion.Euler(_camera.transform.rotation.x, 0, 0) * _camera.transform.forward.normalized * raw.y + Quaternion.Euler(0, _camera.transform.rotation.y, 0) * _camera.transform.right.normalized * raw.x;
-        moveDir = new Vector3(raw.x, 0f, raw.y);
-        moveDir = _camera.transform.TransformDirection(moveDir);
+        rawMoveDir = new Vector3(raw.x, 0f, raw.y);
+        
     }
     public void OnInteract(InputAction.CallbackContext ctx)
     {
@@ -153,16 +154,12 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     }
 
 
-    private void Update()
-    {
+    private void Update() {
 
 
-        if (moveDir == Vector3.zero)
-        {
+        if (rawMoveDir == Vector3.zero) {
             _animator.SetFloat("Speed", 0);
-        }
-        else
-        {
+        } else {
             _animator.SetFloat("Speed", 0.5f);
 
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDir), 0.01f);
@@ -174,13 +171,16 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, _camera.transform.rotation.eulerAngles.y, 0), Time.deltaTime * 5f);
             //transform.Translate(Quaternion.Euler(0, _camera.transform.rotation.eulerAngles.y, 0) * moveDir * 3f * Time.deltaTime, Space.World);
 
-            transform.rotation = Quaternion.Lerp(
+           moveDir = _camera.transform.TransformDirection(rawMoveDir);
+
+           HipBone.rotation = Quaternion.Lerp(
                 transform.rotation,
                 Quaternion.Euler(0, _camera.transform.rotation.eulerAngles.y, 0),
                 Time.deltaTime * 5f
             );
+            var speed = _acceleration * Time.deltaTime * moveDir;
+            transform.Translate(speed, Space.World);
 
-            HipBone.Translate(moveDir * 3f * Time.deltaTime, Space.Self);
 
         }
     }

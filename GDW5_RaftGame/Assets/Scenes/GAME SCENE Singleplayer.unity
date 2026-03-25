@@ -2259,7 +2259,7 @@ MonoBehaviour:
   _animator: {fileID: 286857157}
   _cameraPivot: {fileID: 780130750}
   hipBone: {fileID: 781347274}
-  _acceleration: 0
+  _acceleration: 10
   _maxSpeed: 10
   canMove: 1
   _isOnBoat: 0
@@ -3897,7 +3897,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3923,8 +3923,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2588191, y: -0, z: -0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 4.2200003, z: -3.412045}
+  m_LocalRotation: {x: 0.25340134, y: -0.0000000059708105, z: 0.0000000015640604, w: 0.9673613}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8714,7 +8714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b60d897398ddb81419e23f2ce6e844d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.99
+      value: 10.56
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b60d897398ddb81419e23f2ce6e844d0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17837,8 +17837,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ad8d1b3c473e14ba00cd52ebda0c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _solverIterations: 12
-  _velSolverIterations: 4
+  _solverIterations: 24
+  _velSolverIterations: 8
   _maxAngularVelocity: 50
   _animatedTorso: {fileID: 286857152}
   _physicalTorso: {fileID: 781347274}

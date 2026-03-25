@@ -22,10 +22,19 @@ public class CameraFollow : MonoBehaviour
     public float MinPitch => minPitch;
     [SerializeField] float maxPitch = 60f;
     public float MaxPitch => maxPitch;
-    private void Start()
-    {
+    private void Start() {
         _camera = Camera.main;
         storedTarget = Target;
+
+        Target = storedTarget;
+
+        Vector3 cameraPosition = transform.position
+                       - transform.forward * zoomedInOffset.z
+                       + Vector3.up * zoomedInOffset.y
+                       + transform.right * zoomedInOffset.x;
+        _camera.transform.position = cameraPosition;
+
+
     }
     Vector3 currentOffset;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
