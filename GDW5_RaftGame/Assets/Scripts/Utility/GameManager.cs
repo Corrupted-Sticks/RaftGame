@@ -54,4 +54,10 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
         }
     }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        isPaused = false;
+        Time.timeScale = 1f;
+    }
 }

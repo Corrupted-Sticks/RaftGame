@@ -1055,10 +1055,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176f50ad303ed244d90ba3962d2d25f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isController: 0
   _animator: {fileID: 0}
   _cameraPivot: {fileID: 1674190670}
+  hipBone: {fileID: 0}
   _acceleration: 15
   _maxSpeed: 10
+  canMove: 1
   _isOnBoat: 0
   boatTransform: {fileID: 0}
   moveDir: {x: 0, y: 0, z: 0}
@@ -2089,10 +2092,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176f50ad303ed244d90ba3962d2d25f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isController: 0
   _animator: {fileID: 0}
   _cameraPivot: {fileID: 1674190670}
+  hipBone: {fileID: 0}
   _acceleration: 15
   _maxSpeed: 10
+  canMove: 1
   _isOnBoat: 0
   boatTransform: {fileID: 0}
   moveDir: {x: 0, y: 0, z: 0}
@@ -4034,10 +4040,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176f50ad303ed244d90ba3962d2d25f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isController: 0
   _animator: {fileID: 424864038}
   _cameraPivot: {fileID: 1674190670}
+  hipBone: {fileID: 0}
   _acceleration: 0
   _maxSpeed: 10
+  canMove: 1
   _isOnBoat: 0
   boatTransform: {fileID: 0}
   moveDir: {x: 0, y: 0, z: 0}

@@ -12,7 +12,7 @@ public class GripModule : Module
     public bool canGripYourself = false;
 
     private Gripper _leftGrip, _rightGrip;
-
+    [SerializeField] private Animator _animator;
 
     private void Start()
     {
@@ -29,18 +29,22 @@ public class GripModule : Module
         if (Input.GetMouseButtonDown(1))
         {
             _leftGrip.enabled = 1f > leftArmWeightThreshold;
+            _animator.SetBool("LeftArm", true);
         }
         if (Input.GetMouseButtonUp(1))
         {
             _leftGrip.enabled = 0f > leftArmWeightThreshold;
+            _animator.SetBool("LeftArm", false);
         }
         if (Input.GetMouseButtonDown(0))
         {
             _rightGrip.enabled = 1f > rightArmWeightThreshold;
+            _animator.SetBool("RightArm", true);
         }
         if (Input.GetMouseButtonUp(0))
         {
             _rightGrip.enabled = 0f > rightArmWeightThreshold;
+            _animator.SetBool("RightArm", false);
         }
     }
 

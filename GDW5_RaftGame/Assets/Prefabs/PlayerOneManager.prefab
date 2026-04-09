@@ -1,0 +1,281 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1083350288456485571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6914184684975559070}
+  - component: {fileID: 4792313505519054655}
+  - component: {fileID: 7763226503709560663}
+  - component: {fileID: 9183651896956782264}
+  - component: {fileID: 5614411779865948185}
+  - component: {fileID: 1811233751967619162}
+  - component: {fileID: 6440377526078513009}
+  - component: {fileID: 5377353552891824918}
+  m_Layer: 0
+  m_Name: PlayerOneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6914184684975559070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083350288456485571}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4792313505519054655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083350288456485571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce247650c59a8c4c97d85874d505d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeRagdoll: {fileID: 7763226503709560663}
+  floorDetectionDistance: 0.3
+  maxFloorSlope: 60
+--- !u!114 &7763226503709560663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083350288456485571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ad8d1b3c473e14ba00cd52ebda0c00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _solverIterations: 24
+  _velSolverIterations: 8
+  _maxAngularVelocity: 50
+  _animatedTorso: {fileID: 0}
+  _physicalTorso: {fileID: 0}
+  _bodyParts:
+  - bodyPartName: Head Neck
+    _joints:
+    - {fileID: 0}
+    - {fileID: 0}
+    _strengthScale: 1
+  - bodyPartName: Torso
+    _joints:
+    - {fileID: 0}
+    - {fileID: 0}
+    _strengthScale: 1
+  - bodyPartName: Left Arm
+    _joints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    _strengthScale: 1
+  - bodyPartName: Right Arm
+    _joints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    _strengthScale: 1
+  - bodyPartName: Left Leg
+    _joints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    _strengthScale: 1
+  - bodyPartName: Right Leg
+    _joints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    _strengthScale: 1
+  _animatedAnimator: {fileID: 0}
+  _physicalAnimator: {fileID: 0}
+--- !u!114 &9183651896956782264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083350288456485571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce247650c59a8c4c97d85874d505d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeRagdoll: {fileID: 7763226503709560663}
+  floorDetectionDistance: 0.3
+  maxFloorSlope: 60
+--- !u!114 &5614411779865948185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083350288456485571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08993aea04f601d47bb538be579b09cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeRagdoll: {fileID: 7763226503709560663}
+  _balanceMode: 2
+  customTorsoAngularDrag: 0.05
+  uprightTorque: 10000
+  uprightTorqueFunction:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5046387
+      inSlope: 2.9938433
+      outSlope: 2.9938433
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.09862084
+    - serializedVersion: 3
+      time: 0.20279688
+      value: 0.9030759
+      inSlope: 0.90541357
+      outSlope: 0.90541357
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.46270114
+      outWeight: 0.22557895
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  rotationTorque: 500
+  manualTorque: 500
+  maxManualRotSpeed: 5
+  _stabilizerJointDrive:
+    _positionSpring: 0
+    _positionDamper: 0
+    _maximumForce: 0
+  freezeRotationSpeed: 5
+--- !u!114 &1811233751967619162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083350288456485571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0aa8e03ce700944a595a9a20638a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeRagdoll: {fileID: 7763226503709560663}
+  leftArmWeightThreshold: 0.5
+  rightArmWeightThreshold: 0.5
+  defaultMotionsConfig:
+    angularXMotion: 2
+    angularYMotion: 2
+    angularZMotion: 2
+    angularXLimit: 30
+    angularYLimit: 30
+    angularZLimit: 30
+  onlyUseTriggers: 0
+  canGripYourself: 0
+  _animator: {fileID: 0}
+--- !u!114 &6440377526078513009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083350288456485571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1caff089550c07f4fa3d364d97585015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeRagdoll: {fileID: 7763226503709560663}
+  _enableIK: 1
+  minTargetDirAngle: -30
+  maxTargetDirAngle: 60
+  minArmsAngle: -70
+  maxArmsAngle: 100
+  minLookAngle: -50
+  maxLookAngle: 60
+  lookAngleOffset: 0
+  armsAngleOffset: 0
+  handsRotationOffset: 0
+  armsHorizontalSeparation: 0.75
+  armsDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0000000018626451
+      value: 0.47031102
+      inSlope: -1.1340735
+      outSlope: -1.1340735
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.08721023
+    - serializedVersion: 3
+      time: 0.30576015
+      value: 0.26592785
+      inSlope: 0.010844812
+      outSlope: 0.010844812
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.55304766
+      outWeight: 0.37100154
+    - serializedVersion: 3
+      time: 0.9999528
+      value: 0.541286
+      inSlope: 1.0557013
+      outSlope: 1.0557013
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.04321357
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5377353552891824918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083350288456485571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54c5df9fd7350b4cbb06255d970c739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeRagdoll: {fileID: 7763226503709560663}
+  _physicsModule: {fileID: 0}
+  _animationModule: {fileID: 6440377526078513009}
+  _gripModule: {fileID: 1811233751967619162}
+  _enableMovement: 1
