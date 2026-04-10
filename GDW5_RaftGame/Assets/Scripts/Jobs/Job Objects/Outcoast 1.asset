@@ -21,5 +21,5 @@ MonoBehaviour:
     in there that needs to get to The Maw otherwise our future might be in danger.
     You think I\u2019m crazy? Look man, either take the 1000 coins and do it or I\u2019ll
     find someone else! I\u2019m not crazy, I swear!\u201D"
-  startDock: 15
-  endDock: 9
+  startDock: 10
+  endDock: 5

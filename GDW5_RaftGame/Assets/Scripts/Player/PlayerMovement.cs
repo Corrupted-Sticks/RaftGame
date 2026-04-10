@@ -1,3 +1,4 @@
+using SDS_Locations;
 using Sirenix.OdinInspector;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
@@ -66,25 +67,26 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
     void OnEnable() => _Input.Enable();
     void OnDisable() => _Input.Disable();
     void OnDestroy() => _Input.Disable();
-    void Awake()
-    {
+    void Awake() {
         _Input = new PlayerInput();        // Create asset object.
         _PActions = _Input.Player;         // Extract action map object.
         _PActions.AddCallbacks(this);      // Register callback interface IPlayerActions.
 
-        if (isController)
-        {
+        if (isController) {
             _device = Gamepad.current;
             _Input.devices = new InputDevice[] { Gamepad.current };
-        }
-        else
-        {
+        } else {
             _device = Keyboard.current;
             _Input.devices = new InputDevice[] { Keyboard.current, Mouse.current };
         }
 
         _camera = Camera.main;
         _sailControl = FindFirstObjectByType<Trigger_SailControl>();
+
+        ActiveRagdoll[] tests = FindObjectsOfType(typeof(ActiveRagdoll)) as ActiveRagdoll[];
+        foreach (var t in tests) {
+            print(t.gameObject.name);// do something 
+}
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -114,7 +116,8 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
             }
         }
     }
-
+    public void OnRightArm(InputAction.CallbackContext ctx) { }
+    public void OnLeftArm(InputAction.CallbackContext ctx) { }
     public void OnLook(InputAction.CallbackContext ctx)
     {
         if (ShopManager.instance.isShown) return;
@@ -153,7 +156,9 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
         hipBone.transform.position = BoatController.instance.RespawnPosition.position;
     }
 
-
+    private void OnTriggerEnter(Collider other) {
+            
+    }
     private void Update() {
 
 
@@ -170,10 +175,15 @@ public class PlayerMovement : MonoBehaviour, PlayerInput.IPlayerActions
 
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, _camera.transform.rotation.eulerAngles.y, 0), Time.deltaTime * 5f);
             //transform.Translate(Quaternion.Euler(0, _camera.transform.rotation.eulerAngles.y, 0) * moveDir * 3f * Time.deltaTime, Space.World);
+            Quaternion yawRotation = Quaternion.Euler(
+                0f,
+                _camera.transform.eulerAngles.y,
+                0f
+            );
 
-           moveDir = _camera.transform.TransformDirection(rawMoveDir);
+            moveDir = yawRotation * rawMoveDir;
 
-           HipBone.rotation = Quaternion.Lerp(
+            HipBone.rotation = Quaternion.Lerp(
                 transform.rotation,
                 Quaternion.Euler(0, _camera.transform.rotation.eulerAngles.y, 0),
                 Time.deltaTime * 5f

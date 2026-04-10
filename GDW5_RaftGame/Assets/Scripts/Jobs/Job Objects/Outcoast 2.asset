@@ -20,5 +20,5 @@ MonoBehaviour:
     sick of it! The house is too small for all this crap. Heck, even the island we
     live on is small! Please get rid of this stuff for me. There\u2019s a thrift
     store in Dewsbury. I\u2019m sure others will find space for everything.\u201D"
-  startDock: 15
-  endDock: 0
+  startDock: 10
+  endDock: 1

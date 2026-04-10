@@ -1,5 +1,6 @@
 using SDS_Locations;
 using UnityEngine;
+using Unity.Cinemachine;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] Vector3 zoomedInOffset;
 
     Camera _camera;
+
+    [SerializeField]CinemachineCamera _unZoomedCam;
+    [SerializeField] CinemachineCamera _zoomedCam;
+
+
 
     Transform storedTarget;
 
@@ -40,7 +46,7 @@ public class CameraFollow : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void LateUpdate()
     {
-        Vector3 targetPosition = Target.position;
+/*        Vector3 targetPosition = Target.position;
         transform.position = targetPosition;
 
         Vector3 dir = Target.position - transform.position;
@@ -53,7 +59,7 @@ public class CameraFollow : MonoBehaviour
             euler.x = ClampAngle(euler.x, minPitch, maxPitch);
 
             transform.rotation = Quaternion.Euler(euler);
-        }
+        }*/
     }
 
     public static float ClampAngle(float angle, float min, float max)
@@ -68,25 +74,31 @@ public class CameraFollow : MonoBehaviour
 
         if (zoomedIn)
         {
-            Target = storedTarget;
+            _zoomedCam.Priority = 10;
+            _unZoomedCam.Priority = 0;
+           /* Target = storedTarget;
 
             Vector3 cameraPosition = transform.position
                            - transform.forward * zoomedInOffset.z
                            + Vector3.up * zoomedInOffset.y
                            + transform.right * zoomedInOffset.x;
-            _camera.transform.position = cameraPosition;
+            _camera.transform.position = cameraPosition;*/
         }
         else
         {
+
+            _zoomedCam.Priority = 0;
+            _unZoomedCam.Priority = 10;
+/*
             Target = FindFirstObjectByType<BoatController>().gameObject.transform;
 
             Vector3 cameraPosition = transform.position
                            - transform.forward * zoomedOutOffset.z
                            + Vector3.up * zoomedOutOffset.y
                            + transform.right * zoomedOutOffset.x;
-            _camera.transform.position = cameraPosition;
+            _camera.transform.position = cameraPosition;*/
         }
 
-        transform.position = Target.position;
+       /* transform.position = Target.position;*/
     }
 }

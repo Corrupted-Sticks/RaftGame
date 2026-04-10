@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: The Maw 2
   m_EditorClassIdentifier: 
   npcName: 
-  cargo: 000000000100000001000000
-  reward: 1000
-  time: 300
-  description: "\u201CHey, can you send some of my ex\u2019s stuff back to him? Little
-    does he know I put rotten eggs in with his stuff. Oh, just don\u2019t open the
-    crates and you should be fine. Thanks!\u201D"
-  startDock: 8
-  endDock: 13
+  cargo: 0000000000000000000000000000000000000000
+  reward: 2000
+  time: 240
+  description: "\u201CHey! I need these 5 crates to get to Whirlpool Peak. I\u2019ll
+    give you 2000 coins, but I need it done quickly.\u201D"
+  startDock: 6
+  endDock: 8

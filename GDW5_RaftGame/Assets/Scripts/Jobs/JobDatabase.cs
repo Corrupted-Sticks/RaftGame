@@ -12,6 +12,8 @@ public class JobDatabase : ScriptableObject
 
     public IReadOnlyList<JobObject> GetJobsFromClosestDock()
     {
+        Debug
+            .Log(SDS_Locations.Locations.GetClosestIsland(BoatController.instance.transform.position));
         return GetJobsFromDock(
             SDS_Locations.Locations.GetClosestIsland(BoatController.instance.transform.position)
             );

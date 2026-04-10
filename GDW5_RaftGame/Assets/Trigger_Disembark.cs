@@ -2,21 +2,30 @@ using UnityEngine;
 
 public class Trigger_Disembark : MonoBehaviour
 {
+
+    UI_BoatControl Tutorial;
     [SerializeField] bool inTrigger = false; // int that counts how many players are in the trigger, as a simple bool check would have issues with multiple players.
 
     [SerializeField] bool isOnBoat = true; // start on boat.
 
     private void OnTriggerStay(Collider other)
     {
-
+        if ( !(other.CompareTag("Player") || other.CompareTag("Boat"))) return;
+        Tutorial.SetDockBoatControl(true);
+        Tutorial.SetUIImage(true);
         inTrigger = true;
     }
 
-    private void OnTriggerExit(Collider other)
-    {
+    private void OnTriggerExit(Collider other) {
+
+        Tutorial.SetDockBoatControl(false);
+        Tutorial.SetUIImage(false);
         inTrigger = false;
     }
 
+    private void Start() {
+        Tutorial = FindAnyObjectByType<UI_BoatControl>();
+    }
     private void Update()
     {
         if (

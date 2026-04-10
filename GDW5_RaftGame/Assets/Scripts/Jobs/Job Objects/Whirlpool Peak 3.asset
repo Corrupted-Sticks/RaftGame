@@ -19,5 +19,5 @@ MonoBehaviour:
   description: "\u201CWhy is it called the Nameless Isle? Like, that\u2019s literally
     its name? Who came up with that? Anyways, send these 10 crates over there for
     me.\u201D"
-  startDock: 12
-  endDock: 6
+  startDock: 8
+  endDock: 2

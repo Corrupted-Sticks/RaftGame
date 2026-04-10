@@ -19,5 +19,5 @@ MonoBehaviour:
   description: '"Yar matey! I need you to hoist these 2 crates off to the Outcoast
     for me. I''ll put a handsome 500 doubloons in your purse if you manage to pull
     it off!"'
-  startDock: 14
-  endDock: 15
+  startDock: 9
+  endDock: 10

@@ -9,6 +9,9 @@ public class UI_BoatControl : MonoBehaviour
 
     public void SetEnterBoatControl(bool value) => EnterBoatControl.SetActive(value);
     public void SetExitBoatControl(bool value) => ExitBoatControl.SetActive(value);
-    public void SetDockBoatControl(bool value) => DockBoatControl.SetActive(value);
+    public void SetDockBoatControl(bool value) {
+        if (EnterBoatControl.activeSelf || ExitBoatControl.activeSelf) return;
+        DockBoatControl.SetActive(value);
+    }
     public void SetUIImage(bool value) => uiImage.SetActive(value);
 }

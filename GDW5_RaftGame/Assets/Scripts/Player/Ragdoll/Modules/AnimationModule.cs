@@ -120,8 +120,8 @@ public class AnimationModule : Module
         float lookVerticalAngle = _targetDirVerticalPercent * Mathf.Abs(maxLookAngle - minLookAngle) + minLookAngle;
         lookVerticalAngle += lookAngleOffset;
         _lookDir = Quaternion.AngleAxis(-lookVerticalAngle, _animTorso.right) * _targetDir2D;
-
-        Vector3 lookPoint = _activeRagdoll.GetAnimatedBone(HumanBodyBones.Head).position + _lookDir;
+        var temp = _activeRagdoll.GetAnimatedBone(HumanBodyBones.Head).position;
+        Vector3 lookPoint =  temp + _lookDir;
         _animatorHelper.LookAtPoint(lookPoint);
     }
 

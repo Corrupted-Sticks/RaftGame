@@ -132,6 +132,8 @@ public class BoatController : MonoBehaviour, PlayerInput.IPlayerActions
         moveDir = new Vector3(raw.x, 0.0f, raw.y);
     }
 
+    public void OnRightArm(InputAction.CallbackContext ctx) { }
+    public void OnLeftArm(InputAction.CallbackContext ctx) { }
     public void OnInteract(InputAction.CallbackContext ctx)
     {
 

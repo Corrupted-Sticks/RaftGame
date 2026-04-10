@@ -19,4 +19,4 @@ MonoBehaviour:
   description: "\u201CHey! I need these 5 crates to get to Whirlpool Peak. I\u2019ll
     give you 2000 coins, but I need it done quickly.\u201D"
   startDock: 9
-  endDock: 12
+  endDock: 8
