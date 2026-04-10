@@ -1201,6 +1201,7 @@ MonoBehaviour:
     angularZLimit: 30
   onlyUseTriggers: 0
   canGripYourself: 0
+  _animator: {fileID: 0}
 --- !u!114 &139859960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3884,6 +3885,7 @@ MonoBehaviour:
     angularZLimit: 30
   onlyUseTriggers: 0
   canGripYourself: 0
+  _animator: {fileID: 0}
 --- !u!114 &837119951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4588,6 +4590,7 @@ MonoBehaviour:
     angularZLimit: 30
   onlyUseTriggers: 0
   canGripYourself: 0
+  _animator: {fileID: 0}
 --- !u!114 &879629238
 MonoBehaviour:
   m_ObjectHideFlags: 0
